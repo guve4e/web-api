@@ -7,8 +7,10 @@ require_once (LIBRARY_PATH . '/Constructor.php');
 try
 {
     // construct
-    $constructor = new Constructor($_SERVER['PATH_INFO']);
+    if (isset($_SERVER['PATH_INFO']))  $constructor = new Constructor($_SERVER['PATH_INFO']);
+    else throw new Exception("PATH_INFO");
 }
+
 catch (Exception $e)
 {
     // if call is not authorized
@@ -31,4 +33,3 @@ catch (Exception $e)
         echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 }
-

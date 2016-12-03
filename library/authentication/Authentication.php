@@ -1,6 +1,6 @@
 <?php
 
-include(LIBRARY_PATH . "/Module.php");
+include(LIBRARY_PATH . "/Controller.php");
 /**
  * Authentication
  *
@@ -11,7 +11,7 @@ include(LIBRARY_PATH . "/Module.php");
  * @license http://www.opensource.org/licenses/gpl-license.php
  * @package library
  */
-abstract class Authentication extends Module
+abstract class Authentication extends Controller
 {
     /**
      * __construct

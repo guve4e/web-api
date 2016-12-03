@@ -1,4 +1,5 @@
 <?php
+include(AUTHENTICATION_PATH . "/Authentication.php");
 
 /**
 * UserAuthentication
