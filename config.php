@@ -1,44 +1,45 @@
 <?php
 
     /**
-     * Configuration file.
-     * Contains all the global paths, variables and arrays.
-     *
-     * @license http://www.opensource.org/licenses/gpl-license.php
-     * @package web-api
-     */
+    * config.php
+    *
+    * @author Valentin Kormanov
+    * @license http://www.opensource.org/licenses/gpl-license.php
+    * @package api
+    * @filesource
+    */
 
 
 
     /**
-     * global config array
-     * @global
-     */
+    * global config array
+    * @global
+    */
     $config = [
     "debug" => true
     ];
 
 
     /**
-     * BASE_PATH
-     *
-     * @global string BASE_PATH Absolute path to framework
-     */
+    * BASE_PATH
+    *
+    * @global string BASE_PATH Absolute path to framework
+    */
     define('BASE_PATH',dirname(__FILE__));
 
     /**
-     * LOG_PATH
-     *
-     * @global string LOG_PATH Absolute path to logs
-     */
+    * LOG_PATH
+    *
+    * @global string LOG_PATH Absolute path to logs
+    */
     defined("LOG_PATH")
     or define("LOG_PATH", realpath(dirname(__FILE__) . "/logs" ));
 
     /**
-     * LIBRARY_PATH
-     *
-     * @global string LIBRARY_PATH Absolute path to library
-     */
+    * LIBRARY_PATH
+    *
+    * @global string LIBRARY_PATH Absolute path to library
+    */
     defined("LIBRARY_PATH")
     or define("LIBRARY_PATH", realpath(dirname(__FILE__) . "/library" ));
 
@@ -88,8 +89,16 @@
     defined("VIEW_PATH")
     or define("VIEW_PATH", dirname(__FILE__) . "/views" );
 
-
     /**
+     * CONTROLLERS_PATH
+     *
+     * @global string CONTROLLERS_PATH Absolute path to controllers
+     */
+    defined("CONTROLLERS_PATH")
+    or define("CONTROLLERS_PATH", dirname(__FILE__) . "/controllers" );
+
+
+   /**
     * SRC_PATH
     *
     * @global string SRC_PATH Sources
@@ -109,3 +118,12 @@
                   "schema" => "ARDUINO"
                 ));
 
+    /**
+    * DSN
+    *
+    * @global string FR_DSN PEAR DB compatible DSN
+    */
+    define('DSN','mysql://root@localhost/framework');
+
+
+    ?>

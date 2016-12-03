@@ -1,0 +1,554 @@
+*********START CONTROLLER 2016-12-03 17:00:30 *********
+*********START CONTROLLER 2016-12-03 17:00:30 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_REFERER] => http://carstuff.ddns.net/
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38146
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806030.814
+    [REQUEST_TIME] => 1480806030
+)
+
+*********START CONTROLLER 2016-12-03 17:00:30 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_REFERER] => http://carstuff.ddns.net/
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38146
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806030.814
+    [REQUEST_TIME] => 1480806030
+)
+
+[POST]
+Array
+(
+)
+
+*********START CONTROLLER 2016-12-03 17:02:31 *********
+*********START CONTROLLER 2016-12-03 17:02:31 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38236
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806151.489
+    [REQUEST_TIME] => 1480806151
+)
+
+*********START CONTROLLER 2016-12-03 17:02:31 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38236
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806151.489
+    [REQUEST_TIME] => 1480806151
+)
+
+[POST]
+Array
+(
+)
+
+*********START CONTROLLER 2016-12-03 17:03:45 *********
+*********START CONTROLLER 2016-12-03 17:03:45 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38260
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806225.874
+    [REQUEST_TIME] => 1480806225
+)
+
+*********START CONTROLLER 2016-12-03 17:03:45 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38260
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806225.874
+    [REQUEST_TIME] => 1480806225
+)
+
+[POST]
+Array
+(
+)
+
+*********START CONTROLLER 2016-12-03 17:03:48 *********
+*********START CONTROLLER 2016-12-03 17:03:48 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38260
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806228.243
+    [REQUEST_TIME] => 1480806228
+)
+
+*********START CONTROLLER 2016-12-03 17:03:48 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38260
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806228.243
+    [REQUEST_TIME] => 1480806228
+)
+
+[POST]
+Array
+(
+)
+
+*********START CONTROLLER 2016-12-03 17:04:14 *********
+*********START CONTROLLER 2016-12-03 17:04:14 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38268
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806254.523
+    [REQUEST_TIME] => 1480806254
+)
+
+*********START CONTROLLER 2016-12-03 17:04:14 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_CACHE_CONTROL] => max-age=0
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38268
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php
+    [SCRIPT_NAME] => /ddd/index.php
+    [PHP_SELF] => /ddd/index.php
+    [REQUEST_TIME_FLOAT] => 1480806254.523
+    [REQUEST_TIME] => 1480806254
+)
+
+[POST]
+Array
+(
+)
+
+*********START CONTROLLER 2016-12-03 17:04:25 *********
+*********START CONTROLLER 2016-12-03 17:04:25 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38276
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php/Test
+    [SCRIPT_NAME] => /ddd/index.php
+    [PATH_INFO] => /Test
+    [PATH_TRANSLATED] => /var/www/Test
+    [PHP_SELF] => /ddd/index.php/Test
+    [REQUEST_TIME_FLOAT] => 1480806265.361
+    [REQUEST_TIME] => 1480806265
+)
+
+*********START CONTROLLER 2016-12-03 17:04:25 *********
+[SERVER]
+Array
+(
+    [ApiUrl] => http://coinifide-api-dev.azurewebsites.net/api
+    [Api-Token] => Kjbd43n#4hvsoyjYHUIerJdS073%dfrR
+    [Debug] => On
+    [ImgUrl] => https://coinifidefilesdev.blob.core.windows.net
+    [HTTP_HOST] => carstuff.ddns.net
+    [HTTP_CONNECTION] => keep-alive
+    [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+    [HTTP_USER_AGENT] => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    [HTTP_ACCEPT_ENCODING] => gzip, deflate, sdch
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.8
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.18 (Ubuntu) Server at carstuff.ddns.net Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Ubuntu)
+    [SERVER_NAME] => carstuff.ddns.net
+    [SERVER_ADDR] => 10.0.0.3
+    [SERVER_PORT] => 80
+    [REMOTE_HOST] => c-24-13-53-228.hsd1.il.comcast.net
+    [REMOTE_ADDR] => 24.13.53.228
+    [DOCUMENT_ROOT] => /var/www/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/
+    [SERVER_ADMIN] => webmaster@crypto.com
+    [SCRIPT_FILENAME] => /var/www/ddd/index.php
+    [REMOTE_PORT] => 38276
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => 
+    [REQUEST_URI] => /ddd/index.php/Test
+    [SCRIPT_NAME] => /ddd/index.php
+    [PATH_INFO] => /Test
+    [PATH_TRANSLATED] => /var/www/Test
+    [PHP_SELF] => /ddd/index.php/Test
+    [REQUEST_TIME_FLOAT] => 1480806265.361
+    [REQUEST_TIME] => 1480806265
+)
+
+[POST]
+Array
+(
+)
+
