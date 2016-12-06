@@ -49,11 +49,12 @@ class Test extends UserAuthentication
     /**
      * POST
      */
-    public function post()
+    public function post($id)
     {
         $data = [
             "controller" => "Test",
-            "method" => "POST"
+            "method" => "POST",
+            "id" => $id
         ];
 
         echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
@@ -62,11 +63,12 @@ class Test extends UserAuthentication
     /**
      * PUT
      */
-    public function put()
+    public function put($id)
     {
         $data = [
-            "controller" => "PUT",
-            "method" => "Default"
+            "controller" => "Test",
+            "method" => "PUT",
+            "id" => $id
         ];
 
         echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
@@ -75,11 +77,12 @@ class Test extends UserAuthentication
     /**
      * DELETE
      */
-    public function delete()
+    public function delete($id)
     {
         $data = [
             "controller" => "Test",
-            "method" => "DELETE"
+            "method" => "DELETE",
+            "id" => $id
         ];
 
         echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));

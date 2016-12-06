@@ -54,22 +54,35 @@ class Constructor
 
         // make sure that request is in the form "/controller/method/id"
         // if $request array has more than 3 elements throw exception
-        if (count($request) > 3) throw new Exception("Wrong Request");
+        if (count($request) > 2) throw new Exception("Wrong Request");
 
         // get the controller
         $this->controller = $request[0];
 
         // get the method
-        if (isset($request[1])) $this->method = $request[1];
+         $this->method = $this->getMethod();
 
         // get the id
-        if (isset($request[2])) $this->id = $request[2];
+        if (isset($request[1])) $this->id = $request[1];
 
 
         // build
         $this->build();
 
     }// end constructor
+
+
+    /**
+     * @return string method name
+     */
+    private function getMethod()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") return "get";
+        else if ($_SERVER['REQUEST_METHOD'] == "POST") return "post";
+        else if ($_SERVER['REQUEST_METHOD'] == "PUT") return "put";
+        else if ($_SERVER['REQUEST_METHOD'] == "DELETE") return "delete";
+
+    }
 
     /**
      * __autoload
@@ -82,7 +95,7 @@ class Constructor
      * @return void
      * @package api
      */
-    function __autoload($class)
+    private function __autoload($class)
     {
         $file = str_replace('_','/', $class .'.php');
 
@@ -114,7 +127,11 @@ class Constructor
 //                    throw new Exception("Requested controller is not a valid!");
 //                }
 
+
+
                 $method = $this->method;
+
+
 
                 // using Reflection
                 // @example

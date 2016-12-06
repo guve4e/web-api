@@ -9,12 +9,16 @@ if($config['debug'])
 
     $h = new Logger("HEADERS.txt");
     $h->MakeTitleLine("START HEADERS");
+
+
+    // log server array
+    $l->PrintArray($_SERVER, "SERVER");
+// log post array
+    $l->PrintArray($_POST, "POST");
+// log headers
+    $h->PrintArray(getallheaders(), "HEADERS");
+
+
 }
 
 
-// log server array
-$l->PrintArray($_SERVER, "SERVER");
-// log post array
-$l->PrintArray($_POST, "POST");
-// log headers
-$h->PrintArray(getallheaders(), "HEADERS");
