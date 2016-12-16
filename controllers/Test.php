@@ -14,25 +14,6 @@ class Test extends UserAuthentication
     }
 
     /**
-     * __default
-     *
-     * This function is ran by the controller if an event is not specified
-     * in the user's request.
-     *
-     */
-    public function __default()
-    {
-
-        $data = [
-            "controller" => "Test",
-            "method" => "Default"
-        ];
-
-        echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-
-    }
-
-    /**
      * GET
      */
     public function get($id)

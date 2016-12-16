@@ -19,7 +19,7 @@ class Constructor
     /**
      * @var
      */
-    private $method =  '__default';
+    private $method;
 
     /**
      * @var
@@ -65,12 +65,10 @@ class Constructor
         // get the id
         if (isset($request[1])) $this->id = $request[1];
 
-
         // build
         $this->build();
 
     }// end constructor
-
 
     /**
      * Depends on the Request method
@@ -83,7 +81,6 @@ class Constructor
         else if ($_SERVER['REQUEST_METHOD'] == "POST") return "post";
         else if ($_SERVER['REQUEST_METHOD'] == "PUT") return "put";
         else if ($_SERVER['REQUEST_METHOD'] == "DELETE") return "delete";
-
     }
 
     /**

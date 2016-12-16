@@ -31,18 +31,6 @@ abstract class Controller extends Database
     }// end constructor
 
     /**
-     * __default
-     *
-     * Every Controller needs to override this function.
-     * Its function is :
-     * if an event is not specified in the user's request
-     * this function executes
-     *
-     * @abstract
-     */
-    abstract public function __default();
-
-    /**
      * Authorize
      *
      * Checks if the the derived class is:
