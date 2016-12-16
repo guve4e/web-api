@@ -3,23 +3,23 @@ include(AUTHENTICATION_PATH . "/UserAuthentication.php");
 
 class Test extends UserAuthentication
 {
-/**
-    * __construct
-    * 
-    * @access public 
-    */
+    /**
+     * __construct
+     *
+     * @access public
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
     /**
-    * __default
-    *
-    * This function is ran by the controller if an event is not specified
-    * in the user's request.
-    *
-    */
+     * __default
+     *
+     * This function is ran by the controller if an event is not specified
+     * in the user's request.
+     *
+     */
     public function __default()
     {
 
@@ -37,6 +37,9 @@ class Test extends UserAuthentication
      */
     public function get($id)
     {
+
+        Logger::logMsg("Test","GET");
+
         $data = [
             "controller" => "Test",
             "method" => "GET",

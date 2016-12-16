@@ -5,7 +5,7 @@ include(LIBRARY_PATH . "/Controller.php");
  * Authentication
  *
  * Base class of authentication classes. The controller will check to make
- * sure your module is an instance of Authentication class.
+ * sure your controller is an instance of Authentication class.
  *
  * @see Module
  * @license http://www.opensource.org/licenses/gpl-license.php
@@ -18,7 +18,7 @@ abstract class Authentication extends Controller
      *
      * @access public
      */
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }// end
@@ -29,7 +29,7 @@ abstract class Authentication extends Controller
      * @param $var
      * @return mixed
      */
-    abstract function authenticate($var);
+    public abstract function authenticate($var);
    
     /**
      * __destruct
@@ -37,7 +37,7 @@ abstract class Authentication extends Controller
      * @access public
      * @return void
      */
-    function __destruct()
+    public function __destruct()
     {
         parent::__destruct();
     }// end

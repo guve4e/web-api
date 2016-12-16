@@ -2,9 +2,9 @@
 
 include(BASE_CLASS_PATH . "/Database.php");
 /**
- * Module
+ * Controller
  *
- * The base module class. Authentication and NoAuthentication will
+ * The base controller class. Authentication and NoAuthentication will
  * extend this class.
  *
  * @license http://www.opensource.org/licenses/gpl-license.php

@@ -73,6 +73,8 @@ class Constructor
 
 
     /**
+     * Depends on the Request method
+     *
      * @return string method name
      */
     private function getMethod()
@@ -127,11 +129,7 @@ class Constructor
 //                    throw new Exception("Requested controller is not a valid!");
 //                }
 
-
-
                 $method = $this->method;
-
-
 
                 // using Reflection
                 // @example

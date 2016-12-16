@@ -1,18 +1,21 @@
 <?php
 
-require_once('config.php'); // include the configuration file
-require_once('log.php');
-require_once (LIBRARY_PATH . '/Constructor.php');
+require_once('config.php'); // include configuration file
+require_once (LIBRARY_PATH . '/Constructor.php'); // include Constructor class
+include(LIBRARY_PATH . '/Logger.php');
+
+// Log
+Logger::logServer();
+Logger::logHeaders();
+
 
 try
 {
     // construct
     if (isset($_SERVER['PATH_INFO']))  $constructor = new Constructor($_SERVER['PATH_INFO']);
     else throw new Exception("PATH_INFO");
-}
 
-catch (Exception $e)
-{
+} catch (Exception $e) {
     // if call is not authorized
     if ( $e->getMessage() == "Authorization")
     {
@@ -32,4 +35,4 @@ catch (Exception $e)
         ];
         echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
-}
+}// end try / catch

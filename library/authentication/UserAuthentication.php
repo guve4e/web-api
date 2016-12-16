@@ -29,7 +29,7 @@ include(AUTHENTICATION_PATH . "/Authentication.php");
         {
             parent::__construct();
             $this->token = "Kjbd43n#4hvsoyjYSk1!UIerJdS073%dfrR";
-    
+            
         }
 
         /**

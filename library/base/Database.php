@@ -41,7 +41,8 @@ abstract class Database extends Base
         {
             case "mysql":
             {   // make new Mysql
-                $this->db = new Mysql();
+            //    $this->db = new Mysql();
+                $this->db = null;
                 break;
             }
             default:
