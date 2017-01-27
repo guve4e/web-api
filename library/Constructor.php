@@ -144,7 +144,7 @@ class Constructor
             {
                 die($e->getMessage());
             }
-            
+
         }
         else
         {
