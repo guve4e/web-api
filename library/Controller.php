@@ -35,8 +35,7 @@ abstract class Controller extends Database
      *
      * Checks if the the derived class is:
      * - object
-     * - instance of Module
-     * - instance of Authentication
+     * - instance of Controller
      *
      * @static
      * @access public
