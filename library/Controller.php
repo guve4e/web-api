@@ -45,7 +45,7 @@ abstract class Controller extends Database
      */
     public static function authorize($module)
     {
-        return (is_object($module) &&  $module instanceof Module && $module instanceof Authentication);
+        return (is_object($module) &&  $module instanceof Controller);
     }
 
     /**

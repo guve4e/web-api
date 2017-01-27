@@ -41,7 +41,7 @@ class Constructor
      * __construct
      *
      * @access public
-     * @param mixed $_SERVER['PATH_INFO']
+     * @param $s_path_info  $_SERVER['PATH_INFO']
      * @throws Exception
      */
     public function __construct($s_path_info)
@@ -102,6 +102,12 @@ class Constructor
             require_once(AUTHENTICATION_PATH . "/" . $file);
     }
 
+    /**
+     * Main Building method that
+     * executes the controller
+     *
+     * @throws Exception
+     */
     public function build()
     {
         $controllerFile = CONTROLLERS_PATH . "/" .$this->controller . '.php';
@@ -121,10 +127,10 @@ class Constructor
                 $instance = new $this->controller();
 
                 // authorize the controller
-//                if (!Controller::authorize($instance))
-//                {
-//                    throw new Exception("Requested controller is not a valid!");
-//                }
+                if (!Controller::authorize($instance))
+                {
+                    throw new Exception("Requested controller is not a valid!");
+                }
 
                 $method = $this->method;
 
@@ -138,15 +144,11 @@ class Constructor
             {
                 die($e->getMessage());
             }
-
+            
         }
         else
         {
             throw new Exception("Controller " . $controllerFile . " does NOT exist!");
         }
-
-
     }
-
-
 }

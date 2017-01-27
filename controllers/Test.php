@@ -35,10 +35,25 @@ class Test extends UserAuthentication
      */
     public function post($id)
     {
+
+
+        //get the data
+        $json = file_get_contents("php://input");
+
+        Logger::logMsg("TMP",$json);
+
+        //convert the string of data to an array
+        $d = json_decode($json, true);
+
+        Logger::logMsg("TMP",$d);
+
+
+
         $data = [
             "controller" => "Test",
             "method" => "POST",
-            "id" => $id
+            "id" => $id,
+            "data" => $d
         ];
 
         echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
@@ -49,10 +64,21 @@ class Test extends UserAuthentication
      */
     public function put($id)
     {
+        //get the data
+        $json = file_get_contents("php://input");
+
+        Logger::logMsg("TMP",$json);
+
+        //convert the string of data to an array
+        $d = json_decode($json, true);
+
+        Logger::logMsg("TMP",$d);
+
         $data = [
             "controller" => "Test",
             "method" => "PUT",
-            "id" => $id
+            "id" => $id,
+            "data" => $d
         ];
 
         echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
@@ -63,10 +89,14 @@ class Test extends UserAuthentication
      */
     public function delete($id)
     {
+        $json = file_get_contents('php://input');
+        $arr = json_decode($json,true);
+
         $data = [
             "controller" => "Test",
             "method" => "DELETE",
-            "id" => $id
+            "id" => $id,
+            "data" => $arr
         ];
 
         echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));

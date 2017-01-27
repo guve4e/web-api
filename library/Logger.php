@@ -23,7 +23,7 @@ class Logger{
      * @param $level
      * @param $msg
      */
-    private function _log($level, $msg) {
+    private static function _log($level, $msg) {
         // path to Logs
         $fname = LOG_PATH  . '/' . $level . ".txt";
         // record time and the message with new line at the end
