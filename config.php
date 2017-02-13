@@ -73,13 +73,12 @@
     or define("RDBMS_PATH", realpath(dirname(__FILE__) . "/library/rdbms" ));
 
     /**
-     * USER_PATH
+     * EXCEPTION_PATH
      *
-     * @global string USER_PATH Absolute path to user classe
-     * This folder will contain classe that describes user
+     * @global string EXCEPTION_PATH Absolute path to exception class
      */
-    defined("USER_PATH")
-    or define("USER_PATH", realpath(dirname(__FILE__) . "/library/user" ));
+    defined("EXCEPTION_PATH")
+    or define("EXCEPTION_PATH", realpath(dirname(__FILE__) . "/library/exception" ));
 
     /**
     * VIEW_PATH

@@ -50,11 +50,11 @@ class Constructor
         $request = explode('/', trim($s_path_info,'/'));
 
         // make sure the $s_path_info no null requests
-        if ($request == null) throw new Exception("PATH_INFO");
+        if ($request == null) throw new ApiException("PATH_INFO");
 
         // make sure that request is in the form "/controller/method/id"
         // if $request array has more than 3 elements throw exception
-        if (count($request) > 2) throw new Exception("Wrong Request");
+        if (count($request) > 2) throw new ApiException("Wrong Request");
 
         // get the controller
         $this->controller = $request[0];

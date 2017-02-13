@@ -2,6 +2,7 @@
 
 require_once('config.php'); // include configuration file
 require_once (LIBRARY_PATH . '/Constructor.php'); // include Constructor class
+require_once (EXCEPTION_PATH . '/ApiException.php'); // include ApiException class
 include(LIBRARY_PATH . '/Logger.php');
 
 // Log
@@ -13,9 +14,9 @@ try
 {
     // construct
     if (isset($_SERVER['PATH_INFO']))  $constructor = new Constructor($_SERVER['PATH_INFO']);
-    else throw new Exception("PATH_INFO");
+    else throw new ApiException("PATH_INFO");
 
-} catch (Exception $e) {
+} catch (ApiException $e) {
     // if call is not authorized
     if ( $e->getMessage() == "Authorization")
     {
