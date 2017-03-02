@@ -24,6 +24,28 @@ abstract class Authentication extends Controller
     }// end
 
     /**
+     * output
+     *
+     * This function takes an array as
+     * argument encodes it as json string
+     * and prints the result on the string
+     * @param $data
+     * @throws ApiException
+     */
+    public function output($data)
+    {
+        // set options
+        $options = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+
+        // try to encode the string
+        $json_string = json_encode($data, $options);
+        if( $json_string === false ) throw new ApiException( json_last_error() );
+
+        // print on screen
+        echo($json_string);
+    }
+
+    /**
      *
      * @abstract
      * @param $var

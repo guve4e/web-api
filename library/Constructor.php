@@ -103,6 +103,24 @@ class Constructor
     }
 
     /**
+     * Gets data from input string
+     * converts it to json and returns it
+     *
+     * @return mixed
+     * @throws ApiException
+     */
+    private function get_json(){
+        //get the data
+        $json = file_get_contents("php://input");
+        if ($json === false) throw new ApiException("php://input");
+        //convert the string of data to an array
+        $d = json_decode($json, true);
+        Logger::logMsg("INOUT_STREAM",$d);
+        return $d;
+    }
+
+
+    /**
      * Main Building method that
      * executes the controller
      *
@@ -117,14 +135,16 @@ class Constructor
             // include it
             require_once($controllerFile);
 
-            // handle it here
-            try
+            try // build
             {
+                // get the json string from the input stream
+                $json_data = $this->get_json();
+
                 // make a new class dynamically
                 // using Reflection
                 // @example
-                // $t = new Test()
-                $instance = new $this->controller();
+                // $t = new Test($json_data)
+                $instance = new $this->controller($json_data);
 
                 // authorize the controller
                 if (!Controller::authorize($instance))
@@ -132,6 +152,7 @@ class Constructor
                     throw new Exception("Requested controller is not a valid!");
                 }
 
+                // get the request method
                 $method = $this->method;
 
                 // using Reflection

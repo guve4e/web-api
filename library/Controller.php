@@ -16,22 +16,38 @@ abstract class Controller extends Database
     /**
      * $name
      *
+     * The name of the controller
+     *
      * @var string $name Name of module class
      */
-    public $name;
+    protected $name;
 
     /**
-     * __construct
+     * $json_data
      *
+     * The data sent to the controller
+     * via POST,PUT,DELETE methods
+     *
+     * @var
+     */
+    protected $json_data;
+
+
+    /**
+     * Controller constructor.
+     *
+     * @param $json_data
      */
     public function __construct()
     {
         parent::__construct();
+        // set name
         $this->name = $this->ref->getName();
+
     }// end constructor
 
     /**
-     * Authorize
+     * authorize
      *
      * Checks if the the derived class is:
      * - object
@@ -46,6 +62,19 @@ abstract class Controller extends Database
     {
         return (is_object($module) &&  $module instanceof Controller);
     }
+
+    /**
+     * getJsonData
+     *
+     * Getter for json_data member
+     *
+     * @return mixed
+     */
+    public function getJsonData()
+    {
+        return $this->json_data;
+    }
+
 
     /**
      * __destruct
