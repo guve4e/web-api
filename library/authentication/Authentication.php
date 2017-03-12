@@ -41,7 +41,7 @@ abstract class Authentication extends Controller
      * @param $data
      * @throws ApiException
      */
-    public function output($data)
+    protected function output($data)
     {
         // set options
         $options = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
@@ -55,12 +55,24 @@ abstract class Authentication extends Controller
     }
 
     /**
+     * All overridden functions
+     * get/post/put/delete
+     * use this method to set their log
+     *
+     * @param $method_name
+     */
+    private function setLog($method_name)
+    {
+        $controller_name = get_class($this);
+        Logger::logMsg($controller_name,$method_name);
+    }
+
+    /**
      * GET
      */
     public function get($id)
     {
-        $controller_name = get_class($this);
-        Logger::logMsg($controller_name,"GET");
+        $this->setLog("GET");
     }
 
     /**
@@ -68,11 +80,7 @@ abstract class Authentication extends Controller
      */
     public function post($id)
     {
-        $controller_name = get_class($this);
-        Logger::logMsg($controller_name,"POST");
-
-        //get the incoming data
-        $this->json_data = $this->getJsonData();
+        $this->setLog("POST");
     }
 
     /**
@@ -80,24 +88,17 @@ abstract class Authentication extends Controller
      */
     public function put($id)
     {
-        $controller_name = get_class($this);
-        Logger::logMsg($controller_name,"PUT");
+        $this->setLog("PUT");
 
-        //get the incoming data
-        $this->json_data = $this->getJsonData();
     }
 
     /**
      * DELETE
-     * TODO Not sure if DELETE needs input stream data
+     *
      */
     public function delete($id)
     {
-        $controller_name = get_class($this);
-        Logger::logMsg($controller_name,"DELETE");
-
-        //get the incoming data
-        $this->json_data = $this->getJsonData();
+        $this->setLog("DELETE");
     }
 
     /**
@@ -112,4 +113,5 @@ abstract class Authentication extends Controller
     }// end
 
 }// end class
+
 
