@@ -20,9 +20,13 @@ class Test extends UserAuthentication
      */
     public function get($id)
     {
+        // call parent first
+        // to give you some functionality
+        // as logging and geting data form
+        // input stream
+        parent::get($id);
 
-        Logger::logMsg("Test","GET");
-
+        // dummy data
         $data = [
             "controller" => "Test",
             "method" => "GET",
@@ -31,13 +35,12 @@ class Test extends UserAuthentication
 
         try
         {
-
+            // send the response
             $this->output($data);
         }
         catch(Exception $ex) {
 
         }
-
     }
 
     /**
@@ -45,15 +48,14 @@ class Test extends UserAuthentication
      */
     public function post($id)
     {
-        //get the incoming data
-        $json = $this->getJsonData();
+        parent::post($id);
 
         // make dummy data to output
         $data = [
             "controller" => "Test",
             "method" => "POST",
             "id" => $id,
-            "data" => $json
+            "data" => $this->json_data
         ];
 
         try
@@ -64,7 +66,6 @@ class Test extends UserAuthentication
         catch(Exception $ex) {
 
         }
-
     }
 
     /**
@@ -72,15 +73,14 @@ class Test extends UserAuthentication
      */
     public function put($id)
     {
-        //get the incoming data
-        $json = $this->getJsonData();
+       parent::put($id);
 
         // make dummy data to output
         $data = [
             "controller" => "Test",
             "method" => "PUT",
             "id" => $id,
-            "data" => $json
+            "data" => $this->json_data
         ];
 
         try
@@ -100,20 +100,18 @@ class Test extends UserAuthentication
      */
     public function delete($id)
     {
-        //get the incoming data
-        $json = $this->getJsonData();
+        parent::delete($id);
 
         // make dummy data to output
         $data = [
             "controller" => "Test",
             "method" => "DELETE",
             "id" => $id,
-            "data" => $json
+            "data" => $this->json_data
         ];
 
         try
         {
-
             $this->output($data);
         }
         catch(Exception $ex) {

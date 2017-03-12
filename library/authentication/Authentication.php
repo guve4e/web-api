@@ -13,6 +13,7 @@ include(LIBRARY_PATH . "/Controller.php");
  */
 abstract class Authentication extends Controller
 {
+
     /**
      * __construct
      *
@@ -22,6 +23,14 @@ abstract class Authentication extends Controller
     {
         parent::__construct();
     }// end
+
+    /**
+     *
+     * @abstract
+     * @param $var
+     * @return mixed
+     */
+    public abstract function authenticate($var);
 
     /**
      * output
@@ -39,20 +48,58 @@ abstract class Authentication extends Controller
 
         // try to encode the string
         $json_string = json_encode($data, $options);
+        // check for ptoper encoding
         if( $json_string === false ) throw new ApiException( json_last_error() );
-
         // print on screen
         echo($json_string);
     }
 
     /**
-     *
-     * @abstract
-     * @param $var
-     * @return mixed
+     * GET
      */
-    public abstract function authenticate($var);
-   
+    public function get($id)
+    {
+        $controller_name = get_class($this);
+        Logger::logMsg($controller_name,"GET");
+    }
+
+    /**
+     * POST
+     */
+    public function post($id)
+    {
+        $controller_name = get_class($this);
+        Logger::logMsg($controller_name,"POST");
+
+        //get the incoming data
+        $this->json_data = $this->getJsonData();
+    }
+
+    /**
+     * PUT
+     */
+    public function put($id)
+    {
+        $controller_name = get_class($this);
+        Logger::logMsg($controller_name,"PUT");
+
+        //get the incoming data
+        $this->json_data = $this->getJsonData();
+    }
+
+    /**
+     * DELETE
+     * TODO Not sure if DELETE needs input stream data
+     */
+    public function delete($id)
+    {
+        $controller_name = get_class($this);
+        Logger::logMsg($controller_name,"DELETE");
+
+        //get the incoming data
+        $this->json_data = $this->getJsonData();
+    }
+
     /**
      * __destruct
      *
@@ -66,4 +113,3 @@ abstract class Authentication extends Controller
 
 }// end class
 
-?>

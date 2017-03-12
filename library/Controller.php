@@ -76,6 +76,42 @@ abstract class Controller extends Database
     }
 
     /**
+     * Abstract GET
+     * Has to be overridden
+     *
+     * @param $id
+     * @return mixed
+     */
+    public abstract function get($id);
+
+    /**
+     * Abstract POST
+     * Has to be overridden
+     *
+     * @param $id
+     * @return mixed
+     */
+    public abstract function post($id);
+
+    /**
+     * Abstract PUT
+     * Has to be overridden
+     *
+     * @param $id
+     * @return mixed
+     */
+    public abstract function put($id);
+
+    /**
+     * Abstract DELETE
+     * Has to be overridden
+     *
+     * @param $id
+     * @return mixed
+     */
+    public abstract function delete($id);
+
+    /**
      * __destruct
      *
      * @access public
@@ -88,4 +124,3 @@ abstract class Controller extends Database
 
 }// end class
 
-?>
