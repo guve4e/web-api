@@ -20,7 +20,7 @@ class ApiException extends Exception
      * to the client
      * @var mixed
      */
-    protected $data;
+    protected $data = null;
 
     /**
      *
@@ -31,10 +31,10 @@ class ApiException extends Exception
 
     // Redefine the exception so message isn't optional
     public function __construct($message, $code = 0, Exception $previous = null) {
-        // TODO
-
         // make sure everything is assigned properly
         parent::__construct($message, $code, $previous);
+        // Log just message for now
+        Logger::logException($message);
     }
 
     /**

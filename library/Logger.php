@@ -15,19 +15,25 @@ class Logger{
      */
     private static $endRow = "\n";
 
+    /**
+     * @var string
+     */
+    private static $endRowDouble = "\n\n";
 
     /**
      * Log function. Wrapper to file_put_contents()
      *
      *
-     * @param $level
+     * @param $file_name
      * @param $msg
      */
-    private static function _log($level, $msg) {
+    private static function _log($file_name, $msg) {
         // path to Logs
-        $fname = LOG_PATH  . '/' . $level . ".txt";
+        $fname = LOG_PATH  . '/' . $file_name . ".txt";
         // record time and the message with new line at the end
-        $log_msg =  date('Y-m-d H:i:s') . ": " . $msg . self::$endRow;
+        $log_msg =  "==================== " . date('Y-m-d H:i:s') . "===================="
+            . self::$endRowDouble . $msg . self::$endRow
+            . "============================================================" . self::$endRow;
         // log to file
         file_put_contents($fname, $log_msg, FILE_APPEND | LOCK_EX);
     }
@@ -54,6 +60,17 @@ class Logger{
         $h = print_r($headers,true);
         // call to private _log
         self::_log("HEADERS", $h);
+    }
+
+    /**
+     * Log Exceptions
+     *
+     * @param $msg
+     */
+    public static function logException($msg) {
+        // name file
+        $file = "EXCEPTIONS";
+        self::_log($file,$msg);
     }
 
     /**
