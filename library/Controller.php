@@ -41,7 +41,7 @@ abstract class Controller extends Database
     public function __construct()
     {
         parent::__construct();
-        // set name
+        // set name at runtime
         $this->name = $this->ref->getName();
 
     }// end constructor
@@ -74,7 +74,6 @@ abstract class Controller extends Database
     {
         return $this->json_data;
     }
-
 
     /**
      * __destruct

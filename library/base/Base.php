@@ -40,9 +40,9 @@ abstract class Base
 	 * Wrapper to get_class_vars
 	 *
 	 * @access public
-	 * @param mixed $data Array of variables to assign to instance
 	 * @return void
 	 * @see http://php.net/manual/en/function.get-class-vars.php
+     * @throws ApiException
 	*/
 	public function setProperties()
 	{
@@ -54,6 +54,7 @@ abstract class Base
         //
         // get_class => returns the name of the class of an object
         $properties = get_class_vars(get_class($this));
+        if ($properties === false) throw new ApiException("get_class_vars in Base");
 
         foreach ($properties as $var => $val)
         {

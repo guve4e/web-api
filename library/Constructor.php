@@ -8,6 +8,7 @@
  * @license http://www.opensource.org/licenses/gpl-license.php
  * @package library
  */
+require_once (EXCEPTION_PATH . "/NoSuchControllerException.php");
 
 class Constructor
 {
@@ -86,9 +87,7 @@ class Constructor
     /**
      * __autoload
      *
-     * Autoload is ran by PHP when it can't find a class it is trying to load.
-     * By naming our classes intelligently we should be able to load most classes
-     * dynamically.
+     *
      *
      * @param string $class Class name we're trying to load
      * @return void
@@ -98,13 +97,13 @@ class Constructor
     {
         $file = str_replace('_','/', $class .'.php');
 
-        if( $class == "Authentication")
-            require_once(AUTHENTICATION_PATH . "/" . $file);
+        if( $class == "Authentication") require_once(AUTHENTICATION_PATH . "/" . $file);
     }
 
     /**
      * Gets data from input string
      * converts it to json and returns it
+     * Wrapper over file_get_contents
      *
      * @return mixed
      * @throws ApiException
@@ -112,64 +111,53 @@ class Constructor
     private function get_json(){
         //get the data
         $json = file_get_contents("php://input");
-        if ($json === false) throw new ApiException("php://input");
+        if ($json === false) throw new NoInputStreamException();
         //convert the string of data to an array
         $d = json_decode($json, true);
-        Logger::logMsg("INOUT_STREAM",$d);
         return $d;
     }
-
 
     /**
      * Main Building method that
      * executes the controller
+     * Uses Reflection to make
+     * new object and load a controller
      *
-     * @throws Exception
+     * @throws ApiException
      */
     public function build()
     {
         $controllerFile = CONTROLLERS_PATH . "/" .$this->controller . '.php';
 
         // check if controller exists
-        if (file_exists($controllerFile)) {
-            // include it
-            require_once($controllerFile);
+        if (!file_exists($controllerFile)) throw new NoSuchControllerException($this->controller);
 
-            try // build
-            {
-                // get the json string from the input stream
-                $json_data = $this->get_json();
+        // if file exists include it
+        require_once($controllerFile);
 
-                // make a new class dynamically
-                // using Reflection
-                // @example
-                // $t = new Test($json_data)
-                $instance = new $this->controller($json_data);
 
-                // authorize the controller
-                if (!Controller::authorize($instance))
-                {
-                    throw new Exception("Requested controller is not a valid!");
-                }
+        // get the json string from the input stream
+        $json_data = $this->get_json();
 
-                // get the request method
-                $method = $this->method;
+        // make a new class dynamically
+        // using Reflection
+        // @example
+        // $t = new Test($json_data)
+        $instance = new $this->controller($json_data);
 
-                // using Reflection
-                // @example
-                // $t->post($id)
-                $result = $instance->$method($this->id);
-
-            }
-            catch (Exception $e)
-            {
-                die($e->getMessage());
-            }
-
-        }
-        else
+        // authorize the controller
+        if (!Controller::authorize($instance))
         {
-            throw new Exception("Controller " . $controllerFile . " does NOT exist!");
+            throw new NotAuthorizedException();
         }
+
+        // get the request method
+        $method = $this->method;
+
+        // using Reflection`
+        // @example
+        // $t->post($id)
+        $result = $instance->$method($this->id);
+
     }
 }

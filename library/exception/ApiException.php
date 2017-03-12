@@ -3,6 +3,7 @@
 /**
  * ApiException
  * Extends the Exception Class.
+ * Is base for ApiExceptions
  *
  * Provides ability to log an exception.
  * Change So you can document every exception
@@ -14,26 +15,33 @@
  */
 class ApiException extends Exception
 {
+    /**
+     * Object to be send
+     * to the client
+     * @var mixed
+     */
+    protected $data;
+
+    /**
+     *
+     * @var int
+     */
+    protected $option_bits =  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+
+
     // Redefine the exception so message isn't optional
     public function __construct($message, $code = 0, Exception $previous = null) {
-        // TO_DO
+        // TODO
 
         // make sure everything is assigned properly
         parent::__construct($message, $code, $previous);
     }
-    /**
-     * Custom string representation of object
-     *
-     * @return string
-     */
-    public function __toString() {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
-    }
 
     /**
-     * FOO TO_DO
+     * Send message to client
      */
-    public function foo() {
-        echo "A custom function for this type of exception\n";
+    public function output() {
+        // send to client
+        echo( json_encode($this->data, $this->option_bits ));
     }
 }

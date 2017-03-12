@@ -14,26 +14,23 @@ try
 {
     // construct
     if (isset($_SERVER['PATH_INFO']))  $constructor = new Constructor($_SERVER['PATH_INFO']);
-    else throw new ApiException("PATH_INFO");
+    else throw new ApiException("PATH_INFO",101);
 
 } catch (ApiException $e) {
     // if call is not authorized
-    if ( $e->getMessage() == "Authorization")
+    if ($e instanceof NotAuthorizedException)
     {
+        $e->output();
         header(VIEW_PATH . "/authentication.php");
         die();
     } // if there is no PATH_INFO, display API View
-    else if ( $e->getMessage() == "PATH_INFO")
+    else if ($e->getCode() == 101)
     {
-        include(VIEW_PATH . '/controller.php');
-    }
-    else if ( $e->getMessage() == "Wrong Request")
+        include(VIEW_PATH . "/controller.php");
+    }// if the controller does not exist
+    else if ($e instanceof NoSuchControllerException)
     {
-        // send notification to the user that she has wrong
-        // request
-        $data = [
-            "message" => "Wrong Request, Check URL"
-        ];
-        echo( json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        // send right message to client
+        $e->output();
     }
 }// end try / catch
