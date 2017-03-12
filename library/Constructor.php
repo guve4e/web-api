@@ -127,14 +127,17 @@ class Constructor
      */
     public function build()
     {
-        $controllerFile = CONTROLLERS_PATH . "/" .$this->controller . '.php';
+        // make the first letter of the controller uppercase
+        $controller = ucfirst($this->controller);
+
+        // construct controller
+        $controllerFile = CONTROLLERS_PATH . "/" . $controller . '.php';
 
         // check if controller exists
         if (!file_exists($controllerFile)) throw new NoSuchControllerException($this->controller);
 
         // if file exists include it
         require_once($controllerFile);
-
 
         // get the json string from the input stream
         $json_data = $this->get_json();
@@ -143,7 +146,7 @@ class Constructor
         // using Reflection
         // @example
         // $t = new Test($json_data)
-        $instance = new $this->controller($json_data);
+        $instance = new $controller($json_data);
 
         // authorize the controller
         if (!Controller::authorize($instance))
