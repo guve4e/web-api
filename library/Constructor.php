@@ -9,6 +9,7 @@
  * @package library
  */
 require_once (EXCEPTION_PATH . "/NoSuchControllerException.php");
+require_once (EXCEPTION_PATH . "/NoSuchMethodException.php");
 
 class Constructor
 {
@@ -75,6 +76,7 @@ class Constructor
      * Depends on the Request method
      *
      * @return string method name
+     * @throws
      */
     private function getMethod()
     {
@@ -82,6 +84,7 @@ class Constructor
         else if ($_SERVER['REQUEST_METHOD'] == "POST") return "post";
         else if ($_SERVER['REQUEST_METHOD'] == "PUT") return "put";
         else if ($_SERVER['REQUEST_METHOD'] == "DELETE") return "delete";
+        else throw new NoSuchMethodException($_SERVER['REQUEST_METHOD']);
     }
 
     /**

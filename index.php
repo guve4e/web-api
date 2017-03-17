@@ -24,6 +24,9 @@ try
         header(VIEW_PATH . "/authentication.php");
         die();
     } // if there is no PATH_INFO, display API View
+    else if ($e instanceof NoSuchMethodException) {
+        $e->output();
+    }
     else if ($e->getCode() == 101)
     {
         include(VIEW_PATH . "/controller.php");
