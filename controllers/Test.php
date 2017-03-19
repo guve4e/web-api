@@ -1,5 +1,6 @@
 <?php
 include(AUTHENTICATION_PATH . "/UserAuthentication.php");
+include (EXCEPTION_PATH .  "/MethodNotImplementedException.php");
 
 class Test extends UserAuthentication
 {
@@ -70,27 +71,13 @@ class Test extends UserAuthentication
 
     /**
      * PUT
+     *
+     * Example if method is not
+     * implemented.
      */
     public function put($id)
     {
-       parent::put($id);
-
-        // make dummy data to output
-        $data = [
-            "controller" => "Test",
-            "method" => "PUT",
-            "id" => $id,
-            "data" => $this->json_data
-        ];
-
-        try
-        {
-
-            $this->output($data);
-        }
-        catch(Exception $ex) {
-
-        }
+        throw new MethodNotImplementedException("POST");
     }
 
     /**
@@ -115,7 +102,6 @@ class Test extends UserAuthentication
         catch(Exception $ex) {
 
         }
-
     }
 
     /**

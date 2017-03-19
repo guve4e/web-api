@@ -35,5 +35,9 @@ try
     {
         // send right message to client
         $e->output();
+    }// if the method is not implemented
+    else if ($e instanceof  MethodNotImplementedException)
+    {
+        $e->output();
     }
 }// end try / catch
