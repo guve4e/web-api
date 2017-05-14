@@ -11,20 +11,20 @@ include(BASE_CLASS_PATH . "/Base.php");
  * @license http://www.opensource.org/licenses/gpl-license.php
  * @package library
  */
-abstract class Database extends Base
+class Database
 {   
     /**
      * $db
      *
      * @var mixed represents database connection
      */
-    protected $db;
+    private $db;
 
     /**
      *
      * @var mixed
      */
-    protected $type = "mysql";
+    private $type = "mysql";
 
     /**
      * __construct
@@ -33,14 +33,12 @@ abstract class Database extends Base
      */
     public function __construct()
     {
-        parent::__construct();
-
         // switch databases
         switch ($this->type)
         {
             case "mysql":
             {   // make new Mysql
-             //   $this->db = new Mysql();
+                $this->db = new Mysql();
                 break;
             }
             default:
@@ -53,6 +51,14 @@ abstract class Database extends Base
     }// end constructor
 
     /**
+     * @return mixed
+     */
+    public function getDb()
+    {
+        return $this->db;
+    }
+
+    /**
     * __destruct
     *
     * @access public
@@ -60,7 +66,7 @@ abstract class Database extends Base
     */
     public function __destruct()
     {
-        parent::__destruct();
+
     }// end
 }
 

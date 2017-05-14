@@ -134,10 +134,13 @@ class Constructor
         $controller = ucfirst($this->controller);
 
         // construct controller
-        $controllerFile = CONTROLLERS_PATH . "/" . $controller . '.php';
+        // controllers' folder + controller-folder + controller-file
+        // the reason each controller to be in its own folder is that some
+        // controllers have database access and logic in the same folder
+        $controllerFile = CONTROLLERS_PATH . "/" . $controller  . "/" . $controller . '.php';
 
         // check if controller exists
-        if (!file_exists($controllerFile)) throw new NoSuchControllerException($this->controller, "Constructor.php", 140);
+        if (!file_exists($controllerFile)) throw new NoSuchControllerException($this->controller, "Constructor.php", 143);
 
         // if file exists include it
         require_once($controllerFile);
@@ -145,10 +148,15 @@ class Constructor
         // get the json string from the input stream
         $json_data = $this->get_json();
 
+
+        //
+        // Make an object and call the right method on it
+        //
+
         // make a new class dynamically
         // using Reflection
         // @example
-        // $t = new Test($json_data)
+        // $test = new Test($json_data)
         $instance = new $controller($json_data);
 
         // authorize the controller
@@ -164,6 +172,5 @@ class Constructor
         // @example
         // $t->post($id)
         $result = $instance->$method($this->id);
-
     }
 }

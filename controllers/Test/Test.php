@@ -1,23 +1,34 @@
 <?php
-include(AUTHENTICATION_PATH . "/UserAuthentication.php");
-include (EXCEPTION_PATH .  "/MethodNotImplementedException.php");
+require_once(AUTHENTICATION_PATH . "/UserAuthentication.php");
+require_once("TestDatabase.php");
 
 class Test extends UserAuthentication
 {
+
+    /**
+     * Database Connector
+     * @var null
+     */
+    private $db = null;
+
     /**
      * __construct
      *
      * @access public
      */
-    public function __construct($c)
+    public function __construct($input)
     {
         parent::__construct();
         // set incoming json data
-        $this->json_data = $c;
+        $this->json_data = $input;
+
+        $this->db = new TestDatabase();
     }
 
     /**
      * GET
+     *
+     * @override
      */
     public function get($id)
     {
@@ -34,18 +45,18 @@ class Test extends UserAuthentication
             "id" => $id
         ];
 
-        try
-        {
+        try {
             // send the response
             $this->output($data);
-        }
-        catch(Exception $ex) {
+        } catch(Exception $ex) {
 
         }
     }
 
     /**
      * POST
+     *
+     * @override
      */
     public function post($id)
     {
@@ -59,12 +70,9 @@ class Test extends UserAuthentication
             "data" => $this->json_data
         ];
 
-        try
-        {
-
+        try {
             $this->output($data);
-        }
-        catch(Exception $ex) {
+        } catch(Exception $ex) {
 
         }
     }
@@ -72,16 +80,31 @@ class Test extends UserAuthentication
     /**
      * PUT
      *
-     * Example if method is not
-     * implemented.
+     * @override
      */
     public function put($id)
     {
-        throw new MethodNotImplementedException("POST");
+       parent::put($id);
+
+        // make dummy data to output
+        $data = [
+            "controller" => "Test",
+            "method" => "PUT",
+            "id" => $id,
+            "data" => $this->json_data
+        ];
+
+        try {
+            $this->output($data);
+        } catch(Exception $ex) {
+
+        }
     }
 
     /**
      * DELETE
+     *
+     * @override
      */
     public function delete($id)
     {
@@ -95,13 +118,12 @@ class Test extends UserAuthentication
             "data" => $this->json_data
         ];
 
-        try
-        {
+        try  {
             $this->output($data);
-        }
-        catch(Exception $ex) {
+        } catch(Exception $ex) {
 
         }
+
     }
 
     /**

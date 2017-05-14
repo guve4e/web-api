@@ -69,7 +69,13 @@ class Mysql
      */
     public function __construct()
     {
-        $this->connect();
+        try {
+            $this->connect();
+        } catch (Exception $e) {
+            Logger::logMsg("EXCEPTION",$e->getMessage());
+        }
+
+
     }
 
     /**
@@ -125,14 +131,20 @@ class Mysql
      * Disconnect
      * Attempt to disconnect from MySQL database
      * @return mixed disconnect/connection
+     * @throws Exception
      */
     public function disconnect()
     {
+        // initial result
+        $close_result = false;
+
         if ($this->isValidService())
         {
             $this->isConnected = false;
-            $this->service->close();
+            $close_result = $this->service->close();
         }
+
+        if ($close_result == false) throw new Exception("Unsuccessful closing of database", 777);
 
         return $this;
     }
@@ -140,7 +152,7 @@ class Mysql
     /**
      * Makes a query
      * @param string $sql
-     * @return a corresponding query instance
+     * @return a correspondi2ng query instance
      * to be used in Query class
      * @throws Exception
      * @internal param string $sql
@@ -220,5 +232,20 @@ class Mysql
             throw new Exception("Not connected to a valid service");
 
         return $this->service->error;
+    }
+
+    /**
+     * __destruct
+     *
+     * @access public
+     * @return void
+     */
+    public function __destruct()
+    {
+        try {
+            $log = $this->disconnect();
+        } catch (Exception $e) {
+            Logger::logMsg("EXCEPTION",$e->getMessage());
+        }
     }
 }
