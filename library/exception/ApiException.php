@@ -33,14 +33,14 @@ class ApiException extends Exception
     public function __construct($message, $code = 0, Exception $previous = null) {
         // make sure everything is assigned properly
         parent::__construct($message, $code, $previous);
-        // Log just message for now
-        Logger::logException($message);
     }
 
     /**
      * Send message to client
      */
     public function output() {
+        // Log just message for now
+        Logger::logException($this->message);
         // send to client
         echo( json_encode($this->data, $this->option_bits ));
     }

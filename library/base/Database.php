@@ -5,12 +5,11 @@ include(BASE_CLASS_PATH . "/Base.php");
  * Database
  * Extends the base Base class to include a database connection.
  *
- * Composition with an class that is wrapper over RDBMS
+ * Composition with class that is wrapper to RDBMS
  * framework
  *
  * @license http://www.opensource.org/licenses/gpl-license.php
  * @package library
- * @filesource
  */
 abstract class Database extends Base
 {   
@@ -41,8 +40,7 @@ abstract class Database extends Base
         {
             case "mysql":
             {   // make new Mysql
-            //    $this->db = new Mysql();
-                $this->db = null;
+             //   $this->db = new Mysql();
                 break;
             }
             default:

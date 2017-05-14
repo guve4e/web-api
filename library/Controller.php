@@ -1,6 +1,7 @@
 <?php
 
 include(BASE_CLASS_PATH . "/Database.php");
+require_once (EXCEPTION_PATH . "/NotAuthorizedException.php");
 /**
  * Controller
  *
@@ -55,12 +56,22 @@ abstract class Controller extends Database
      *
      * @static
      * @access public
-     * @param mixed $module
+     * @param mixed $controller
+     * @throws NotAuthorizedException
      * @return bool
      */
-    public static function authorize($module)
+    public static function authorize($controller)
     {
-        return (is_object($module) &&  $module instanceof Controller);
+        $authenticated = false;
+       
+        if (!isset($_SERVER['HTTP_APITOKEN'])) throw new NotAuthorizedException();
+        // get headers
+        $token = $_SERVER['HTTP_APITOKEN'];
+
+        // check for the right API Token
+        if ($token == "WRCdmach38E2*$%Ghdo@nf#cOBD4fd") $authenticated = true;
+
+        return (is_object($controller) &&  $controller instanceof Controller && $authenticated);
     }
 
     /**

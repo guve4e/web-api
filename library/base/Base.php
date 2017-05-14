@@ -13,16 +13,16 @@ abstract class Base
 {
 	/**
 	 * Reflection object
-     *
+         *
 	 * @var mixed Instance of ReflectionClass
 	 */
 	protected $ref;
 
-    /**
-     * Properties of class
-     *
-     * @var mixed
-     */
+       /**
+        * Properties of class
+        *
+        *  @var mixed
+        */
 	protected $prop;
 
 	/**

@@ -137,7 +137,7 @@ class Constructor
         $controllerFile = CONTROLLERS_PATH . "/" . $controller . '.php';
 
         // check if controller exists
-        if (!file_exists($controllerFile)) throw new NoSuchControllerException($this->controller);
+        if (!file_exists($controllerFile)) throw new NoSuchControllerException($this->controller, "Constructor.php", 140);
 
         // if file exists include it
         require_once($controllerFile);

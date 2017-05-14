@@ -1,7 +1,7 @@
  <?php
 
 /**
-* Mysql class usess MySQL predefined functions
+* Mysql class uses MySQL predefined functions
 *
 * @license http://www.opensource.org/licenses/gpl-license.php
 * @package library
@@ -12,56 +12,56 @@ class Mysql
     /**
      * @var
      */
-    protected $service;
-    
+    private $service;
+
     /**
      * @var
      * @readwrite
      */
-    protected $host;
-    
+    private $host;
+
     /**
      * @var
      * @readwrite
      */
-    protected $username;
-    
+    private $username;
+
     /**
      * @var
      * @readwrite
      */
-    protected $password;
-    
+    private $password;
+
     /**
      * @var
      * @readwrite
      */
-    protected $schema;
-    
+    private $schema;
+
     /**
      * @var
      * @readwrite
      */
-    protected $port = "3306";
-    
+    private $port = "3306";
+
     /**
      * @var
      * @readwrite
      */
-    protected $charset = "utf8";
-    
+    private $charset = "utf8";
+
     /**
      * @var
      * @readwrite
      */
-    protected $engine = "InnoDB";
-    
+    private $engine = "InnoDB";
+
     /**
      * @var
      * @readwrite
      */
-    protected $isConnected = false;
-    
+    private $isConnected = false;
+
     /**
      * __construct
      *
@@ -73,21 +73,19 @@ class Mysql
     }
 
     /**
-     * Checks if connected to the database
+     * Checks if connected to the database.
+     * Makes sure that it is connected, is instance and
+     * it is initialized.
      * @return true if valid connection false, other ways
      */
     protected function isValidService()
     {
         $isEmpty = empty($this->service);                  // check if initialized object
         $isInstance = $this->service instanceof \MySQLi;   // check if it is MysSQLi object
-        
-        if ($this->isConnected && $isInstance && !$isEmpty)
-        {
-            return true;
-        }
-        
-        return false;
-    }// end 
+
+        // if these conditions are met return true, else false
+        return $this->isConnected && $isInstance && !$isEmpty;
+    }// end
 
     /**
      * Makes A Connection
@@ -107,28 +105,26 @@ class Mysql
             // connect
             $this->service = new \MySQLi($server, $user, $pass, $name);
 
-            //
-            // mysqli::$connect_error -- mysqli_connect_error — Returns a string a 
+            // mysqli::$connect_error -- mysqli_connect_error — Returns a string a
             // escription of the last connect error
             // Object oriented style -> string $mysqli->connect_error;
             // Procedural Style -> string mysqli_connect_error ( void )
-            //
             if ($this->service->connect_error)
             {
                 $error = mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
                 throw new Exception("Unable to connect to service: " . $error);
             }
-            
+
             $this->isConnected = true;
         }
-        
+
         return $this->service;
-    }// end 
-    
+    }// end
+
     /**
      * Disconnect
      * Attempt to disconnect from MySQL database
-     * @return disconnect/connection
+     * @return mixed disconnect/connection
      */
     public function disconnect()
     {
@@ -137,7 +133,7 @@ class Mysql
             $this->isConnected = false;
             $this->service->close();
         }
-        
+
         return $this;
     }
 
@@ -152,36 +148,31 @@ class Mysql
     public function query($sql)
     {
         if (!$this->isValidService())
-        {
             throw new Exception("Not connected to a valid service");
-        }
-        
+
         return $this->service->query($sql);
     }
-    
+
     /**
      * Executes the provided SQL statement
      * @param string query
-     * @return associative array representing a row
+     * @return mixed representing a row
      * @see query()
      * @throws Exception
      */
     public function execute($sql)
     {
         if (!$this->isValidService())
-        {
             throw new Exception("Not connected to a valid service");
-        }
+
         // pass the query to MySQL for processing
         $result = $this->service->query($sql);
 
         if ($result === false)
-        {
             throw new Exception("There was an error with your SQL query:");
-        }
-        
+
         $rows = array();
-        
+
         for ($i = 0; $i < $result->num_rows; $i++)
         {
             $rows[] = $result->fetch_array(MYSQLI_ASSOC);
@@ -199,13 +190,10 @@ class Mysql
     public function getLastInsertId()
     {
         if (!$this->isValidService())
-        {
             throw new Exception("Not connected to a valid service");
-        }
-        
+
         return $this->service->insert_id;
     }
-    
 
     /**
      * Returns the number of rows affected
@@ -216,13 +204,11 @@ class Mysql
     public function getAffectedRows()
     {
         if (!$this->isValidService())
-        {
             throw new Exception("Not connected to a valid service");
-        }
-        
+
         return $this->service->affected_rows;
     }
-    
+
     /**
      * Gets the number of affected rows in a previous MySQL operation
      * @return the last error of occur
@@ -231,10 +217,8 @@ class Mysql
     public function getLastError()
     {
         if (!$this->isValidService())
-        {
             throw new Exception("Not connected to a valid service");
-        }
-        
+
         return $this->service->error;
     }
 }

@@ -2,12 +2,10 @@
 
 include(LIBRARY_PATH . "/Controller.php");
 /**
- * Authentication
+ * Authentication class.
+ * This class sends data back to front end.
+ * It provides each controller with logging ability.
  *
- * Base class of authentication classes. The controller will check to make
- * sure your controller is an instance of Authentication class.
- *
- * @see Module
  * @license http://www.opensource.org/licenses/gpl-license.php
  * @package library
  */
@@ -60,45 +58,62 @@ abstract class Authentication extends Controller
      * use this method to set their log
      *
      * @param $method_name
+     * @param $id
+     * @param $msg
      */
-    private function setLog($method_name)
+    private function setLog($method_name, $id = "No Id", $msg = "No Message")
     {
         $controller_name = get_class($this);
-        Logger::logMsg($controller_name,$method_name);
+        $toString = "Method  : " . $method_name . "\n" .
+                    "Id      : " . $id . "\n" .
+                    "Message : " . $msg  . "\n";
+        Logger::logMsg($controller_name, $toString);
     }
 
     /**
      * GET
+     * @param $id
+     * @param string $msg
+     * @return void
      */
-    public function get($id)
+    public function get($id = "No Id", $msg = "No Message")
     {
-        $this->setLog("GET");
+        $this->setLog("GET", $id, $msg);
     }
 
     /**
      * POST
+     * @param $id
+     * @param string $msg
+     * @return void
      */
-    public function post($id)
+    public function post($id = "No Id", $msg = "No Message")
     {
-        $this->setLog("POST");
+        $this->setLog("POST", $id, $msg);
     }
 
     /**
      * PUT
+     * @param $id
+     * @param string $msg
+     * @return void
      */
-    public function put($id)
+    public function put($id = "No Id", $msg = "No Message")
     {
-        $this->setLog("PUT");
+        $this->setLog("PUT", $id, $msg);
 
     }
 
     /**
      * DELETE
      *
+     * @param $id
+     * @param string $msg
+     * @return void
      */
-    public function delete($id)
+    public function delete($id = "No Id", $msg = "No Message")
     {
-        $this->setLog("DELETE");
+        $this->setLog("DELETE", $id, $msg);
     }
 
     /**
