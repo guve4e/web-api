@@ -14,10 +14,16 @@
     /**
     * global config array
     * @global
-    */
+     */
+/**
+ * DB
+ *
+ * @global string MySQLi options
+ */
+define('CONFIG',
     $config = [
     "debug" => true
-    ];
+    ]);
 
 
     /**

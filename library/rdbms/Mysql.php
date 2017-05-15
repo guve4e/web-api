@@ -1,5 +1,5 @@
  <?php
-
+require_once (EXCEPTION_PATH . "/DatabaseException.php");
 /**
 * Mysql class uses MySQL predefined functions
 *
@@ -69,13 +69,17 @@ class Mysql
      */
     public function __construct()
     {
-        try {
-            $this->connect();
-        } catch (Exception $e) {
-            Logger::logMsg("EXCEPTION",$e->getMessage());
-        }
+        // set up
+        $this->host = DB['host'];
+        $this->username = DB['username'];
+        $this->password = DB['password'];
+        $this->schema = DB['schema'];
 
+        // adjust myqsli to throw exceptions
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+        // connect to database
+        $this->connect();
     }
 
     /**
@@ -102,23 +106,13 @@ class Mysql
     {
         if (!$this->isValidService())
         {
-            // extract info from configuration file
-            $server = DB['host'];
-            $user = DB['username'];
-            $pass = DB['password'];
-            $name = DB['schema'];
+            try {
 
-            // connect
-            $this->service = new \MySQLi($server, $user, $pass, $name);
+                $this->service = new mysqli($this->host, $this->username, $this->password, $this->schema);
 
-            // mysqli::$connect_error -- mysqli_connect_error — Returns a string a
-            // escription of the last connect error
-            // Object oriented style -> string $mysqli->connect_error;
-            // Procedural Style -> string mysqli_connect_error ( void )
-            if ($this->service->connect_error)
-            {
-                $error = mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-                throw new Exception("Unable to connect to service: " . $error);
+                $this->isConnected = true;
+            } catch (mysqli_sql_exception $e) {
+                throw new DatabaseException($e->getMessage());
             }
 
             $this->isConnected = true;
@@ -140,11 +134,11 @@ class Mysql
 
         if ($this->isValidService())
         {
-            $this->isConnected = false;
             $close_result = $this->service->close();
-        }
+            $this->isConnected = false;
 
-        if ($close_result == false) throw new Exception("Unsuccessful closing of database", 777);
+            if ($close_result == false) throw new Exception("Unsuccessful closing of database", 777);
+        }
 
         return $this;
     }
@@ -152,7 +146,7 @@ class Mysql
     /**
      * Makes a query
      * @param string $sql
-     * @return a correspondi2ng query instance
+     * @return string corresponding query instance
      * to be used in Query class
      * @throws Exception
      * @internal param string $sql
@@ -223,7 +217,7 @@ class Mysql
 
     /**
      * Gets the number of affected rows in a previous MySQL operation
-     * @return the last error of occur
+     * @return string, the last error that occured
      * @throws Exception
      */
     public function getLastError()
@@ -245,7 +239,7 @@ class Mysql
         try {
             $log = $this->disconnect();
         } catch (Exception $e) {
-            Logger::logMsg("EXCEPTION",$e->getMessage());
+            Logger::logMsg("EXCEPTIONS",$e->getMessage());
         }
     }
 }

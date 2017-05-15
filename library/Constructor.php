@@ -111,7 +111,7 @@ class Constructor
      * @return mixed
      * @throws ApiException
      */
-    private function get_json(){
+    private function getJson(){
         //get the data
         $json = file_get_contents("php://input");
         if ($json === false) throw new NoInputStreamException();
@@ -146,7 +146,7 @@ class Constructor
         require_once($controllerFile);
 
         // get the json string from the input stream
-        $json_data = $this->get_json();
+        $json_data = $this->getJson();
 
 
         //
