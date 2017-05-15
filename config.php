@@ -3,58 +3,51 @@
     /**
     * config.php
     *
-    * @author Valentin Kormanov
     * @license http://www.opensource.org/licenses/gpl-license.php
-    * @package api
-    * @filesource
+    * @package library
     */
 
 
 
     /**
-    * global config array
-    * @global
+     * global config array
+     * @global
      */
-/**
- * DB
- *
- * @global string MySQLi options
- */
-define('CONFIG',
-    $config = [
-    "debug" => true
-    ]);
+    define('CONFIG',
+        $config = [
+        "debug" => true
+        ]);
 
 
     /**
-    * BASE_PATH
-    *
-    * @global string BASE_PATH Absolute path to framework
-    */
+     * BASE_PATH
+     *
+     * @global string BASE_PATH Absolute path to framework
+     */
     define('BASE_PATH',dirname(__FILE__));
 
     /**
-    * LOG_PATH
-    *
-    * @global string LOG_PATH Absolute path to logs
-    */
+     * LOG_PATH
+     *
+     * @global string LOG_PATH Absolute path to logs
+     */
     defined("LOG_PATH")
     or define("LOG_PATH", realpath(dirname(__FILE__) . "/logs" ));
 
     /**
-    * LIBRARY_PATH
-    *
-    * @global string LIBRARY_PATH Absolute path to library
-    */
+     * LIBRARY_PATH
+     *
+     * @global string LIBRARY_PATH Absolute path to library
+     */
     defined("LIBRARY_PATH")
     or define("LIBRARY_PATH", realpath(dirname(__FILE__) . "/library" ));
 
     /**
-    * AUTHENTICATION_PATH
-    *
-    * @global string AUTHENTICATION_PATH Absolute path to authentication classes
-    * all apps will inherit from these classes
-    */
+     * AUTHENTICATION_PATH
+     *
+     * @global string AUTHENTICATION_PATH Absolute path to authentication classes
+     * all apps will inherit from these classes
+     */
     defined("AUTHENTICATION_PATH")
     or define("AUTHENTICATION_PATH", realpath(dirname(__FILE__) . "/library/authentication" ));
 
