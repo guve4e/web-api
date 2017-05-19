@@ -20,8 +20,6 @@ class TestDatabase extends Database
         parent::__construct();
     }
 
-
-
     /**
      * __destruct
      *

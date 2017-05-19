@@ -113,7 +113,7 @@
     define('DB',array(  "host" => "localhost",
                   "username" => "root",
                   "password" => "aztewe",
-                  "schema" => "ARDUINO"
+                  "schema" => "HOUSE-NET"
                 ));
 
     /**
