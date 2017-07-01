@@ -37,7 +37,6 @@ abstract class Controller extends Base
     /**
      * Controller constructor.
      *
-     * @param $json_data
      */
     public function __construct()
     {
@@ -63,7 +62,7 @@ abstract class Controller extends Base
     public static function authorize($controller)
     {
         $authenticated = false;
-        return true;
+        //return true;
         if (!isset($_SERVER['HTTP_APITOKEN'])) throw new NotAuthorizedException();
         // get headers
         $token = $_SERVER['HTTP_APITOKEN'];
@@ -84,6 +83,18 @@ abstract class Controller extends Base
     public function getJsonData()
     {
         return $this->json_data;
+    }
+
+    /**
+     * setJsonData
+     *
+     * Setter for json_data member
+     *
+     * @return mixed
+     */
+    public function setJsonData($data)
+    {
+        $this->json_data = $data;
     }
 
     /**

@@ -1,12 +1,12 @@
- <?php
+<?php
 require_once (EXCEPTION_PATH . "/DatabaseException.php");
 /**
-* Mysql class uses MySQL predefined functions
-*
-* @license http://www.opensource.org/licenses/gpl-license.php
-* @package library
-* @filesource
-*/
+ * Mysql class uses MySQL predefined functions
+ *
+ * @license http://www.opensource.org/licenses/gpl-license.php
+ * @package library
+ * @filesource
+ */
 class Mysql
 {
     /**
@@ -108,7 +108,7 @@ class Mysql
         {
             try {
 
-                $this->service = new mysqli($this->host, $this->username, $this->password, $this->schema);
+            //    $this->service = new mysqli($this->host, $this->username, $this->password, $this->schema);
 
                 $this->isConnected = true;
             } catch (mysqli_sql_exception $e) {
@@ -120,6 +120,52 @@ class Mysql
 
         return $this->service;
     }// end
+
+    /**
+     * Wrapper over execute()
+     * It retrieves one Row from Table
+     */
+    public function getOneRow($sql)
+    {
+        // check precondition
+        if ($sql == null) throw new Exception("Null SQL Query");
+        // execute
+        $result = $this->execute($sql);
+        // shift array and return
+        return array_shift($result);
+    }
+
+    /**
+     * Executes the provided SQL statement
+     * @param string query
+     * @return mixed representing a row
+     * @see query()
+     * @throws Exception
+     */
+    public function execute($sql)
+    {
+        if (!$this->isValidService())
+            throw new Exception("Not connected to a valid service");
+
+        try
+        {
+            // pass the query to MySQL for processing
+            $result = $this->service->query($sql);
+        }
+        catch (Exception $ex)
+        {
+            throw new DatabaseException("There was an error with your SQL query:");
+        }
+
+        $rows = array();
+
+        for ($i = 0; $i < $result->num_rows; $i++)
+        {
+            $rows[] = $result->fetch_array(MYSQLI_ASSOC);
+        }
+
+        return $rows;
+    }
 
     /**
      * Disconnect
@@ -156,35 +202,16 @@ class Mysql
         if (!$this->isValidService())
             throw new Exception("Not connected to a valid service");
 
-        return $this->service->query($sql);
-    }
-
-    /**
-     * Executes the provided SQL statement
-     * @param string query
-     * @return mixed representing a row
-     * @see query()
-     * @throws Exception
-     */
-    public function execute($sql)
-    {
-        if (!$this->isValidService())
-            throw new Exception("Not connected to a valid service");
-
-        // pass the query to MySQL for processing
-        $result = $this->service->query($sql);
-
-        if ($result === false)
-            throw new Exception("There was an error with your SQL query:");
-
-        $rows = array();
-
-        for ($i = 0; $i < $result->num_rows; $i++)
+        try
         {
-            $rows[] = $result->fetch_array(MYSQLI_ASSOC);
+            // pass the query to MySQL for processing
+            $result = $this->service->query($sql);
         }
-
-        return $rows;
+        catch (Exception $ex)
+        {
+            throw new DatabaseException("There was an error with your SQL query:");
+        }
+        return $result;
     }
 
     /**

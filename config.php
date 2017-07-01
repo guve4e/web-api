@@ -112,8 +112,8 @@
     */
     define('DB',array(  "host" => "localhost",
                   "username" => "root",
-                  "password" => "aztewe",
-                  "schema" => "HOUSE-NET"
+                  "password" => "pass",
+                  "schema" => "SCHEMA"
                 ));
 
     /**

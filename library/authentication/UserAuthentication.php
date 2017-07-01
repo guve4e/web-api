@@ -44,8 +44,6 @@ include(AUTHENTICATION_PATH . "/Authentication.php");
                 return false;
         }
 
-
-
         /**
         * __destruct
         * 

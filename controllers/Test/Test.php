@@ -42,7 +42,7 @@ class Test extends UserAuthentication
         $data = [
             "controller" => "Test",
             "method" => "GET",
-            "id" => $id
+            "id" => 123
         ];
 
         try {

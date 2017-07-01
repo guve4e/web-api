@@ -13,6 +13,13 @@ abstract class Authentication extends Controller
 {
 
     /**
+     * @var string
+     * Json String that will be sent
+     * to client
+     */
+    protected $json_string;
+
+    /**
      * __construct
      *
      * @access public
@@ -45,11 +52,13 @@ abstract class Authentication extends Controller
         $options = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 
         // try to encode the string
-        $json_string = json_encode($data, $options);
+        $this->json_string = json_encode($data, $options);
         // check for ptoper encoding
-        if( $json_string === false ) throw new ApiException( json_last_error() );
+        if( $this->json_string === false ) throw new ApiException( json_last_error() );
+        // log
+        Logger::logOutput($this->json_string);
         // print on screen
-        echo($json_string);
+        echo($this->json_string);
     }
 
     /**
@@ -65,8 +74,8 @@ abstract class Authentication extends Controller
     {
         $controller_name = get_class($this);
         $toString = "Method  : " . $method_name . "\n" .
-                    "Id      : " . $id . "\n" .
-                    "Message : " . $msg  . "\n";
+            "Id      : " . $id . "\n" .
+            "Message : " . $msg  . "\n";
         Logger::logMsg($controller_name, $toString);
     }
 

@@ -22,6 +22,8 @@ class ApiException extends Exception
      */
     protected $data = null;
 
+    protected $time;
+
     /**
      *
      * @var int
@@ -33,6 +35,14 @@ class ApiException extends Exception
     public function __construct($message, $code = 0, Exception $previous = null) {
         // make sure everything is assigned properly
         parent::__construct($message, $code, $previous);
+
+        // get time and date
+        $dateTime = new DateTime('2016-03-11 11:00:00');
+
+        $this->data = [
+            "message" => $message,
+            "time" => $dateTime->getTimestamp()
+        ];
     }
 
     /**

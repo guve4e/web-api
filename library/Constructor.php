@@ -29,17 +29,6 @@ class Constructor
     private $id;
 
     /**
-     * @var
-     */
-    private $action;
-
-    /**
-     * @var
-     */
-    private $data;
-
-
-    /**
      * __construct
      *
      * @access public
@@ -85,22 +74,6 @@ class Constructor
         else if ($_SERVER['REQUEST_METHOD'] == "PUT") return "put";
         else if ($_SERVER['REQUEST_METHOD'] == "DELETE") return "delete";
         else throw new NoSuchMethodException($_SERVER['REQUEST_METHOD']);
-    }
-
-    /**
-     * __autoload
-     *
-     *
-     *
-     * @param string $class Class name we're trying to load
-     * @return void
-     * @package api
-     */
-    private function __autoload($class)
-    {
-        $file = str_replace('_','/', $class .'.php');
-
-        if( $class == "Authentication") require_once(AUTHENTICATION_PATH . "/" . $file);
     }
 
     /**
@@ -156,7 +129,7 @@ class Constructor
         // make a new class dynamically
         // using Reflection
         // @example
-        // $test = new Test($json_data)
+        // $test = new Braintree($json_data)
         $instance = new $controller($json_data);
 
         // authorize the controller

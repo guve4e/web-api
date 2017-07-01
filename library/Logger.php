@@ -74,6 +74,18 @@ class Logger{
     }
 
     /**
+     * Log Output
+     * Everything that is sent to caller.
+     *
+     * @param $msg
+     */
+    public static function logOutput($msg) {
+        // name file
+        $file = "OUTPUT";
+        self::_log($file,$msg);
+    }
+
+    /**
      * Generic Method to log messages
      *
      * @param $fname string filename
