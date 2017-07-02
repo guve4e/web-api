@@ -74,6 +74,17 @@ class Logger{
     }
 
     /**
+     * Log Mysql Response
+     *
+     * @param $msg
+     */
+    public static function logMySqlResponse($msg) {
+        // name file
+        $file = "DATABASE_RESPONSE";
+        self::_log($file,$msg);
+    }
+
+    /**
      * Log Output
      * Everything that is sent to caller.
      *

@@ -1,5 +1,6 @@
 <?php
 require_once (EXCEPTION_PATH . "/DatabaseException.php");
+require_once ("MysqlResponse.php");
 /**
  * Mysql class uses MySQL predefined functions
  *
@@ -39,22 +40,11 @@ class Mysql
     private $schema;
 
     /**
+     * MysqlResponse Object
      * @var
      * @readwrite
      */
-    private $port = "3306";
-
-    /**
-     * @var
-     * @readwrite
-     */
-    private $charset = "utf8";
-
-    /**
-     * @var
-     * @readwrite
-     */
-    private $engine = "InnoDB";
+    private $response;
 
     /**
      * @var
@@ -74,6 +64,8 @@ class Mysql
         $this->username = DB['username'];
         $this->password = DB['password'];
         $this->schema = DB['schema'];
+
+        $this->response = new MysqlResponse();
 
         // adjust myqsli to throw exceptions
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -109,7 +101,6 @@ class Mysql
             try {
 
             //    $this->service = new mysqli($this->host, $this->username, $this->password, $this->schema);
-
                 $this->isConnected = true;
             } catch (mysqli_sql_exception $e) {
                 throw new DatabaseException($e->getMessage());
@@ -204,14 +195,24 @@ class Mysql
 
         try
         {
+            $startTime = microtime(true);
             // pass the query to MySQL for processing
             $result = $this->service->query($sql);
+            $endTime = microtime(true);
+            $time = $endTime - $startTime;
+
+            $this->response->setExecutionTime($time)
+                ->setSuccess($result)
+                ->setSqlQueryString($sql);
         }
         catch (Exception $ex)
         {
             throw new DatabaseException("There was an error with your SQL query:");
         }
-        return $result;
+        finally
+        {
+            return $this->response->getMySqlResponse();
+        }
     }
 
     /**
