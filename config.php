@@ -120,8 +120,8 @@
     */
     define('DB',array(  "host" => "localhost",
                   "username" => "root",
-                  "password" => "aztewe",
-                  "schema" => "Crystalpure"
+                  "password" => "pass",
+                  "schema" => "SCHEMA"
                 ));
 
     /**
