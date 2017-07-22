@@ -46,6 +46,16 @@ class ApiException extends Exception
     }
 
     /**
+     * ControllerFactory 2
+     * @param $ex
+     */
+    public function __construct1($ex)
+    {   // give the exception ot the parent
+        parent::__construct($ex);
+    }
+
+
+    /**
      * Send message to client
      */
     public function output() {

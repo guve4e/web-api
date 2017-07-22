@@ -36,7 +36,7 @@ class NotAuthorizedException extends ApiException
     public function output()
     {
         parent::output(); // call parent first
-        header(VIEW_PATH . "/authentication.php");
+        header(VIEW_PATH . "/authorized.php");
         die();
     }
 

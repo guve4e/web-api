@@ -41,15 +41,23 @@
      */
     defined("LIBRARY_PATH")
     or define("LIBRARY_PATH", realpath(dirname(__FILE__) . "/library" ));
+    
+    /**
+     * PAYPAL_PATH
+     *
+     * @global string PAYPAL_PATH Absolute path to Paypal - Braintree library
+     */
+    defined("PAYPAL_PATH")
+    or define("PAYPAL_PATH", realpath(dirname(__FILE__) . '/external/braintree'));
 
     /**
      * AUTHENTICATION_PATH
      *
-     * @global string AUTHENTICATION_PATH Absolute path to authentication classes
+     * @global string AUTHENTICATION_PATH Absolute path to authorized classes
      * all apps will inherit from these classes
      */
-    defined("AUTHENTICATION_PATH")
-    or define("AUTHENTICATION_PATH", realpath(dirname(__FILE__) . "/library/authentication" ));
+    defined("AUTHORIZATION_PATH")
+    or define("AUTHORIZATION_PATH", realpath(dirname(__FILE__) . "/library/authorized" ));
 
     /**
      * BASE_CLASS_PATH
@@ -64,12 +72,12 @@
     /**
      * RDBMS_PATH
      *
-     * @global string RDBMS_PATH Absolute path to rdbms classes
+     * @global string RDBMS_PATH Absolute path to database classes
      * This folder will contain classes that are rappers to
-     * rdbms frameworks as MySqli
+     * database frameworks as MySqli
      */
-    defined("RDBMS_PATH")
-    or define("RDBMS_PATH", realpath(dirname(__FILE__) . "/library/rdbms" ));
+    defined("DATABSE_PATH")
+    or define("DATABSE_PATH", realpath(dirname(__FILE__) . "/library/database" ));
 
     /**
      * EXCEPTION_PATH
@@ -112,8 +120,8 @@
     */
     define('DB',array(  "host" => "localhost",
                   "username" => "root",
-                  "password" => "pass",
-                  "schema" => "SCHEMA"
+                  "password" => "aztewe",
+                  "schema" => "Crystalpure"
                 ));
 
     /**

@@ -1,148 +1,86 @@
 <?php
 
-include(BASE_CLASS_PATH . "/Database.php");
+
 require_once (EXCEPTION_PATH . "/NotAuthorizedException.php");
 /**
- * Controller
+ * Base Concrete class. It has one member:
+ * 1. $jsonDataIn: mixed is the placeholder for the data coming
+ * from the input stream, retrieved by method called
+ * retrieveJsonDataIn()
  *
- * The base controller class. Authentication and NoAuthentication will
- * extend this class.
- *
- * @license http://www.opensource.org/licenses/gpl-license.php
  * @package library
  */
 
-abstract class Controller extends Base
-{
-    /**
-     * $name
-     *
-     * The name of the controller
-     *
-     * @var string $name Name of module class
-     */
-    protected $name;
+class Controller {
 
     /**
-     * $json_data
-     *
-     * The data sent to the controller
-     * via POST,PUT,DELETE methods
-     *
-     * @var
+     * @var mixed
+     * The data coming
+     * form the input stream
      */
-    protected $json_data;
+    private $jsonDataIn;
 
+    /**
+     * @var string
+     * Where to get the
+     * input stream from
+     */
+    private $fileIn = "php://input";
 
     /**
      * Controller constructor.
-     *
      */
     public function __construct()
     {
-        parent::__construct();
-        // set name at runtime
-        $this->name = $this->ref->getName();
-
-    }// end constructor
+        $this->retrieveJsonDataIn();
+    }
 
     /**
-     * authorize
-     *
-     * Checks if the the derived class is:
-     * - object
-     * - instance of Controller
-     *
-     * @static
-     * @access public
-     * @param mixed $controller
-     * @throws NotAuthorizedException
-     * @return bool
+     * Extracts info from the input stream.
+     * If problems is encountered, it throws an exception.
+     * @throws NoInputStreamException
      */
-    public static function authorize($controller)
+    private function retrieveJsonDataIn()
     {
-        $authenticated = false;
-        //return true;
-        if (!isset($_SERVER['HTTP_APITOKEN'])) throw new NotAuthorizedException();
-        // get headers
-        $token = $_SERVER['HTTP_APITOKEN'];
+        //get the data
+        $json = file_get_contents($this->fileIn);
+        if ($json === false) throw new NoInputStreamException();
+        //convert the string of data to an array
+        $this->jsonDataIn = json_decode($json, true);
+    }
 
-        // check for the right API Token
-        if ($token == "WRCdmach38E2*$%Ghdo@nf#cOBD4fd") $authenticated = true;
+    /**
+     * This function takes an array as
+     * argument, encodes it as json string
+     * and prints the result on the string
+     * @param $data: mixed
+     * @throws ApiException
+     */
+    protected function send($data)
+    {
+        // set options
+        $options = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 
-        return (is_object($controller) &&  $controller instanceof Controller && $authenticated);
+        // try to encode the string
+        $jsonString = json_encode($data, $options);
+        // check for proper encoding
+        if(  $jsonString === false ) throw new ApiException( json_last_error() );
+        // log
+        Logger::logOutput($jsonString);
+        // print on screen
+        echo($jsonString);
     }
 
     /**
      * getJsonData
      *
-     * Getter for json_data member
+     * Getter for jsonDataIn member
      *
      * @return mixed
      */
     public function getJsonData()
     {
-        return $this->json_data;
+        return $this->jsonDataIn;
     }
-
-    /**
-     * setJsonData
-     *
-     * Setter for json_data member
-     *
-     * @return mixed
-     */
-    public function setJsonData($data)
-    {
-        $this->json_data = $data;
-    }
-
-    /**
-     * Abstract GET
-     * Has to be overridden
-     *
-     * @param $id
-     * @return mixed
-     */
-    public abstract function get($id);
-
-    /**
-     * Abstract POST
-     * Has to be overridden
-     *
-     * @param $id
-     * @return mixed
-     */
-    public abstract function post($id);
-
-    /**
-     * Abstract PUT
-     * Has to be overridden
-     *
-     * @param $id
-     * @return mixed
-     */
-    public abstract function put($id);
-
-    /**
-     * Abstract DELETE
-     * Has to be overridden
-     *
-     * @param $id
-     * @return mixed
-     */
-    public abstract function delete($id);
-
-    /**
-     * __destruct
-     *
-     * @access public
-     * @return void
-     */
-    public function __destruct()
-    {
-        parent::__destruct();
-    }
-
 }// end class
 

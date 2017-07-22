@@ -6,7 +6,6 @@
  *
  *
  *
- * @license http://www.opensource.org/licenses/gpl-license.php
  * @package library/exeption
  * @filesource
  */
@@ -15,7 +14,7 @@ require_once ("ApiException.php");
 class NoInputStreamException extends ApiException
 {
     /**
-     * NoSuchControllerException constructor.
+     * NoInputStreamException constructor.
      *
      * @param string controller's name
      */
