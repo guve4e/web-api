@@ -85,14 +85,15 @@ class ControllerFactory
      */
     private function retrieveMethodType()
     {
-        if ($_SERVER['REQUEST_METHOD'] == "GET") return "get";
-        else if ($_SERVER['REQUEST_METHOD'] == "HEAD") return "head";
-        else if ($_SERVER['REQUEST_METHOD'] == "POST") return "post";
-        else if ($_SERVER['REQUEST_METHOD'] == "PUT") return "put";
-        else if ($_SERVER['REQUEST_METHOD'] == "DELETE") return "delete";
-        else if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") return "options";
-        else if ($_SERVER['REQUEST_METHOD'] == "PATCH") return "patch";
-        else throw new NoSuchMethodException($_SERVER['REQUEST_METHOD']);
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+        if ($requestMethod == "GET") return "get";
+        else if ($requestMethod == "HEAD") return "head";
+        else if ($requestMethod == "POST") return "post";
+        else if ($requestMethod == "PUT") return "put";
+        else if ($requestMethod == "DELETE") return "delete";
+        else if ($requestMethod == "OPTIONS") return "options";
+        else if ($requestMethod == "PATCH") return "patch";
+        else throw new NoSuchMethodException($requestMethod);
     }
 
     /**

@@ -7,6 +7,20 @@ require_once ("MysqlResponse.php");
  */
 class MySql extends  MysqlConnect
 {
+    /**
+     * @var boolean
+     * If set to true, MySlq Class
+     * will wrap the data retrieved
+     * from table with metadata.
+     */
+    private $verbose = true;
+
+    /**
+     * @var object
+     * The data retrieved
+     * from the table.
+     */
+    private $data;
 
     /**
      * MysqlResponse Object
@@ -37,6 +51,8 @@ class MySql extends  MysqlConnect
         $result = $this->getService()->query($sql);
         $endTime = microtime(true);
         $this->chrono = $endTime - $startTime;
+        // save the raw data
+        $this->data = $result;
 
         return $result;
     }
@@ -90,6 +106,7 @@ class MySql extends  MysqlConnect
      *
      * @param $sql string: the SQL query
      * @throws mysqli_sql_exception
+     * @throws Exception
      */
     private function queryWrite($sql)
     {
@@ -109,6 +126,7 @@ class MySql extends  MysqlConnect
      *
      * @param $sql string: the SQL query
      * @throws mysqli_sql_exception
+     * @throws Exception
      */
     private function queryRead($sql)
     {
@@ -116,10 +134,13 @@ class MySql extends  MysqlConnect
 
         $rows = array();
 
+        // TODO check for null before
         for ($i = 0; $i < $result->num_rows; $i++)
         {
             $rows[] = $result->fetch_array(MYSQLI_ASSOC);
         }
+
+        $this->data = $result;
 
         $this->response->setExecutionTime($this->chrono)
             ->setSuccess($result)
@@ -130,9 +151,10 @@ class MySql extends  MysqlConnect
 
     /**
      * Queries only one row from table.
-     * TODO Cose reuse with queryRead
+     * TODO reuse with queryRead
      * @param $sql string: the SQL query
      * @throws mysqli_sql_exception
+     * @throws Exception
      */
     private function queryOneRow($sql)
     {
@@ -152,12 +174,12 @@ class MySql extends  MysqlConnect
         // if we query only single row, we need first element
         $rows = array_shift($rows);
 
+        $this->data = $rows;
         $this->response->setExecutionTime($this->chrono)
             ->setSuccess($result)
             ->setRowsAffected($this->getAffectedRows())
             ->setData($rows)
             ->setSqlQueryString($sql);
-
     }
 
     /**
@@ -168,6 +190,7 @@ class MySql extends  MysqlConnect
      *
      * @param $sql string: the SQL query
      * @throws mysqli_sql_exception
+     * @throws Exception
      */
     private function querySingleValue($sql)
     {
@@ -175,6 +198,7 @@ class MySql extends  MysqlConnect
 
         $value = mysqli_fetch_assoc($result);
 
+        $this->data = $value;
         $this->response->setExecutionTime($this->chrono)
             ->setSuccess($result)
             ->setRowsAffected( $this->getAffectedRows())
@@ -183,11 +207,11 @@ class MySql extends  MysqlConnect
     }
 
     /**
-     *
-     *
      * TODO SUCCESS field is not right,
      * TODO Make it better
      * @param $sql
+     * @throws ApiException
+     * @throws Exception
      */
     private function executeMultipleSqlQueries($sql)
     {
@@ -209,6 +233,77 @@ class MySql extends  MysqlConnect
         parent::__construct();
 
         $this->response = new MysqlResponse();
+    }
+
+    /**
+     * Begins a transaction.
+     * Requires MySQL 5.6 and above,
+     * and the InnoDB engine.
+     */
+    public function startTransaction()
+    {
+        $this->getService()->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+    }
+
+    /**
+     * Commit Transaction.
+     */
+    public function commit()
+    {
+        $this->getService()->commit();
+    }
+
+    /**
+     * Roll Back Transaction.
+     */
+    public function rollback()
+    {
+        $this->getService()->rollback();
+    }
+
+    /**
+     * This method checks the success of previous
+     * sql query and if the query was NOT successful
+     * then it rolls-back
+     * @param $msg
+     */
+    public function rollbackOnFail($msg)
+    {
+        if (!$this->response->isSuccess()) {
+            $this->rollback();
+
+            $reasonMsg = "Database Message: ". $this->response->getMessage() . "\n";
+            $reasonMsg .= "Function Name: " . $msg ."\n";
+
+            Logger::logException($reasonMsg);
+        }
+    }
+
+    /**
+     * @param bool $verbose
+     */
+    public function setVerbose($verbose)
+    {
+        $this->verbose = $verbose;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @return int
+     * Returns the last updated ID
+     * in the table
+     * @throws Exception
+     */
+    public function getLastInsertId()
+    {
+        return parent::getLastInsertId();
     }
 
     /**
@@ -242,7 +337,10 @@ class MySql extends  MysqlConnect
         }
         finally
         {
-            return $this->response->getMySqlResponse();
+            if($this->verbose)
+                return $this->response->getMySqlResponse();
+            else
+                return $this->data;
         }
     }
 }

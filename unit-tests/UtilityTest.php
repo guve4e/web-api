@@ -10,7 +10,7 @@ trait UtilityTest
      *
      * @param object &$object Instantiated object
      * @param $propertyName
-     * @return mixed propertie return.
+     * @return mixed property return.
      * @internal param string $propertiedName
      */
     public function invokeProperty(&$object, $propertyName)
@@ -40,7 +40,7 @@ trait UtilityTest
     }
 
     /**
-     *
+     * Get the property
      * @param $object
      * @param $nameOfVar
      * @return mixed

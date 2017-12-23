@@ -123,6 +123,15 @@ class MysqlResponse
     }
 
     /**
+     * If the database write/read was successful
+     * @return bool
+     */
+    public function isSuccess()
+    {
+        return $this->success;
+    }
+
+    /**
      * Sets Success
      *
      * @param mixed $successOrStats
@@ -172,6 +181,14 @@ class MysqlResponse
     {
         $this->message = $message;
         return $this;
+    }
+
+    /**
+     * @return String
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 
     /**
@@ -252,7 +269,6 @@ class MysqlResponse
                     "Data           : " . $data . "\n";
         return $toString;
     }
-
 
     /**
      * Destructor

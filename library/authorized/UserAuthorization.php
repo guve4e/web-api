@@ -9,7 +9,7 @@ include(AUTHORIZATION_PATH . "/Authorization.php");
 
 class UserAuthorization extends Authorization
 {
-    private $apiToken = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd";
+    private $apiToken = "WRCdma(&#_)*@$$@@$@#Sch38E2*$%G";
 
     /**
      * __construct

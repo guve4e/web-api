@@ -1,8 +1,9 @@
 <?php
 require_once(AUTHORIZATION_PATH . "/UserAuthorization.php");
+require_once(PACK_PATH . "/Response.php");
 require_once("MockControllerDatabase.php");
 
-final class MockController extends UserAuthorization
+final class Mockcontroller extends UserAuthorization
 {
     /**
      * Database Connector
@@ -46,7 +47,18 @@ final class MockController extends UserAuthorization
             "method" => "GET",
             "id" => $id
         ];
-        $this->send($data);
+
+        $data2 = ["key" => "value"];
+
+        // pack in a response object
+        $response = new Response();
+        $response->addObject("data", $data)
+            ->addObject("", $data2);
+
+        // send the response
+        $out = $response->getResponse();
+
+        $this->send($out);
 
     }
 

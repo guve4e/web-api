@@ -41,7 +41,14 @@
      */
     defined("LIBRARY_PATH")
     or define("LIBRARY_PATH", realpath(dirname(__FILE__) . "/library" ));
-    
+
+    /**
+     * LIBRARY_PATH
+     *
+     * @global string LIBRARY_PATH Absolute path to library
+     */
+    defined("PACK_PATH")
+    or define("PACK_PATH", realpath(dirname(__FILE__) . "/library/pack" ));
     /**
      * PAYPAL_PATH
      *
@@ -120,8 +127,8 @@
     */
     define('DB',array(  "host" => "localhost",
                   "username" => "root",
-                  "password" => "pass",
-                  "schema" => "SCHEMA"
+                  "password" => "aztewe",
+                  "schema" => "Crystalpure"
                 ));
 
     /**
