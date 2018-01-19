@@ -202,8 +202,16 @@ class Response
             $this->data = $this->packer->addDictionaryObject($key, $keyNames, $value);
         }
         else if (Packer::isArrayOfArrays($value)) {
-            if (is_null($keys)) $keyNames = $this->generateDictionaryKeys($value, true);
-            $this->data = $this->packer->addArrayOfDictionaryObject($key, $keyNames, $value);
+            if (is_null($keys))
+            {
+                $keyNames = $this->generateDictionaryKeys($value, true);
+                $this->data = $this->packer->addArrayOfDictionaryObject($key, $keyNames, $value);
+            }
+            else
+            {
+                $this->data = $this->packer->addArrayOfDictionaryObject($key, $keys, $value);
+            }
+
         }
         else if (!Packer::hasStringKeys($value) && is_array($value)) // simple array
 
