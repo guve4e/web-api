@@ -24,7 +24,7 @@ class ControllerFactoryTest extends TestCase
     protected function setUp()
     {
         // Arrange
-        $_SERVER['PATH_INFO'] = "/mockController/123";
+        $_SERVER['PATH_INFO'] = "/mockcontroller/123";
         $_SERVER['REQUEST_METHOD'] = "GET";
         $_SERVER['HTTP_APITOKEN'] = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd";
 
