@@ -278,4 +278,180 @@ class PackerTest extends TestCase
         // Assert
         $this->assertEquals($actual, $expected);
     }
+
+    public function testConstructComplexObject()
+    {
+        $primaryObject = [
+            [
+                "MT_ID" => "1",
+                "MT_MILES" => "178429",
+                "MT_MILES_NEXT" => "179321",
+                "MT_DATE" => "2017-02-02",
+                "MT_DATE_NEXT" => "2017-08-02",
+                "MT_HOURS_SPENT" => "2",
+                "MT_COST_LABOR" => "0.00"
+            ],
+            [
+                "MT_ID" => "2",
+                "MT_MILES" => "178429",
+                "MT_MILES_NEXT" => "179321",
+                "MT_DATE" => "2017-02-02",
+                "MT_DATE_NEXT" => "2017-08-02",
+                "MT_HOURS_SPENT" => "2",
+                "MT_COST_LABOR" => "0.00"
+            ],
+            [
+                "MT_ID" => "3",
+                "MT_MILES" => "178429",
+                "MT_MILES_NEXT" => "179321",
+                "MT_DATE" => "2017-02-02",
+                "MT_DATE_NEXT" => "2017-08-02",
+                "MT_HOURS_SPENT" => "2",
+                "MT_COST_LABOR" => "0.00"
+            ]
+        ];
+
+        $secondaryObjects = [
+            "mt_parts" =>  [
+                [
+                    "MT_ID" => "1",
+                    "AP_NAME" => "Oil Filter",
+                    "AP_DESCRIPTION" => ""
+                ],
+                [
+                    "MT_ID" => "1",
+                    "AP_NAME" => "Oil",
+                    "AP_DESCRIPTION" => ""
+                ],
+                [
+                    "MT_ID" => "2",
+                    "AP_NAME" => "Brake Fluid",
+                    "AP_DESCRIPTION" => ""
+                ],
+                [
+                    "MT_ID" => "3",
+                    "AP_NAME" => "Air Filter",
+                    "AP_DESCRIPTION" => ""
+                ]
+            ],
+            "mt_pics" => [
+                [
+                    "MT_ID" => "1",
+                    "P_PATH" => "img\auto\pic1.jpg"
+                ],
+                [
+                    "MT_ID" => "1",
+                    "P_PATH" => "img\auto\pic2.jpg"
+                ],
+                [
+                    "MT_ID" => "1",
+                    "P_PATH" => "img\auto\pic3.jpg"
+                ],
+                [
+                    "MT_ID" => "2",
+                    "P_PATH" => "img\auto\pic4.jpg"
+                ],
+                [
+                    "MT_ID" => "2",
+                    "P_PATH" => "img\auto\pic5.jpg"
+                ],
+                [
+                    "MT_ID" => "3",
+                    "P_PATH" => "img\auto\pic6.jpg"
+                ]
+            ]
+        ];
+
+        $expected = [
+            [
+                "MT_ID" => "1",
+                "MT_MILES" => "178429",
+                "MT_MILES_NEXT" => "179321",
+                "MT_DATE" => "2017-02-02",
+                "MT_DATE_NEXT" => "2017-08-02",
+                "MT_HOURS_SPENT" => "2",
+                "MT_COST_LABOR" => "0.00",
+                "mt_parts" =>  [
+                    [
+                        "MT_ID" => "1",
+                        "AP_NAME" => "Oil Filter",
+                        "AP_DESCRIPTION" => ""
+                    ],
+                    [
+                        "MT_ID" => "1",
+                        "AP_NAME" => "Oil",
+                        "AP_DESCRIPTION" => ""
+                    ]
+                ],
+                "mt_pics" =>   [
+                    [
+                        "MT_ID" => "1",
+                        "P_PATH" => "img\auto\pic1.jpg"
+                    ],
+                    [
+                        "MT_ID" => "1",
+                        "P_PATH" => "img\auto\pic2.jpg"
+                    ],
+                    [
+                        "MT_ID" => "1",
+                        "P_PATH" => "img\auto\pic3.jpg"
+                    ]
+                ]
+            ],
+            [
+                "MT_ID" => "2",
+                "MT_MILES" => "178429",
+                "MT_MILES_NEXT" => "179321",
+                "MT_DATE" => "2017-02-02",
+                "MT_DATE_NEXT" => "2017-08-02",
+                "MT_HOURS_SPENT" => "2",
+                "MT_COST_LABOR" => "0.00",
+                "mt_parts" => [
+                    [
+                        "MT_ID" => "2",
+                        "AP_NAME" => "Brake Fluid",
+                        "AP_DESCRIPTION" => ""
+                    ]
+                ],
+                "mt_pics" => [
+                    [
+                        "MT_ID" => "2",
+                        "P_PATH" => "img\auto\pic4.jpg"
+                    ],
+                    [
+                        "MT_ID" => "2",
+                        "P_PATH" => "img\auto\pic5.jpg"
+                    ]
+                ]
+            ],
+            [
+                "MT_ID" => "3",
+                "MT_MILES" => "178429",
+                "MT_MILES_NEXT" => "179321",
+                "MT_DATE" => "2017-02-02",
+                "MT_DATE_NEXT" => "2017-08-02",
+                "MT_HOURS_SPENT" => "2",
+                "MT_COST_LABOR" => "0.00",
+                "mt_parts" => [
+                    [
+                        "MT_ID" => "3",
+                        "AP_NAME" => "Air Filter",
+                        "AP_DESCRIPTION" => ""
+                    ]
+                ],
+                "mt_pics" => [
+                    [
+                        "MT_ID" => "3",
+                        "P_PATH" => "img\auto\pic6.jpg"
+                    ]
+                ]
+            ]
+        ];
+
+        $packer = new Packer();
+        $actual = $packer->combineDataSets($primaryObject, $secondaryObjects, "MT_ID");
+
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
 }

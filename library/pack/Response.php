@@ -284,6 +284,18 @@ class Response
     }
 
     /**
+     * Combines tables with the same id (key).
+     * @param array $primarySets array of primary data sets
+     * @param array $secondarySets array of secondary data sets
+     * @param string $primaryKey the key used to combine data sets
+     * @return array $primaryObjects array of the newly combined complex objects
+     */
+    public static function combineTables(array $primarySets, array $secondarySets, string $key) : array
+    {
+        return Packer::combineDataSets($primarySets, $secondarySets, $key);
+    }
+
+    /**
      * Destructor.
      */
     public function __destruct()

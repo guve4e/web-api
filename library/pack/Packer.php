@@ -383,6 +383,40 @@ class Packer
     }
 
     /**
+     * Bruit Force method, that construct complex objects,
+     * given data set with same id.
+     * When dealing with SQL instead of joining tables to normalize
+     * data, give this method a primary data set, and array of secondary data sets.
+     * It will search for the same id and it will append the primary data set with arrays
+     * that contain the same id.
+     * @param array $primarySets array of primary data sets
+     * @param array $secondarySets array of secondary data sets
+     * @param string $primaryKey the key used to combine data sets
+     * @return array $primaryObjects array of the newly combined complex objects
+     */
+    static public function combineDataSets(array $primarySets, array $secondarySets, string $primaryKey) : array
+    {
+        foreach($primarySets as &$primarySet)
+        {
+            $id = $primarySet[$primaryKey];
+            foreach($secondarySets as $key => $set)
+            {
+                $i = 0;
+                $tmp = [];
+                foreach($set as $member)
+                {
+                    if($member[$primaryKey] == $id){
+                        $tmp[$i] = $member;
+                        $i++;
+                    }
+                }
+                $primarySet[$key] = $tmp;
+            }
+        }
+        return $primarySets;
+    }
+
+    /**
      * Destructor
      */
     public function __destruct()
