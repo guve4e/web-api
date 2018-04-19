@@ -60,33 +60,28 @@ class PackerTest extends TestCase
         $this->assertTrue($result2);
     }
 
-//    public function testIsDictionary()
-//    {
-//        $dict = [
-//            [
-//                "P_ID" => 1234,
-//                "P_QTY" => 1,
-//                "P_PRICE" => 2.45
-//            ],
-//            [
-//                "P_ID" => 1222,
-//                "P_QTY" => 3,
-//                "P_PRICE" => 3.18
-//            ],
-//            [
-//                "P_ID" => 1333,
-//                "P_QTY" => 17,
-//                "P_PRICE" => 7.15
-//            ]
-//        ];
-//
-//        $result = Packer::isDictionary($dict);
-//        $this->assertTrue($result);
-//    }
-
-    protected function setUp()
+    public function testIsDictionary()
     {
+        $dict = [
+            [
+                "P_ID" => 1234,
+                "P_QTY" => 1,
+                "P_PRICE" => 2.45
+            ],
+            [
+                "P_ID" => 1222,
+                "P_QTY" => 3,
+                "P_PRICE" => 3.18
+            ],
+            [
+                "P_ID" => 1333,
+                "P_QTY" => 17,
+                "P_PRICE" => 7.15
+            ]
+        ];
 
+        $result = Packer::isDictionary($dict);
+        $this->assertTrue($result);
     }
 
     public function testAddSimpleObject()

@@ -71,7 +71,7 @@ class Router
         $this->retrieveParameter();
 
         // build
-        $this->build();
+        $this->route();
 
     }
 
@@ -171,7 +171,7 @@ class Router
      * with using dynamic languages)
      * @throws ApiException, NoSuchControllerException
      */
-    private function build()
+    private function route()
     {
         // sanitize controller name first
         $this->sanitizeControllerName();

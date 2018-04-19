@@ -2,9 +2,7 @@
 
 require_once ("MysqlConnect.php");
 require_once ("MysqlResponse.php");
-/**
- *
- */
+
 class MySql extends  MysqlConnect
 {
     /**
@@ -132,7 +130,7 @@ class MySql extends  MysqlConnect
     {
         $result = $this->executeSqlQuery($sql);
 
-        $rows = array();
+        $rows = [];
 
         // TODO check for null before
         for ($i = 0; $i < $result->num_rows; $i++)
@@ -158,11 +156,9 @@ class MySql extends  MysqlConnect
      */
     private function queryOneRow($sql)
     {
-
-
         $result = $this->executeSqlQuery($sql);
 
-        $rows = array();
+        $rows = [];
 
         for ($i = 0; $i < $result->num_rows; $i++)
         {

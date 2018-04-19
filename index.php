@@ -1,9 +1,10 @@
 <?php
 
-require_once ('config.php'); // include configuration file
-require_once (LIBRARY_PATH . '/Router.php'); // include ControllerFactory class
-require_once (EXCEPTION_PATH . '/ApiException.php'); // include ApiException class
+require_once ('config.php');
+require_once (LIBRARY_PATH . '/Router.php');
+require_once (EXCEPTION_PATH . '/ApiException.php');
 include (LIBRARY_PATH . '/Logger.php');
+
 
 // Log
 Logger::logServer();
@@ -12,14 +13,15 @@ Logger::logHeaders();
 try
 {
     // construct
-    if (isset($_SERVER['PATH_INFO']))  $constructor = new Router($_SERVER['PATH_INFO']);
+    if (isset($_SERVER['PATH_INFO']))
+        $constructor = new Router($_SERVER['PATH_INFO']);
     else throw new ApiException("PATH_INFO",101);
 
 }
 catch (NotAuthorizedException $e)
 {
     $e->output();
-    header(VIEW_PATH . "/authorized.php");
+    header("Location: " . VIEW_PATH . "/authorized.php");
     die();
 }
 catch (ApiException $e)
