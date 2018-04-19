@@ -29,6 +29,7 @@ class Controller {
 
     /**
      * Controller constructor.
+     * @throws NoInputStreamException
      */
     public function __construct()
     {

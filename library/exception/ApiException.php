@@ -46,7 +46,7 @@ class ApiException extends Exception
     }
 
     /**
-     * ControllerFactory 2
+     * ControllerFactory
      * @param $ex
      */
     public function __construct1($ex)
