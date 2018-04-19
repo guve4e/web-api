@@ -1,5 +1,5 @@
 <?php
-require_once(DATABSE_PATH . "/MySql.php");
+require_once (DATABSE_PATH . "/MySql.php");
 
 /**
  */

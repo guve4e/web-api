@@ -1,9 +1,9 @@
 <?php
-require_once(AUTHORIZATION_PATH . "/UserAuthorization.php");
-require_once(PACK_PATH . "/Response.php");
-require_once("MockControllerDatabase.php");
+require_once (AUTHORIZATION_PATH . "/UserAuthorizedController.php");
+require_once (PACK_PATH . "/Response.php");
+require_once ("MockControllerDatabase.php");
 
-final class Mockcontroller extends UserAuthorization
+final class Mockcontroller extends UserAuthorizedController
 {
     /**
      * Database Connector
@@ -27,6 +27,7 @@ final class Mockcontroller extends UserAuthorization
      * __construct
      *
      * @access public
+     * @throws Exception
      */
     public function __construct()
     {
@@ -37,6 +38,10 @@ final class Mockcontroller extends UserAuthorization
         $this->db = new MockControllerDatabase();
     }
 
+    /**
+     * @param $id
+     * @throws ApiException
+     */
     public function get($id)
     {
         // used for unit tests
@@ -62,6 +67,10 @@ final class Mockcontroller extends UserAuthorization
 
     }
 
+    /**
+     * @param $id
+     * @throws ApiException
+     */
     public function head($id)
     {
         // used for unit tests
@@ -76,6 +85,10 @@ final class Mockcontroller extends UserAuthorization
 
     }
 
+    /**
+     * @param $id
+     * @throws ApiException
+     */
     public function post($id)
     {
         // used for unit tests
@@ -91,6 +104,10 @@ final class Mockcontroller extends UserAuthorization
         $this->send($data);
     }
 
+    /**
+     * @param $id
+     * @throws ApiException
+     */
     public function put($id)
     {
         // used for unit tests
@@ -106,6 +123,10 @@ final class Mockcontroller extends UserAuthorization
         $this->send($data);
     }
 
+    /**
+     * @param $id
+     * @throws ApiException
+     */
     public function delete($id)
     {
         // used for unit tests
@@ -121,6 +142,10 @@ final class Mockcontroller extends UserAuthorization
         $this->send($data);
     }
 
+    /**
+     * @param $id
+     * @throws ApiException
+     */
     public function options($id)
     {
         // used for unit tests
@@ -136,6 +161,10 @@ final class Mockcontroller extends UserAuthorization
         $this->send($data);
     }
 
+    /**
+     * @param $id
+     * @throws ApiException
+     */
     public function patch($id)
     {
         // used for unit tests
