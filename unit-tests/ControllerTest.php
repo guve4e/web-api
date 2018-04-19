@@ -13,9 +13,6 @@ class ControllerTest extends TestCase
 
     protected $testJson;
 
-    /**
-     * Create test subject before test
-     */
     protected function setUp()
     {
         // Arrange
@@ -26,9 +23,6 @@ class ControllerTest extends TestCase
         ];
     }
 
-    /**
-     *
-     */
     public function testProperExtractionOfInput()
     {
         // Arrange
