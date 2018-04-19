@@ -43,19 +43,20 @@
     or define("LIBRARY_PATH", realpath(dirname(__FILE__) . "/library" ));
 
     /**
-     * LIBRARY_PATH
+     * PACK_PATH_PATH
      *
      * @global string LIBRARY_PATH Absolute path to library
      */
     defined("PACK_PATH")
     or define("PACK_PATH", realpath(dirname(__FILE__) . "/library/pack" ));
+
     /**
-     * PAYPAL_PATH
+     * UTILITY_PATH
      *
-     * @global string PAYPAL_PATH Absolute path to Paypal - Braintree library
+     * @global string LIBRARY_PATH Absolute path to library
      */
-    defined("PAYPAL_PATH")
-    or define("PAYPAL_PATH", realpath(dirname(__FILE__) . '/external/braintree'));
+    defined("UTILITY_PATH")
+    or define("UTILITY_PATH", realpath(dirname(__FILE__) . "/library/utility" ));
 
     /**
      * AUTHENTICATION_PATH
