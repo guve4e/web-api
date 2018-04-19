@@ -6,7 +6,7 @@
 require_once (EXCEPTION_PATH . "/NoSuchControllerException.php");
 require_once (EXCEPTION_PATH . "/NoSuchMethodException.php");
 
-class ControllerFactory
+class Router
 {
     /**
      * @var

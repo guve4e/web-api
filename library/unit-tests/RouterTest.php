@@ -7,12 +7,12 @@
  */
 
 use PHPUnit\Framework\TestCase;
-require_once("../config.php");
+require_once ("../../config.php");
 require_once ("UtilityTest.php");
 require_once (LIBRARY_PATH . "/Logger.php");
-require_once(LIBRARY_PATH . "/ControllerFactory.php");
+require_once(LIBRARY_PATH . "/Router.php");
 
-class ControllerFactoryTest extends TestCase
+class RouterTest extends TestCase
 {
     use UtilityTest;
 
@@ -28,7 +28,7 @@ class ControllerFactoryTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = "GET";
         $_SERVER['HTTP_APITOKEN'] = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd";
 
-        $this->constructor = new ControllerFactory($_SERVER['PATH_INFO']);
+        $this->constructor = new Router($_SERVER['PATH_INFO']);
     }
 
     /**
@@ -36,7 +36,7 @@ class ControllerFactoryTest extends TestCase
      */
     public function testConstructionExpectedException()
     {
-        $this->site = new ControllerFactory(null);
+        $this->site = new Router(null);
     }
 
     /**

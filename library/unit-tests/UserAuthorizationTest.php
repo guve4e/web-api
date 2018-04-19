@@ -1,7 +1,7 @@
 <?php
 
-require_once("../config.php");
-require_once(AUTHORIZATION_PATH . "/UserAuthorizedController.php");
+require_once ("../../config.php");
+require_once (AUTHORIZATION_PATH . "/UserAuthorizedController.php");
 require_once ("UtilityTest.php");
 use PHPUnit\Framework\TestCase;
 

@@ -1,9 +1,9 @@
 <?php
-require_once (AUTHORIZATION_PATH . "/UserAuthorizedController.php");
+require_once (AUTHORIZATION_PATH . "/NotAuthorizedController.php");
 require_once (PACK_PATH . "/Response.php");
 require_once ("MockControllerDatabase.php");
 
-final class Mockcontroller extends UserAuthorizedController
+final class Mockcontroller extends NotAuthorizedController
 {
     /**
      * Database Connector
@@ -34,8 +34,6 @@ final class Mockcontroller extends UserAuthorizedController
         parent::__construct();
         // set incoming json data
         $this->jsonData = $this->getJsonData();
-
-        $this->db = new MockControllerDatabase();
     }
 
     /**

@@ -101,5 +101,5 @@ class Controller {
     {
         return $this->jsonDataIn;
     }
-}// end class
+}
 

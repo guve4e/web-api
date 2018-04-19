@@ -40,7 +40,7 @@ final class JsonLoader
         $stringFileContent = $this->file->loadFileContent($this->fileName);
 
         if ($stringFileContent == "")
-            throw new Exception("Empty Configuration File: {$this->fileName}");
+            throw new FileException("Empty Configuration File: {$this->fileName}");
 
         $json = $this->file->jsonDecode($stringFileContent);
         return $json;
@@ -57,12 +57,12 @@ final class JsonLoader
     public function __construct(File $fileSystem, string $fileName)
     {
         if (!isset($fileSystem) || $fileName == "")
-            throw new Exception("Bad parameters in JsonLoader Constructor!");
+            throw new FileException("Bad parameters in JsonLoader Constructor!");
 
         $this->file = $fileSystem;
 
         if (!$this->file->fileExists($fileName))
-            throw new Exception("File Not found: " . $fileName);
+            throw new FileException("File Not found: " . $fileName);
 
         // set filename
         $this->fileName = $fileName;

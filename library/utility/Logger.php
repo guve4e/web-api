@@ -1,5 +1,6 @@
 <?php
 
+
 abstract class Type
 {
     const Error = "Error";
@@ -72,7 +73,7 @@ class Logger
      public function __construct(File $file)
      {
          if (!isset($file))
-             throw new Exception("Bad file object in Logger Constructor!");
+             throw new FileException("Bad file object in Logger Constructor!");
 
          $this->file = $file;
 

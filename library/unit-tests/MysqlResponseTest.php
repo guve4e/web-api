@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once("../config.php");
+require_once("../../config.php");
 require_once ("UtilityTest.php");
 require_once (LIBRARY_PATH . "/Logger.php");
 require_once(LIBRARY_PATH . "/database/MysqlResponse.php");

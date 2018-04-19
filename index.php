@@ -1,9 +1,9 @@
 <?php
 
-require_once('config.php'); // include configuration file
-require_once(LIBRARY_PATH . '/ControllerFactory.php'); // include ControllerFactory class
+require_once ('config.php'); // include configuration file
+require_once (LIBRARY_PATH . '/Router.php'); // include ControllerFactory class
 require_once (EXCEPTION_PATH . '/ApiException.php'); // include ApiException class
-include(LIBRARY_PATH . '/Logger.php');
+include (LIBRARY_PATH . '/Logger.php');
 
 // Log
 Logger::logServer();
@@ -12,7 +12,7 @@ Logger::logHeaders();
 try
 {
     // construct
-    if (isset($_SERVER['PATH_INFO']))  $constructor = new ControllerFactory($_SERVER['PATH_INFO']);
+    if (isset($_SERVER['PATH_INFO']))  $constructor = new Router($_SERVER['PATH_INFO']);
     else throw new ApiException("PATH_INFO",101);
 
 }
@@ -30,4 +30,6 @@ catch (ApiException $e)
     // Assume normal execution showing home page
     if ($e->getCode() == 101)
         include(VIEW_PATH . "/controller.php");
+} catch (Exception $e) {
+    die($e->getMessage());
 }

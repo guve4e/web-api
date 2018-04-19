@@ -34,7 +34,7 @@ class File {
                 $msg = ' - Unknown error';
                 break;
         }
-        throw new Exception("json_decode failed: {$msg}");
+        throw new FileException("json_decode failed: {$msg}");
     }
 
 
@@ -50,8 +50,9 @@ class File {
     {
         $res = json_decode($data, $arr);
         // check for successful decode
-        if ($res === false || is_null($res))
-            $this->handleJsonErrors();
+        // TODO!!!!
+//        if ($res === false || is_null($res))
+//            $this->handleJsonErrors();
 
         return $res;
     }
@@ -63,7 +64,7 @@ class File {
      * @return string JSON string
      * @throws Exception
      */
-    public function jsonEncode(string $data, $optionFlags = JSON_PRETTY_PRINT) : string
+    public function jsonEncode($data, $optionFlags = JSON_PRETTY_PRINT) : string
     {
         $res = json_encode($data, $optionFlags);
         // check for successful encode
@@ -96,7 +97,7 @@ class File {
         $stringContent = file_get_contents($fileName);
 
         if ($stringContent === false)
-            throw new Exception("file_put_contents failed");
+            throw new FileException("file_put_contents failed");
 
         return $stringContent;
     }
@@ -116,7 +117,7 @@ class File {
         $res = file_put_contents($fileName, $message, $flags);
 
         if ($res === false)
-            throw new Exception("file_put_contents failed");
+            throw new FileException("file_put_contents failed");
 
         return $res;
     }
@@ -134,7 +135,7 @@ class File {
         $fp = fsockopen($host, $port, $errno, $errstr, $socketTimeout);
 
         if (!$fp)
-            throw new Exception("$errstr {$errno}\n");
+            throw new FileException("$errstr {$errno}\n");
 
         return $fp;
     }
@@ -150,7 +151,7 @@ class File {
     {
         $bytesWritten = fwrite($fileDescriptor, $content);
         if ($bytesWritten === false)
-            throw new Exception("fwrite couldn't execute!");
+            throw new FileException("fwrite couldn't execute!");
 
         return $bytesWritten;
     }
