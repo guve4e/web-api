@@ -158,13 +158,29 @@ class MysqlConnection implements Connection
         return $this->connection->error;
     }
 
+    /**
+     * @param string $sql
+     * @return mixed
+     * @throws DatabaseException
+     */
     public function query(string $sql)
     {
+        if (!$this->isValidService())
+            throw new DatabaseException("Not connected to a valid service");
+
        return  $this->connection->query($sql);
     }
 
+    /**
+     * @param string $sql
+     * @return mixed
+     * @throws DatabaseException
+     */
     public function multiQuery(string $sql)
     {
+        if (!$this->isValidService())
+            throw new DatabaseException("Not connected to a valid service");
+
         return $this->connection->multi_query($sql);
     }
 

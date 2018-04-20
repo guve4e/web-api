@@ -12,8 +12,6 @@ interface Connection
      */
     public function disconnect();
 
-    public function getConnection();
-
     public function query(string $sql);
 
     public function multiQuery(string $sql);

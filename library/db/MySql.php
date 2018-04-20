@@ -38,10 +38,6 @@ class MySql
      */
     private $service;
 
-    /**
-     *
-     */
-    private $connection;
 
     /**
      * Executes Query.
@@ -56,7 +52,7 @@ class MySql
         $startTime = microtime(true);
 
         // pass the query to MySQL for processing
-        $result = $this->service->query($sql);
+        $result = $this->connection->query($sql);
         $endTime = microtime(true);
         $this->chrono = $endTime - $startTime;
 
@@ -78,14 +74,14 @@ class MySql
         $startTime = microtime(true);
 
         // guard
-        if (!$this->service->multi_query($sql)) {
+        if (!$this->connection->multiQuery($sql)) {
             throw new ApiException("Multi Query Failed");
         }
 
         $results = [];
         $i = 0;
         do {
-            if ($res = $this->service->store_result()) {
+            if ($res = $this->connection->storeResult()) {
 
                 $result = $res->fetch_all(MYSQLI_ASSOC);
                 $result = array_shift($result);
@@ -93,7 +89,7 @@ class MySql
                 $res->free();
                 $i++;
             }
-        } while ($this->service->more_results() && $this->service->next_result());
+        } while ($this->connection->moreResult() && $this->connection->nextResult());
 
         $sanitizedResults = [];
         foreach($results as $result)
@@ -242,7 +238,6 @@ class MySql
             throw new DatabaseException("Bad parameter in MySql constructor!");
 
         $this->connection = $mysqlConnection;
-        $this->service = $this->connection->getConnection();
         $this->response = new MysqlResponse();
     }
 
@@ -253,7 +248,7 @@ class MySql
      */
     public function startTransaction()
     {
-        $this->getService()->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+        $this->connection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
     }
 
     /**
@@ -261,7 +256,7 @@ class MySql
      */
     public function commit()
     {
-        $this->getService()->commit();
+        $this->connection->commit();
     }
 
     /**
@@ -269,7 +264,7 @@ class MySql
      */
     public function rollback()
     {
-        $this->getService()->rollback();
+        $this->connection->rollback();
     }
 
     /**
@@ -307,17 +302,6 @@ class MySql
     }
 
     /**
-     * @return int
-     * Returns the last updated ID
-     * in the table
-     * @throws Exception
-     */
-    public function getLastInsertId()
-    {
-        return parent::getLastInsertId();
-    }
-
-    /**
      * Generic function to call
      * the more specific type of
      * query function
@@ -330,8 +314,6 @@ class MySql
      */
     public function query($sql, $function)
     {
-        if (!$this->isValidService())
-            throw new ApiException("Not connected to a valid service");
 
         try
         {
