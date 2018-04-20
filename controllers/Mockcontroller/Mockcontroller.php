@@ -1,7 +1,7 @@
 <?php
 require_once (AUTHORIZATION_PATH . "/NotAuthorizedController.php");
 require_once (PACK_PATH . "/Response.php");
-require_once ("MockControllerDatabase.php");
+//require_once ("MockControllerDatabase.php");
 
 final class Mockcontroller extends NotAuthorizedController
 {
