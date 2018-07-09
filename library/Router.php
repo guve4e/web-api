@@ -10,7 +10,7 @@ class Router
 {
     /**
      * @var
-     * Used to be accessed form Unit-Test
+     *
      */
     public $instance;
 
@@ -129,9 +129,10 @@ class Router
         // make sure the $s_path_info no null requests
         if ($this->pathInfo == null) throw new ApiException("PATH_INFO");
 
-        // make sure that request is in the form "/controller/method/id"
-        // if $request array has more than 3 elements throw exception
-        if (count($this->pathInfo) > 2) throw new ApiException("Wrong Request");
+        // make sure that request is in the form "/controller/id"
+        // if $request array has more than 2 elements throw exception
+        if (count($this->pathInfo) > 2)
+            throw new ApiException("Wrong Request. Request must be: /controller/id");
     }
 
     /**
@@ -148,7 +149,7 @@ class Router
     /**
      * Constructs the controller path form
      * the parameter given and hard wired path to
-     * direcotry. Then it checks if the file exists
+     * directory. Then it checks if the file exists
      * @throws NoSuchControllerException
      */
     private function constructControllerPath()
