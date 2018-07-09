@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../config.php");
+require_once("../../relative-paths.php");
 require_once(PACK_PATH . "/Response.php");
 require_once ("UtilityTest.php");
 use PHPUnit\Framework\TestCase;

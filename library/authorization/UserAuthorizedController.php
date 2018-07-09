@@ -1,5 +1,5 @@
 <?php
-include (AUTHORIZATION_PATH . "/AuthorizedController.php");
+include(AUTHORIZATION_PATH . "/AuthorizedController.php");
 
 /**
  * UserAuthentication
@@ -9,8 +9,7 @@ include (AUTHORIZATION_PATH . "/AuthorizedController.php");
 
 class UserAuthorizedController extends AuthorizedController
 {
-    // TODO get this from json config file
-    private $apiToken = "WRCdma(&#_)*@$$@@$@#Sch38E2*$%G";
+    private $apiToken = API_TOKEN;
 
     /**
      * __construct

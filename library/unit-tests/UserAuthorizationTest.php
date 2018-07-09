@@ -1,7 +1,7 @@
 <?php
 
-require_once ("../../config.php");
-require_once (AUTHORIZATION_PATH . "/UserAuthorizedController.php");
+require_once("../../relative-paths.php");
+require_once(AUTHORIZATION_PATH . "/UserAuthorizedController.php");
 require_once ("UtilityTest.php");
 use PHPUnit\Framework\TestCase;
 
@@ -34,8 +34,12 @@ class UserAuthorizationTest extends TestCase
     {
         $_SERVER['HTTP_APITOKEN'] = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd ";
 
-        $this->auth = new UserAuthorizedController();
-        $result = $this->auth->authorize($this->auth);
+        try {
+            $this->auth = new UserAuthorizedController();
+            $result = $this->auth->authorize($this->auth);
+        } catch (NotAuthorizedException $e) {
+        } catch (Exception $e) {
+        }
 
         $this->assertEquals(false, $result);
     }

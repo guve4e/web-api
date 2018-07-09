@@ -1,6 +1,6 @@
 <?php
 
-require_once ('config.php');
+require_once('relative-paths.php');
 require_once (LIBRARY_PATH . '/Router.php');
 require_once (EXCEPTION_PATH . '/ApiException.php');
 include (LIBRARY_PATH . '/Logger.php');
@@ -21,7 +21,7 @@ try
 catch (NotAuthorizedException $e)
 {
     $e->output();
-    header("Location: " . VIEW_PATH . "/authorized.php");
+    header("Location: " . VIEW_PATH . "/authorization.php");
     die();
 }
 catch (ApiException $e)

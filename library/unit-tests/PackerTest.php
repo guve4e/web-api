@@ -1,6 +1,6 @@
 <?php
 
-require_once ("../../config.php");
+require_once("../../relative-paths.php");
 require_once (PACK_PATH . "/Packer.php");
 require_once (EXCEPTION_PATH . "/ApiException.php");
 require_once ("UtilityTest.php");

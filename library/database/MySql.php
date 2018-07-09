@@ -203,8 +203,7 @@ class MySql extends  MysqlConnect
     }
 
     /**
-     * TODO SUCCESS field is not right,
-     * TODO Make it better
+     * TODO SUCCESS field is not right
      * @param $sql
      * @throws ApiException
      * @throws Exception

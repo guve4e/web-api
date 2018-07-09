@@ -62,7 +62,6 @@ final class Mockcontroller extends NotAuthorizedController
         $out = $response->getResponse();
 
         $this->send($out);
-
     }
 
     /**

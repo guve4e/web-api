@@ -1,5 +1,5 @@
 <?php
-include (DATABSE_PATH . "/MysqlConnect.php");
+include (DATABASE_PATH . "/MysqlConnect.php");
 /**
  * Database
  */

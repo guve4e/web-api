@@ -1,8 +1,6 @@
 <?php
-require_once (DATABSE_PATH . "/MySql.php");
+require_once (DATABASE_PATH . "/MySql.php");
 
-/**
- */
 final class MockControllerDatabase extends Mysql
 {
 
