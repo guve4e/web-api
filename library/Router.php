@@ -155,21 +155,21 @@ class Router
     private function constructControllerPath()
     {
         // construct controller
-        // controllers' folder + controller-folder + controller-file
-        // the reason each controller to be in its own folder is that some
+        // controllers' directory + controller-directory + controller-file
+        // the reason each controller to be in its own directory is that some
         // controllers have database access and logic in the same folder
         $this->controllerPath = CONTROLLERS_PATH . "/" . $this->controllerName  . "/" . $this->controllerName . '.php';
 
         // check if controller exists
-        if (!file_exists( $this->controllerPath)) throw new NoSuchControllerException($this->controllerName, "ControllerFactory.phpry.php", 143);
+        if (!file_exists( $this->controllerPath))
+            throw new NoSuchControllerException($this->controllerName, "ControllerFactory.phpry.php", 143);
     }
 
     /**
      * Creates an object of the
      * required controller using
      * string substitution
-     * (the good stuff that comes
-     * with using dynamic languages)
+     *
      * @throws ApiException, NoSuchControllerException
      */
     private function route()

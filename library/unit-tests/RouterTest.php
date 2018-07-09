@@ -54,6 +54,7 @@ class RouterTest extends TestCase
     {
         $this->site = new Router("/somefakecontroller/123");
     }
+
     /**
      * Test Build
      */

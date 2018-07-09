@@ -12,9 +12,9 @@ Logger::logHeaders();
 
 try
 {
-    // construct
+    // if controller and parameter are given
     if (isset($_SERVER['PATH_INFO']))
-        $constructor = new Router($_SERVER['PATH_INFO']);
+        $router = new Router($_SERVER['PATH_INFO']);
     else throw new ApiException("PATH_INFO",101);
 
 }

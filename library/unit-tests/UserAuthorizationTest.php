@@ -15,10 +15,13 @@ class UserAuthorizationTest extends TestCase
      */
     public function testProperAuthorization()
     {
-        $_SERVER['HTTP_APITOKEN'] = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd";
+        $_SERVER['HTTP_APITOKEN'] = "WRCdma(&#_)*@$$@@$@#Sch38E2*$%G";
 
-        $this->auth = new UserAuthorizedController();
-        $result = $this->auth->authorize($this->auth);
+        try {
+            $this->auth = new UserAuthorizedController();
+            $result = $this->auth->authorize($this->auth);
+        } catch (Exception $e) {
+        }
 
         $this->assertEquals(true, $result);
     }

@@ -1,5 +1,5 @@
 <?php
-include(AUTHORIZATION_PATH . "/AuthorizedController.php");
+include (AUTHORIZATION_PATH . "/AuthorizedController.php");
 
 /**
  * UserAuthentication
@@ -9,7 +9,7 @@ include(AUTHORIZATION_PATH . "/AuthorizedController.php");
 
 class UserAuthorizedController extends AuthorizedController
 {
-    // TODO get this from json config filee
+    // TODO get this from json config file
     private $apiToken = "WRCdma(&#_)*@$$@@$@#Sch38E2*$%G";
 
     /**
@@ -39,12 +39,14 @@ class UserAuthorizedController extends AuthorizedController
     {
         $authorized = false;
 
-        if (!isset($_SERVER['HTTP_APITOKEN'])) throw new NotAuthorizedException();
+        if (!isset($_SERVER['HTTP_APITOKEN']))
+            throw new NotAuthorizedException();
         // get headers
         $token = $_SERVER['HTTP_APITOKEN'];
 
         // check for the right API Token
-        if ($token == $this->apiToken) $authorized = true;
+        if ($token == $this->apiToken)
+            $authorized = true;
 
         return (is_object($controller) &&  $controller instanceof Controller && $authorized);
     }
