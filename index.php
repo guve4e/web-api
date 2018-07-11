@@ -21,7 +21,7 @@ try
 catch (NotAuthorizedException $e)
 {
     $e->output();
-    header("Location: " . VIEW_PATH . "/authorization.php");
+    header("Location: " . VIEW_PATH . "/controller.php");
     die();
 }
 catch (ApiException $e)

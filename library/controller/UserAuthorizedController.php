@@ -26,7 +26,7 @@ class UserAuthorizedController extends AuthorizedController
      * Checks if the the derived class is:
      * - object
      * - instance of Controller
-     * - contains the right authorization
+     * - contains the right controller
      *   token
      *
      * @access public

@@ -20,7 +20,7 @@
     or define("UTILITY_PATH", realpath(dirname(__FILE__) . "/library/utility" ));
 
     defined("AUTHORIZATION_PATH")
-    or define("AUTHORIZATION_PATH", realpath(dirname(__FILE__) . "/library/authorization" ));
+    or define("AUTHORIZATION_PATH", realpath(dirname(__FILE__) . "/library/controller" ));
 
     defined("BASE_CLASS_PATH")
     or define("BASE_CLASS_PATH", realpath(dirname(__FILE__) . "/library/base" ));

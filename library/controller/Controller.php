@@ -1,8 +1,8 @@
 <?php
 
-require_once (EXCEPTION_PATH . "/NotAuthorizedException.php");
-require_once (UTILITY_PATH . "/File.php");
-require_once (LIBRARY_PATH . "/Logger.php");
+require_once(EXCEPTION_PATH . "/NotAuthorizedException.php");
+require_once(UTILITY_PATH . "/File.php");
+require_once(LIBRARY_PATH . "/Logger.php");
 
 /**
  * Base Concrete class. It has one member:

@@ -1,6 +1,6 @@
 <?php
 
-include (LIBRARY_PATH . "/Controller.php");
+include (LIBRARY_PATH . "/controller/Controller.php");
 /**
  * Every class extending this one
  * must implement the authorize method.

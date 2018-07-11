@@ -162,7 +162,7 @@ class Router
 
         // check if controller exists
         if (!file_exists( $this->controllerPath))
-            throw new NoSuchControllerException($this->controllerName, "ControllerFactory.phpry.php", 143);
+            throw new NoSuchControllerException($this->controllerName, "Router.php", 143);
     }
 
     /**

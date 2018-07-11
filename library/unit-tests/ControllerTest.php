@@ -1,7 +1,7 @@
 <?php
 
 require_once("../../relative-paths.php");
-require_once (LIBRARY_PATH . "/Controller.php");
+require_once(LIBRARY_PATH . "/Controller.php");
 require_once ("UtilityTest.php");
 
 use PHPUnit\Framework\TestCase;
