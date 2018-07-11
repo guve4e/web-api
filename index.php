@@ -1,6 +1,6 @@
 <?php
 
-require_once('relative-paths.php');
+require_once ('relative-paths.php');
 require_once (LIBRARY_PATH . '/Router.php');
 require_once (EXCEPTION_PATH . '/ApiException.php');
 include (LIBRARY_PATH . '/Logger.php');
