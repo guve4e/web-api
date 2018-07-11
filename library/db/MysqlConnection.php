@@ -186,6 +186,11 @@ class MysqlConnection implements Connection
         return $this->connection->multi_query($sql);
     }
 
+    public function commit()
+    {
+        $this->connection->commit();
+    }
+
     public function rollBack()
     {
         $this->connection->rollback();
