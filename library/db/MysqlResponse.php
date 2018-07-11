@@ -242,12 +242,21 @@ class MysqlResponse
     public function getMySqlResponse() : StdClass
     {
         // create response object
-       $response = $this->createResponseObject();
+        $response = $this->createResponseObject();
 
-       // log it
+        // log it
         $this->logResponse($response);
 
         return $response;
+    }
+
+    /*
+     * Gives back only the data,
+     * no info, no stats
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**
@@ -261,12 +270,12 @@ class MysqlResponse
         $data = print_r($this->data,true);
 
         $toString = "Success        : " . $converted_res . "\n" .
-                    "Rows Affected  : " . $this->rowsAffected . "\n" .
-                    "Execution Time : " . $this->executionTime . "\n" .
-                    "Time           : " . $this->time . "\n" .
-                    "Message        : " . $this->message . "\n" .
-                    "SQL Query      : " . $this->sqlQueryString . "\n" .
-                    "Data           : " . $data . "\n";
+            "Rows Affected  : " . $this->rowsAffected . "\n" .
+            "Execution Time : " . $this->executionTime . "\n" .
+            "Time           : " . $this->time . "\n" .
+            "Message        : " . $this->message . "\n" .
+            "SQL Query      : " . $this->sqlQueryString . "\n" .
+            "Data           : " . $data . "\n";
         return $toString;
     }
 

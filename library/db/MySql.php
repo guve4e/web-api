@@ -11,7 +11,7 @@ class MySql
      * will wrap the data retrieved
      * from table with metadata.
      */
-    private $verbose = true;
+    private $verbose = false;
 
     /**
      * @var object
@@ -156,57 +156,51 @@ class MySql
 
     /**
      * Queries only one row from table.
-     * TODO reuse with queryRead
+     * Uses queryRead to read the row, then
+     * shifts the array and updates the response.
+     * Note! If db returns empty set,
+     * then method will return null.
      * @param $sql string: the SQL query
      * @throws mysqli_sql_exception
      * @throws Exception
      */
     private function queryOneRow($sql)
     {
-        $result = $this->executeSqlQuery($sql);
-
-        $rows = [];
-
-        for ($i = 0; $i < $result->num_rows; $i++)
-        {
-            $rows[] = $result->fetch_array(MYSQLI_ASSOC);
-        }
+        $this->queryRead($sql);
+        $rows = $this->response->getData();
 
         // shift array to get the first element
         // since each row will be represented as array element
         // if we query only single row, we need first element
-        $rows = array_shift($rows);
+        $row = array_shift($rows);
 
         $this->data = $rows;
-        $this->response->setExecutionTime($this->chrono)
-            ->setSuccess($result)
-            ->setRowsAffected($this->connection->getAffectedRows())
-            ->setData($rows)
-            ->setSqlQueryString($sql);
+        $this->response->setData($row);
     }
 
     /**
-     * Execute sql query if client wants to
-     * read from database.
-     * Other methods are calling
-     * this one to execute the query
-     *
+     * Retrieves single value from table.
+     * Ex: Average Age as AVG_AGE = 38,
+     * method will return 38
+     * If Data set has more than one key value
+     * pair, it throws DatabaseException,
+     * since something have to be wrong with the
+     * SQL query, because in normal execution,
+     * RDBMS will return single key value pair.
      * @param $sql string: the SQL query
      * @throws mysqli_sql_exception
      * @throws Exception
      */
     private function querySingleValue($sql)
     {
-        $result = $this->executeSqlQuery($sql);
+        $this->queryOneRow($sql);
+        $keyValueArray = $this->response->getData();
 
-        $value = mysqli_fetch_assoc($result);
+        if (count($keyValueArray) > 1)
+            throw new DatabaseException("Check SQL query. You are querying Single Value!");
 
-        $this->data = $value;
-        $this->response->setExecutionTime($this->chrono)
-            ->setSuccess($result)
-            ->setRowsAffected($this->connection->getAffectedRows())
-            ->setData($value)
-            ->setSqlQueryString($sql);
+        $value = array_shift($keyValueArray);
+        $this->response->setData($value);
     }
 
     /**
@@ -309,31 +303,17 @@ class MySql
      * @param $function: the name of the function
      * to be called
      * @return mixed: the result of the query
-     * @throws ApiException
+     * @throws Exception
      */
     public function query($sql, $function)
     {
+        $this->$function($sql);
 
-        try
-        {
-            $this->$function($sql);
-        }
-        catch (mysqli_sql_exception $ex)
-        {
-            $this->response->setSuccess(false)
-                ->setMessage($ex->getMessage());
-        }
-        catch (Exception $ex)
-        {
-            throw new ApiException($ex);
-        }
-        finally
-        {
-            if($this->verbose)
-                return $this->response->getMySqlResponse();
-            else
-                return $this->data;
-        }
+        if($this->verbose)
+            return $this->response->getMySqlResponse();
+        else
+            return $this->response->getData();
+
     }
 
     public function getLastInsertedId()

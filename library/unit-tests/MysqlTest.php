@@ -8,7 +8,7 @@ require_once (LIBRARY_PATH . "/db/MysqlResponse.php");
 
 require_once (LIBRARY_PATH . "/db/MysqlConnection.php");
 require_once (LIBRARY_PATH . "/db/MySql.php");
-require_once (EXCEPTION_PATH . "/ApiException.php");
+require_once (EXCEPTION_PATH . "/DatabaseException.php");
 
 class MysqlTest extends TestCase
 {
@@ -37,8 +37,6 @@ class MysqlTest extends TestCase
                 'moreResult'
                 ])
             ->getMock();
-
-
     }
 
     public function testQueryWrite() {
@@ -56,6 +54,7 @@ class MysqlTest extends TestCase
                 VALUES({$userId}, {$productId})";
 
         // Act
+        $mysql->setVerbose(true);
         $result = $mysql->query($sql, "queryWrite");
         $mysql->disconnect();
 
@@ -138,6 +137,7 @@ class MysqlTest extends TestCase
         $sql = "SOME SQL QUERY";
 
         // Act
+        $mysql->setVerbose(true);
         $result = $mysql->query($sql, "queryRead");
         $mysql->disconnect();
 
@@ -147,5 +147,130 @@ class MysqlTest extends TestCase
         $this->assertInternalType("double", $result->database_access_time);
         $this->assertEquals($expected->data, $result->data);
         $this->assertEquals($expected->rows_affected, $result->rows_affected);
+    }
+
+    public function testQuerySingleRowWhenDataSetHasOneRow()
+    {
+        // Arrange
+        $mysql = new MySql($this->mockConnection);
+
+        $this->mockConnection->method('query')
+            ->willReturn((object)[
+                'current_field' => 0,
+                'field_count' => 5,
+                'lengths' => null,
+                'num_rows' => 1,
+                'type' => 0
+            ]);
+
+        $this->mockConnection->method('getDataSet')
+            ->willReturn([
+                'R_ID' => '1',
+                'P_ID' => '2',
+                'R_STAR' => '5',
+                'R_COMMENT' => 'TEST TEST TEST TEST.',
+                'U_TIMESTAMP' => '2018-07-09 09:45:51'
+            ]);
+
+        $sql = "SOME SQL QUERY";
+
+        // Act
+        $result = $mysql->query($sql, "queryOneRow");
+        $mysql->disconnect();
+
+        // Assert
+        $this->assertEquals([
+            'R_ID' => '1',
+            'P_ID' => '2',
+            'R_STAR' => '5',
+            'R_COMMENT' => 'TEST TEST TEST TEST.',
+            'U_TIMESTAMP' => '2018-07-09 09:45:51'
+        ], $result);
+    }
+
+    public function testQuerySingleRowWhenDataSetHasNoRow()
+    {
+        // Arrange
+        $mysql = new MySql($this->mockConnection);
+
+        $this->mockConnection->method('query')
+            ->willReturn((object)[
+                'current_field' => 0,
+                'field_count' => 5,
+                'lengths' => null,
+                'num_rows' => 0,
+                'type' => 0
+            ]);
+
+        $this->mockConnection->method('getDataSet')
+            ->willReturn([]); // empty set
+
+        $sql = "SOME SQL QUERY";
+
+        // Act
+        $result = $mysql->query($sql, "queryOneRow");
+        $mysql->disconnect();
+
+        // Assert
+        $this->assertEquals(null, $result);
+    }
+
+    public function testQuerySingleValueWhenDataSetHasOneKeyValuePair()
+    {
+        // Arrange
+        $mysql = new MySql($this->mockConnection);
+
+        $this->mockConnection->method('query')
+            ->willReturn((object)[
+                'current_field' => 0,
+                'field_count' => 5,
+                'lengths' => null,
+                'num_rows' => 1,
+                'type' => 0
+            ]);
+
+        $this->mockConnection->method('getDataSet')
+            ->willReturn([
+                'R_ID' => 123
+            ]);
+
+        $sql = "SOME SQL QUERY";
+
+        // Act
+        $result = $mysql->query($sql, "querySingleValue");
+        $mysql->disconnect();
+
+        // Assert
+        $this->assertEquals(123, $result);
+    }
+
+
+    /**
+     * @expectedException DatabaseException
+     */
+    public function testQuerySingleValueWhenDataSetHasManyKeyValuePair()
+    {
+        // Arrange
+        $mysql = new MySql($this->mockConnection);
+
+        $this->mockConnection->method('query')
+            ->willReturn((object)[
+                'current_field' => 0,
+                'field_count' => 5,
+                'lengths' => null,
+                'num_rows' => 1,
+                'type' => 0
+            ]);
+
+        $this->mockConnection->method('getDataSet')
+            ->willReturn([
+                'R_ID' => 123,
+                'U_ID' => 1001
+            ]);
+
+        $sql = "SOME SQL QUERY";
+
+        // Act
+        $result = $mysql->query($sql, "querySingleValue");
     }
 }
