@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 require_once("../../relative-paths.php");
 require_once ("UtilityTest.php");
 require_once (LIBRARY_PATH . "/Logger.php");
-require_once (LIBRARY_PATH . "/database/MysqlResponse.php");
+require_once (LIBRARY_PATH . "/db/MysqlResponse.php");
 
 require_once (LIBRARY_PATH . "/db/MysqlConnection.php");
 require_once (LIBRARY_PATH . "/db/MySql.php");
@@ -148,23 +148,4 @@ class MysqlTest extends TestCase
         $this->assertEquals($expected->data, $result->data);
         $this->assertEquals($expected->rows_affected, $result->rows_affected);
     }
-
-    public function testConnection()
-    {
-        $a = new MysqlConnection();
-
-        $b = new MySql($a);
-
-        $id = 2;
-
-        $userId = 1001;
-        $productId = 1234;
-
-        $sql = "SELECT * FROM REVIEW
-                WHERE P_ID = {$id}";
-
-        $ss = $b->query($sql, "queryRead");
-        $b->disconnect();
-    }
-
 }
