@@ -102,7 +102,6 @@ class File {
         return $stringContent;
     }
 
-
     /**
      * Wrapper over file_put_contents
      * @param string $fileName

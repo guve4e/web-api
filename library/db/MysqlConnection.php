@@ -16,21 +16,6 @@ class MysqlConnection implements Connection
     private $isConnected = false;
 
     /**
-     * __construct
-     *
-     * @access public
-     * @throws Exception
-     */
-    public function __construct()
-    {
-        // connect to database
-        $this->connect();
-
-        // adjust myqsli to throw exceptions
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    }
-
-    /**
      * Checks if connected to the database.
      * Makes sure that it is connected, is instance and
      * it is initialized.
@@ -66,6 +51,21 @@ class MysqlConnection implements Connection
     }
 
     /**
+     * __construct
+     *
+     * @access public
+     * @throws Exception
+     */
+    public function __construct()
+    {
+        // connect to database
+        $this->connect();
+
+        // adjust myqsli to throw exceptions
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    }
+
+    /**
      * Makes A Connection
      * @throws Exception
      */
@@ -84,7 +84,8 @@ class MysqlConnection implements Connection
                 $this->connection = new mysqli($host, $username, $password, $schema);
 
                 $this->isConnected = true;
-                if ($this->connection->connect_error) throw new DatabaseException("Error connecting to database");
+                if ($this->connection->connect_error)
+                    throw new DatabaseException("Error connecting to database");
             } catch (mysqli_sql_exception $e) {
                 $this->isConnected = false;
                 throw new DatabaseException($e->getMessage());
@@ -111,7 +112,8 @@ class MysqlConnection implements Connection
             $close_result = $this->connection->close();
             $this->isConnected = false;
 
-            if ($close_result == false) throw new DatabaseException("Unsuccessful closing of database");
+            if ($close_result == false)
+                throw new DatabaseException("Unsuccessful closing of database");
         }
 
         return $this;
@@ -182,6 +184,21 @@ class MysqlConnection implements Connection
             throw new DatabaseException("Not connected to a valid service");
 
         return $this->connection->multi_query($sql);
+    }
+
+    public function rollBack()
+    {
+        $this->connection->rollback();
+    }
+
+    public function beginTransaction()
+    {
+        $this->connection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+    }
+
+    public function getDataSet($result)
+    {
+        return $result->fetch_array(MYSQLI_ASSOC);
     }
 
     public function storeResult()

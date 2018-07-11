@@ -10,7 +10,6 @@ require_once (LIBRARY_PATH . "/Logger.php");
  * from the input stream, retrieved by method called
  * retrieveJsonDataIn()
  */
-
 class Controller {
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 require_once ("Database.php");
+require_once ("MysqlResponse.php");
 
 class MySql
 {
@@ -34,18 +35,13 @@ class MySql
     private $chrono;
 
     /**
-     * @var connection
-     */
-    private $service;
-
-
-    /**
      * Executes Query.
      * Takes database access time.
      *
-     * @param $sql: the sql query
+     * @param $sql : the sql query
      * @return mixed: the result from the query
      * @throws mysqli_sql_exception
+     * @throws DatabaseException
      */
     private function executeSqlQuery($sql)
     {
@@ -53,6 +49,10 @@ class MySql
 
         // pass the query to MySQL for processing
         $result = $this->connection->query($sql);
+
+        if (is_null($result))
+            throw new DatabaseException("Bad Query!");
+
         $endTime = microtime(true);
         $this->chrono = $endTime - $startTime;
 
@@ -119,7 +119,7 @@ class MySql
 
         $this->response->setExecutionTime($this->chrono)
             ->setSuccess($result)
-            ->setRowsAffected($this->getAffectedRows())
+            ->setRowsAffected($this->connection->getAffectedRows())
             ->setSqlQueryString($sql);
     }
 
@@ -142,14 +142,14 @@ class MySql
         // TODO check for null before
         for ($i = 0; $i < $result->num_rows; $i++)
         {
-            $rows[] = $result->fetch_array(MYSQLI_ASSOC);
+            $rows[] = $this->connection->getDataSet($result);
         }
 
         $this->data = $result;
 
         $this->response->setExecutionTime($this->chrono)
             ->setSuccess($result)
-            ->setRowsAffected($this->getAffectedRows())
+            ->setRowsAffected($this->connection->getAffectedRows())
             ->setData($rows)
             ->setSqlQueryString($sql);
     }
@@ -180,7 +180,7 @@ class MySql
         $this->data = $rows;
         $this->response->setExecutionTime($this->chrono)
             ->setSuccess($result)
-            ->setRowsAffected($this->getAffectedRows())
+            ->setRowsAffected($this->connection->getAffectedRows())
             ->setData($rows)
             ->setSqlQueryString($sql);
     }
@@ -204,7 +204,7 @@ class MySql
         $this->data = $value;
         $this->response->setExecutionTime($this->chrono)
             ->setSuccess($result)
-            ->setRowsAffected( $this->getAffectedRows())
+            ->setRowsAffected($this->connection->getAffectedRows())
             ->setData($value)
             ->setSqlQueryString($sql);
     }
@@ -220,10 +220,9 @@ class MySql
     {
         $result = $this->executeMultiSqlQuery($sql);
 
-
         $this->response->setExecutionTime($this->chrono)
             ->setSuccess($result)
-            ->setRowsAffected($this->getAffectedRows())
+            ->setRowsAffected($this->connection->getAffectedRows())
             ->setData($result)
             ->setSqlQueryString($sql);
     }
@@ -248,7 +247,7 @@ class MySql
      */
     public function startTransaction()
     {
-        $this->connection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+        $this->connection->beginTransaction();
     }
 
     /**
@@ -264,7 +263,7 @@ class MySql
      */
     public function rollback()
     {
-        $this->connection->rollback();
+        $this->connection->rollBack();
     }
 
     /**
@@ -335,5 +334,17 @@ class MySql
             else
                 return $this->data;
         }
+    }
+
+    public function getLastInsertedId()
+    {
+        return $this->connection->getLastInsertId();
+    }
+    /**
+     * Disconnect
+     */
+    public function disconnect()
+    {
+        $this->connection->disconnect();
     }
 }
