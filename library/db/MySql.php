@@ -2,6 +2,7 @@
 
 require_once ("Database.php");
 require_once ("MysqlResponse.php");
+require_once (EXCEPTION_PATH . "/DatabaseException.php");
 
 class MySql
 {
@@ -169,6 +170,9 @@ class MySql
         $this->queryRead($sql);
         $rows = $this->response->getData();
 
+        if (count($rows) > 1 || is_null($rows))
+            throw new DatabaseException("Check SQL query. You are querying One Row!");
+
         // shift array to get the first element
         // since each row will be represented as array element
         // if we query only single row, we need first element
@@ -196,7 +200,7 @@ class MySql
         $this->queryOneRow($sql);
         $keyValueArray = $this->response->getData();
 
-        if (count($keyValueArray) > 1)
+        if (count($keyValueArray) > 1 || is_null($keyValueArray))
             throw new DatabaseException("Check SQL query. You are querying Single Value!");
 
         $value = array_shift($keyValueArray);
