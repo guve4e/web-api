@@ -170,13 +170,14 @@ class MySql
         $this->queryRead($sql);
         $rows = $this->response->getData();
 
-        if (count($rows) > 1 || is_null($rows))
+        if (count($rows) > 1)
             throw new DatabaseException("Check SQL query. You are querying One Row!");
 
-        // shift array to get the first element
-        // since each row will be represented as array element
-        // if we query only single row, we need first element
-        $row = array_shift($rows);
+        if (!is_null($rows))
+            // shift array to get the first element
+            // since each row will be represented as array element
+            // if we query only single row, we need first element
+            $row = array_shift($rows);
 
         $this->data = $rows;
         $this->response->setData($row);
@@ -200,10 +201,11 @@ class MySql
         $this->queryOneRow($sql);
         $keyValueArray = $this->response->getData();
 
-        if (count($keyValueArray) > 1 || is_null($keyValueArray))
+        if (count($keyValueArray) > 1)
             throw new DatabaseException("Check SQL query. You are querying Single Value!");
 
-        $value = array_shift($keyValueArray);
+        if (!is_null($keyValueArray))
+            $value = array_shift($keyValueArray);
         $this->response->setData($value);
     }
 
