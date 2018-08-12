@@ -36,6 +36,11 @@ class MySql
     private $chrono;
 
     /**
+     * @var Connection
+     */
+    private $connection;
+
+    /**
      * Executes Query.
      * Takes database access time.
      *
@@ -167,6 +172,8 @@ class MySql
      */
     private function queryOneRow($sql)
     {
+        $row = null;
+
         $this->queryRead($sql);
         $rows = $this->response->getData();
 
@@ -232,6 +239,7 @@ class MySql
 
     /**
      * MySql constructor
+     * @param Connection $mysqlConnection
      * @throws DatabaseException
      */
     public function __construct(Connection $mysqlConnection)
@@ -322,13 +330,13 @@ class MySql
             return $this->response->getMySqlResponse();
         else
             return $this->response->getData();
-
     }
 
     public function getLastInsertedId()
     {
         return $this->connection->getLastInsertId();
     }
+
     /**
      * Disconnect
      */
