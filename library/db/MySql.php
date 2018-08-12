@@ -170,7 +170,7 @@ class MySql
         $this->queryRead($sql);
         $rows = $this->response->getData();
 
-        if (count($rows) > 1)
+        if (is_array($rows) && count($rows) > 1)
             throw new DatabaseException("Check SQL query. You are querying One Row!");
 
         if (!is_null($rows))
@@ -198,14 +198,17 @@ class MySql
      */
     private function querySingleValue($sql)
     {
+        $value = null;
+
         $this->queryOneRow($sql);
         $keyValueArray = $this->response->getData();
 
-        if (count($keyValueArray) > 1)
+        if (is_array($keyValueArray) && count($keyValueArray) > 1)
             throw new DatabaseException("Check SQL query. You are querying Single Value!");
 
         if (!is_null($keyValueArray))
             $value = array_shift($keyValueArray);
+
         $this->response->setData($value);
     }
 
