@@ -1,36 +1,37 @@
 <?php
 
-require_once('config.php'); // include configuration file
-require_once (LIBRARY_PATH . '/Constructor.php'); // include Constructor class
-require_once (EXCEPTION_PATH . '/ApiException.php'); // include ApiException class
-include(LIBRARY_PATH . '/Logger.php');
+require_once ('relative-paths.php');
+require_once (LIBRARY_PATH . '/Router.php');
+require_once (EXCEPTION_PATH . '/ApiException.php');
+include (LIBRARY_PATH . '/Logger.php');
+
 
 // Log
 Logger::logServer();
 Logger::logHeaders();
 
-
 try
 {
-    // construct
-    if (isset($_SERVER['PATH_INFO']))  $constructor = new Constructor($_SERVER['PATH_INFO']);
+    // if controller and parameter are given
+    if (isset($_SERVER['PATH_INFO']))
+        $router = new Router($_SERVER['PATH_INFO']);
     else throw new ApiException("PATH_INFO",101);
 
-} catch (ApiException $e) {
-    // if call is not authorized
-    if ($e instanceof NotAuthorizedException)
-    {
-        $e->output();
-        header(VIEW_PATH . "/authentication.php");
-        die();
-    } // if there is no PATH_INFO, display API View
-    else if ($e->getCode() == 101)
-    {
+}
+catch (NotAuthorizedException $e)
+{
+    $e->output();
+    header("Location: " . VIEW_PATH . "/controller.php");
+    die();
+}
+catch (ApiException $e)
+{
+    $e->output();
+
+    // If no controller is specified then show home page
+    // Assume normal execution showing home page
+    if ($e->getCode() == 101)
         include(VIEW_PATH . "/controller.php");
-    }// if the controller does not exist
-    else if ($e instanceof NoSuchControllerException)
-    {
-        // send right message to client
-        $e->output();
-    }
-}// end try / catch
+} catch (Exception $e) {
+    die($e->getMessage());
+}

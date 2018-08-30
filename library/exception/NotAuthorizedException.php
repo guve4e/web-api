@@ -21,8 +21,9 @@ class NotAuthorizedException extends ApiException
      * @param string controller's name
      */
     public function __construct() {
+
         // make sure everything is assigned properly
-        parent::__construct("Not Authorized");
+        parent::__construct($this);
         $this->data = [
             "message" => "You Are Not Authorized"
         ];
@@ -34,8 +35,20 @@ class NotAuthorizedException extends ApiException
      */
     public function output()
     {
-        parent::output(); // call parernt first
-        header(VIEW_PATH . "/authentication.php");
+        parent::output(); // call parent first
+        header(VIEW_PATH . "/controller.php");
         die();
+    }
+
+    /**
+     * toString magical method
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $toString = "Not Authorized Access !\n" .
+            "IP : " . $_SERVER['SERVER_ADDR'] . "\n";
+        return $toString;
     }
 }

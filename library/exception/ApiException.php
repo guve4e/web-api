@@ -22,6 +22,8 @@ class ApiException extends Exception
      */
     protected $data = null;
 
+    protected $time;
+
     /**
      *
      * @var int
@@ -33,14 +35,32 @@ class ApiException extends Exception
     public function __construct($message, $code = 0, Exception $previous = null) {
         // make sure everything is assigned properly
         parent::__construct($message, $code, $previous);
-        // Log just message for now
-        Logger::logException($message);
+
+        // get time and date
+        $dateTime = new DateTime('2016-03-11 11:00:00');
+
+        $this->data = [
+            "message" => $message,
+            "time" => $dateTime->getTimestamp()
+        ];
     }
+
+    /**
+     * ControllerFactory
+     * @param $ex
+     */
+    public function __construct1($ex)
+    {   // give the exception ot the parent
+        parent::__construct($ex);
+    }
+
 
     /**
      * Send message to client
      */
     public function output() {
+        // Log just message for now
+        Logger::logException($this->message);
         // send to client
         echo( json_encode($this->data, $this->option_bits ));
     }
