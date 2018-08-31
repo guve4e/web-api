@@ -40,7 +40,7 @@ class NoSuchControllerException extends ApiException
     public function __toString()
     {
         $toString = "There is no such controler (" . $this->controller . ")!\n" .
-            "File : " . $this->file . "\n" .
+            "FileManager : " . $this->file . "\n" .
             "Line # " . $this->line . "\n";
         return $toString;
     }

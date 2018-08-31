@@ -18,7 +18,7 @@ abstract class AuthorizedController extends Controller
      */
     public function __construct()
     {
-        parent::__construct(new File());
+        parent::__construct(new FileManager());
     }
 
     /**

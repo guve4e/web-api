@@ -1,7 +1,7 @@
 <?php
 
 require_once(EXCEPTION_PATH . "/NotAuthorizedException.php");
-require_once(UTILITY_PATH . "/File.php");
+require_once(UTILITY_PATH . "/FileManager.php");
 require_once(LIBRARY_PATH . "/Logger.php");
 
 /**
@@ -38,7 +38,7 @@ class Controller {
      * @throws NoInputStreamException
      * @throws ApiException
      */
-    public function __construct(File $file)
+    public function __construct(FileManager $file)
     {
         if (!isset($file))
             throw new ApiException("Bad file object in Controller Constructor!");
@@ -60,7 +60,8 @@ class Controller {
         $json = $this->file->loadFileContent($this->fileIn);
 
         //convert the string of data to an array
-        $this->jsonDataIn = $this->file->jsonDecode($json, true);
+        if (!is_null($json) && $json !== "")
+            $this->jsonDataIn = $this->file->jsonDecode($json, true);
     }
 
     /**

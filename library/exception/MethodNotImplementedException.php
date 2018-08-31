@@ -45,7 +45,7 @@ class MethodNotImplementedException extends ApiException
     public function __toString()
     {
         $toString = "This method (" . $this->method . ") is not implemented!\n" .
-            "File : " . $this->file . "\n" .
+            "FileManager : " . $this->file . "\n" .
             "Line # " . $this->line . "\n";
         return $toString;
     }

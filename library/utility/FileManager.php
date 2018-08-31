@@ -4,37 +4,49 @@
  * Why Wrapper? For dependency injection, easy to unit test.
  */
 
-class File {
+class FileManager {
 
     /**
      * Determines the type of the JSON Error
      * and throws exception with right message.
      * @throws Exception
      */
-    private function handleJsonErrors()
+    private function handleJsonErrors(string $jsonString)
     {
-        $msg = "";
         switch (json_last_error()) {
             case JSON_ERROR_DEPTH:
-                $msg = ' - Maximum stack depth exceeded';
+                $msg = 'The maximum stack depth has been exceeded.';
                 break;
             case JSON_ERROR_STATE_MISMATCH:
-                $msg = ' - Underflow or the modes mismatch';
+                $msg = 'Invalid or malformed JSON.';
                 break;
             case JSON_ERROR_CTRL_CHAR:
-                $msg = ' - Unexpected control character found';
+                $msg = 'Control character error, possibly incorrectly encoded.';
                 break;
             case JSON_ERROR_SYNTAX:
-                $msg = ' - Syntax error, malformed JSON';
+                $msg = 'Syntax error, malformed JSON.';
                 break;
+            // PHP >= 5.3.3
             case JSON_ERROR_UTF8:
-                $msg = ' - Malformed UTF-8 characters, possibly incorrectly encoded';
+                $msg = 'Malformed UTF-8 characters, possibly incorrectly encoded.';
+                break;
+            // PHP >= 5.5.0
+            case JSON_ERROR_RECURSION:
+                $msg = 'One or more recursive references in the value to be encoded.';
+                break;
+            // PHP >= 5.5.0
+            case JSON_ERROR_INF_OR_NAN:
+                $msg = 'One or more NAN or INF values in the value to be encoded.';
+                break;
+            case JSON_ERROR_UNSUPPORTED_TYPE:
+                $msg = 'A value of a type that cannot be encoded was given.';
                 break;
             default:
-                $msg = ' - Unknown error';
+                $msg = 'Unknown JSON error occurred.';
                 break;
         }
-        throw new FileException("json_decode failed: {$msg}");
+
+        return "json_decode failed with message: {$msg}\n" . "Original Json: {$jsonString}";
     }
 
 
@@ -50,16 +62,15 @@ class File {
     {
         $res = json_decode($data, $arr);
         // check for successful decode
-        // TODO!!!!
-//        if ($res === false || is_null($res))
-//            $this->handleJsonErrors();
+        if ($res === false || is_null($res))
+            throw new Exception($this->handleJsonErrors($data));
 
         return $res;
     }
 
     /**
      * Encodes string data as JSON.
-     * @param string $data data to be encoded
+     * @param $data string or object to be encoded
      * @param int $optionFlags
      * @return string JSON string
      * @throws Exception
@@ -69,7 +80,7 @@ class File {
         $res = json_encode($data, $optionFlags);
         // check for successful encode
         if ($res === false || is_null($res))
-            $this->handleJsonErrors();
+            $this->handleJsonErrors($data);
 
         return $res;
     }
@@ -97,7 +108,7 @@ class File {
         $stringContent = file_get_contents($fileName);
 
         if ($stringContent === false)
-            throw new FileException("file_put_contents failed");
+            throw new Exception("file_put_contents failed");
 
         return $stringContent;
     }
@@ -116,7 +127,7 @@ class File {
         $res = file_put_contents($fileName, $message, $flags);
 
         if ($res === false)
-            throw new FileException("file_put_contents failed");
+            throw new Exception("file_put_contents failed");
 
         return $res;
     }
@@ -134,7 +145,7 @@ class File {
         $fp = fsockopen($host, $port, $errno, $errstr, $socketTimeout);
 
         if (!$fp)
-            throw new FileException("$errstr {$errno}\n");
+            throw new Exception("$errstr {$errno}\n");
 
         return $fp;
     }
@@ -150,7 +161,7 @@ class File {
     {
         $bytesWritten = fwrite($fileDescriptor, $content);
         if ($bytesWritten === false)
-            throw new FileException("fwrite couldn't execute!");
+            throw new Exception("fwrite couldn't execute!");
 
         return $bytesWritten;
     }

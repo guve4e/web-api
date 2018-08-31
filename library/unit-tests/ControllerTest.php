@@ -14,7 +14,7 @@ class ControllerTest extends TestCase
 
     protected function setUp()
     {
-        $this->mockFile = $this->getMockBuilder(File::class)
+        $this->mockFile = $this->getMockBuilder(FileManager::class)
             ->setMethods(array('jsonDecode', 'loadFileContent'))
             ->getMock();
 

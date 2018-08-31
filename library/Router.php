@@ -190,9 +190,7 @@ class Router
 
         // authorize the controller
         if (!$this->instance->authorize($this->instance))
-        {
             throw new NotAuthorizedException();
-        }
 
         // get the request method
         $method = $this->methodType;
