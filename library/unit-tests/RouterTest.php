@@ -47,6 +47,7 @@ class RouterTest extends TestCase
 
     /**
      * @expectedException NoSuchControllerException
+     * @throws Exception
      */
     public function testRouterWithControllerThatDoesNotExistExpectedException()
     {
@@ -55,13 +56,25 @@ class RouterTest extends TestCase
 
     /**
      * Test Build
+     * @throws Exception
      */
     public function testConstruction()
     {
         // Act
-        new Router($_SERVER['PATH_INFO']);
+        $router = new Router($_SERVER['PATH_INFO']);
 
         // Assert
-        $this->assertTrue( class_exists("Mockcontroller", false));
+        $this->assertTrue(class_exists("Mockcontroller", false));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testRouterWithMultipleParameters()
+    {
+        // Arrange
+        $_SERVER['PATH_INFO'] = "/mockcontroller/id=1001&start_date='2018-05-27&end_date='2019-05-27'";
+
+        new Router($_SERVER['PATH_INFO']);
     }
 }
