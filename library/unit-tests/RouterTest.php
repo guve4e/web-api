@@ -38,14 +38,6 @@ class RouterTest extends TestCase
     }
 
     /**
-     * @expectedException Exception
-     */
-    public function testRouterWithWrongPathInfoExpectedException()
-    {
-        new Router("/mockcontroller/get/123");
-    }
-
-    /**
      * @expectedException NoSuchControllerException
      * @throws Exception
      */
@@ -61,20 +53,9 @@ class RouterTest extends TestCase
     public function testConstruction()
     {
         // Act
-        $router = new Router($_SERVER['PATH_INFO']);
+        new Router($_SERVER['PATH_INFO']);
 
         // Assert
         $this->assertTrue(class_exists("Mockcontroller", false));
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function testRouterWithMultipleParameters()
-    {
-        // Arrange
-        $_SERVER['PATH_INFO'] = "/mockcontroller/id=1001&start_date='2018-05-27&end_date='2019-05-27'";
-
-        new Router($_SERVER['PATH_INFO']);
     }
 }

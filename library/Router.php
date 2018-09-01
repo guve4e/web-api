@@ -5,6 +5,7 @@
  */
 require_once (EXCEPTION_PATH . "/NoSuchControllerException.php");
 require_once (EXCEPTION_PATH . "/NoSuchMethodException.php");
+require_once (LIBRARY_PATH . "/Splicer.php");
 
 class Router
 {
@@ -29,18 +30,12 @@ class Router
     private $methodType;
 
     /**
-     * @var
-     * Parameter passed to
-     * the controller
+     * @var array
+     * If request has more
+     * than one parameters,
+     * will be stored in array;
      */
-    private $parameter;
-
-    /**
-     * @var
-     * Extracted from
-     * raw $_SERVER['PATH_INFO']
-     */
-    private $pathInfo;
+    private $parameters;
 
     /**
      * @var
@@ -58,21 +53,21 @@ class Router
      */
     public function __construct($pathInfo)
     {
-        // sanitize path info first
-        $this->splitPathInfo($pathInfo);
+        if (!isset($pathInfo) || is_null($pathInfo))
+            throw new Exception("Bad parameter passed in Router constructor!");
 
-        // get the controller
-        $this->retrieveControllerName();
+        // retrieve the controller name
+        $splicer = new Splicer($pathInfo);
+        $this->controllerName = $splicer->getControllerName();
+
+        // retrieve parameters
+        $this->parameters = $splicer->getParameters();
 
         // get the method
         $this->methodType = $this->retrieveMethodType();
 
-        // get the parameter
-        $this->retrieveParameter();
-
         // build
         $this->route();
-
     }
 
     /**
@@ -96,44 +91,6 @@ class Router
         else throw new NoSuchMethodException($requestMethod);
     }
 
-    /**
-     * Extracts the controller name form
-     * member array pathInfo
-     */
-    private function retrieveControllerName()
-    {
-        $this->controllerName = $this->pathInfo[0];
-    }
-
-    /**
-     * Extracts the controller parameter form
-     * member array pathInfo
-     */
-    private function retrieveParameter()
-    {
-        // get the id
-        if (isset($this->pathInfo[1])) $this->parameter = $this->pathInfo[1];
-    }
-
-    /**
-     * It explodes the array given as
-     * parameter and validates it.
-     * @param $pathInfo: string,
-     * @throws ApiException
-     */
-    private function splitPathInfo($pathInfo)
-    {
-        // explode and trim
-        $this->pathInfo = explode('/', trim($pathInfo,'/'));
-
-        // make sure the $s_path_info no null requests
-        if ($this->pathInfo == null) throw new ApiException("PATH_INFO");
-
-        // make sure that request is in the form "/controller/id"
-        // if $request array has more than 2 elements throw exception
-        if (count($this->pathInfo) > 2)
-            throw new ApiException("Wrong Request. Request must be: /controller/id");
-    }
 
     /**
      * Takes te first char from the
@@ -149,7 +106,7 @@ class Router
     /**
      * Constructs the controller path form
      * the parameter given and hard wired path to
-     * directory. Then it checks if the file exists
+     * directory. Then it checks if the file exists.
      * @throws NoSuchControllerException
      */
     private function constructControllerPath()
@@ -168,7 +125,7 @@ class Router
     /**
      * Creates an object of the
      * required controller using
-     * string substitution
+     * string substitution.
      *
      * @throws ApiException, NoSuchControllerException
      */
@@ -196,6 +153,9 @@ class Router
         $method = $this->methodType;
 
         // invoke method with the right parameter, if provided
-        $this->instance->$method($this->parameter);
+        if (!is_array($this->parameters))
+            $this->instance->$method($this->parameters);
+        else
+            call_user_func_array([$this->instance, $this->methodType], $this->parameters);
     }
 }
