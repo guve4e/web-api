@@ -60,7 +60,7 @@ class Controller {
         $json = $this->file->loadFileContent($this->fileIn);
 
         //convert the string of data to an array
-        if (!is_null($json) && $json !== "")
+        if (!is_null($json) && $json !== "" && !isset($json) && $json !== "null")
             $this->jsonDataIn = $this->file->jsonDecode($json, true);
     }
 
