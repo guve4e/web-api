@@ -35,8 +35,8 @@ class Controller {
 
     /**
      * Controller constructor.
-     * @throws NoInputStreamException
      * @throws ApiException
+     * @throws Exception
      */
     public function __construct(FileManager $file)
     {
@@ -51,7 +51,6 @@ class Controller {
     /**
      * Extracts info from the input stream.
      * If problems is encountered, it throws an exception.
-     * @throws NoInputStreamException
      * @throws Exception
      */
     private function retrieveJsonDataIn()
@@ -59,8 +58,7 @@ class Controller {
         //get the data
         $json = $this->file->loadFileContent($this->fileIn);
 
-        //convert the string of data to an array
-        if (!is_null($json) && $json !== "" && !isset($json) && $json !== "null")
+        if (!is_null($json) && !empty($json) && $json !== "null")
             $this->jsonDataIn = $this->file->jsonDecode($json, true);
     }
 
@@ -69,7 +67,6 @@ class Controller {
      * argument, encodes it as json string
      * and prints the result on the string
      * @param $data : mixed
-     * @throws ApiException
      * @throws Exception
      */
     protected function send($data)
@@ -91,10 +88,7 @@ class Controller {
     }
 
     /**
-     * getJsonData
-     *
      * Getter for jsonDataIn member
-     *
      * @return mixed
      */
     public function getJsonData()
