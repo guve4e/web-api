@@ -269,7 +269,11 @@ class Response
         if($key == "")
         {
             $keyNames = $this->generateDictionaryKeys($value, false);
-            $this->data = $this->packer->addDictionary($keyNames, $value);
+
+            if (Packer::isDictionary($value))
+                $this->data = $this->packer->addDictionary($keyNames, $value);
+            else if (is_array($value))
+                $this->data = $this->packer->addArray($value, $keys);
         }
         else
         {
@@ -287,7 +291,7 @@ class Response
      * Combines tables with the same id (key).
      * @param array $primarySets array of primary data sets
      * @param array $secondarySets array of secondary data sets
-     * @param string $primaryKey the key used to combine data sets
+     * @param string $key
      * @return array $primaryObjects array of the newly combined complex objects
      */
     public static function combineTables(array $primarySets, array $secondarySets, string $key) : array

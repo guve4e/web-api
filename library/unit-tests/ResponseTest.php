@@ -146,7 +146,7 @@ class ResponseTest extends TestCase
         $actualResponse = $this->response->getResponse();
 
         // Assert
-        $this->assertEquals($actualResponse , $expectedResponse);
+        $this->assertEquals($expectedResponse, $actualResponse);
     }
 
     public function testAddDictionary()
@@ -167,7 +167,7 @@ class ResponseTest extends TestCase
         $actual = $response->getResponse();
 
         // Assert
-        $this->assertEquals($actual, $expected);
+        $this->assertEquals($expected, $actual);
     }
 
 
@@ -191,7 +191,22 @@ class ResponseTest extends TestCase
         $actual = $response->getResponse();
 
         // Assert
-        $this->assertEquals($actual, $expected);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testAddObjectWhenArray()
+    {
+        $dummy = [1,2,3];
+
+        $expected = (object) [1,2,3];
+
+        // pack in a response object
+        $response = new Response();
+        $response->addObject("", $dummy);
+        $actual = $response->getResponse();
+
+        // Assert
+        $this->assertEquals($expected, $actual);
     }
 
     public function testAddObjectWithRestResponseObject()

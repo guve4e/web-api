@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../relative-paths.php");
+require_once ("../../relative-paths.php");
 require_once (PACK_PATH . "/Packer.php");
 require_once (EXCEPTION_PATH . "/ApiException.php");
 require_once ("UtilityTest.php");
@@ -81,9 +81,12 @@ class PackerTest extends TestCase
         ];
 
         $result = Packer::isDictionary($dict);
-        $this->assertTrue($result);
+        $this->assertFalse($result);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testAddSimpleObject()
     {
         // Arrange
@@ -91,15 +94,55 @@ class PackerTest extends TestCase
         $expected->key = "value";
         $packer = new Packer();
         // Act
-        try {
+
         $packer->addSimpleObject("key", "value");
-        } catch (Exception $e) {}
+
         $actual = $this->getProperty($packer, "packedObject");
 
         // Assert
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @throws Exception
+     */
+    public function testAddArrayWithNoKey()
+    {
+        // Arrange
+        $expected = (object) [1,2,3];
+        $packer = new Packer();
+        // Act
+
+        $packer->addArray([1,2,3]);
+
+        $actual = $this->getProperty($packer, "packedObject");
+
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testAddArrayWithKey()
+    {
+        // Arrange
+        $expected = new stdClass();
+        $expected->key = [1,2,3];
+        $packer = new Packer();
+        // Act
+
+        $packer->addArray([1,2,3], "key");
+
+        $actual = $this->getProperty($packer, "packedObject");
+
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @throws Exception
+     */
     public function testAddSimpleObjectWithArray()
     {
         // Arrange
@@ -108,15 +151,16 @@ class PackerTest extends TestCase
         $expected->key = ["value1", "value2", "value3"];
 
         // Act
-        try {
-            $packer->addSimpleObject("key", ["value1", "value2", "value3"]);
-        } catch (Exception $e) {}
+        $packer->addSimpleObject("key", ["value1", "value2", "value3"]);
         $actual = $this->getProperty($packer, "packedObject");
 
         // Assert
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testAddArrayOfDictionaryObject()
     {
         // Arrange
@@ -160,9 +204,9 @@ class PackerTest extends TestCase
             ]
         ];
 
-        try {
-            $actualObject = $pack->addArrayOfDictionaryObject("cart", $keys, $values);
-        } catch (Exception $e) {}
+
+        $actualObject = $pack->addArrayOfDictionaryObject("cart", $keys, $values);
+
 
         // Assert
         $this->assertEquals($expectedDict, $actualObject);
@@ -238,9 +282,9 @@ class PackerTest extends TestCase
             ]
         ];
 
-        try {
-            $actualObject = $pack->addArrayOfDictionaryObject("cart", $keys, $values);
-        } catch (Exception $e) {}
+
+        $actualObject = $pack->addArrayOfDictionaryObject("cart", $keys, $values);
+
 
         // Assert
         $this->assertEquals($expectedDict, $actualObject);

@@ -374,6 +374,38 @@ class Packer
     }
 
     /**
+     * Adds array with indexing.
+     * Ex: existing object is {"key" : "value"}
+     * If you use this method, addArray("mums", ["1", "2", "3"])
+     * it will become
+     * {
+     *   "keys" : ["key1", "key2", "key3"]
+     * }
+     *
+     * If you use it with no key parameter, addArray(["1", "2", "3"])
+     * it will become
+     *
+     * ["key1", "key2", "key3"]
+     *
+     * @param string $key
+     * @param array $array
+     * @return stdClass
+     * @throws ApiException
+     */
+    public  function addArray(array $array, string $key = null) : stdClass
+    {
+        if (!isset($array) || !is_array($array))
+            throw new ApiException("Wrong parameters in addArray!");
+
+        if ($key == null)
+            $this->packedObject = (object) $array;
+        else
+            $this->packedObject->$key = $array;
+
+        return $this->packedObject;
+    }
+
+    /**
      * Getter.
      * @return stdClass
      */
@@ -405,7 +437,8 @@ class Packer
                 $tmp = [];
                 foreach($set as $member)
                 {
-                    if($member[$primaryKey] == $id){
+                    if($member[$primaryKey] == $id)
+                    {
                         $tmp[$i] = $member;
                         $i++;
                     }
