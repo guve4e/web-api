@@ -66,6 +66,9 @@ class ResponseTest extends TestCase
         return $mysqlResponseSimulator;
     }
 
+    /**
+     * @throws ApiException
+     */
     public function testConstruction()
     {
         // Arrange
@@ -101,6 +104,9 @@ class ResponseTest extends TestCase
         $this->assertEquals($expectedResponse, $actualResponse);
     }
 
+    /**
+     * @throws ApiException
+     */
     public function testProperAssigningOfInfo()
     {
         // Arrange
@@ -149,6 +155,9 @@ class ResponseTest extends TestCase
         $this->assertEquals($expectedResponse, $actualResponse);
     }
 
+    /**
+     * @throws ApiException
+     */
     public function testAddDictionary()
     {
         $dummy = [
@@ -170,7 +179,9 @@ class ResponseTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-
+    /**
+     * @throws ApiException
+     */
     public function testAddObjectWhenDictionary()
     {
         $dummy = [
@@ -194,6 +205,9 @@ class ResponseTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @throws ApiException
+     */
     public function testAddObjectWhenArray()
     {
         $dummy = [1,2,3];
@@ -209,6 +223,63 @@ class ResponseTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @throws ApiException
+     */
+    public function testAddObjectWhenArrayMultipleLevelsDeep()
+    {
+        $dummy = [
+                [
+                    "E_ID" => "291",
+                    "TITLE" => "Nissan",
+                    "START" => '2019-02-1'
+                ],
+                [
+                    [
+                        "E_ID" => "111",
+                        "TITLE" => "Walmart",
+                        "START" => '2018-07-17'
+                    ],
+                    [
+                        "E_ID" => "183",
+                        "TITLE" => "Aldi",
+                        "START" => '2018-04-18'
+                    ]
+                ]
+            ];
+
+        $expected = (object) [
+                [
+                    "e_id" => "291",
+                    "title" => "Nissan",
+                    "start" => '2019-02-1'
+                ],
+                [
+                    [
+                        "e_id" => "111",
+                        "title" => "Walmart",
+                        "start" => '2018-07-17'
+                    ],
+                    [
+                        "e_id" => "183",
+                        "title" => "Aldi",
+                        "start" => '2018-04-18'
+                    ]
+                ]
+            ];
+
+        // pack in a response object
+        $response = new Response();
+        $response->addObject("", $dummy);
+        $actual = $response->getResponse();
+
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @throws ApiException
+     */
     public function testAddObjectWithRestResponseObject()
     {
         // Arrange
@@ -242,6 +313,9 @@ class ResponseTest extends TestCase
         $this->assertEquals($actual, $expected);
     }
 
+    /**
+     * @throws ApiException
+     */
     public function testAddingMixedObjects()
     {
         // Arrange

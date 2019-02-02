@@ -3,11 +3,9 @@
 /**
  * It packs an object. User can add to it
  * at any time. Adding of arrays and dictionaries
- * is also possible.
- * It has one member:
- *      packedObject - the object that is build
+ * is also supported.
  *
- * @version v1.0
+ * @version v1.1
  */
 class Packer
 {
@@ -72,12 +70,35 @@ class Packer
      * @return array
      * @throws Exception
      */
-    private function changeKeys(string $keys, array $dict) : array
+    private function changeKeys(string $keys, array $dict): array
     {
         $keyNames = explode($this->delimiter, $keys);
         $values = $this->constructArrayOfObjects($keyNames, $dict);
 
         return $values;
+    }
+
+    private function changeArrayKeys(array $array, string $keys = null): array
+    {
+        // If keys are not provided, we are going
+        // to convert the keys to lower
+        if (is_null($keys))
+        {
+            // Lets take care of the sub-arrays
+            if ($this->isArrayOfArrays($array))
+            {
+                foreach($array as &$arr)
+                    $arr = $this->changeArrayKeys($arr);
+            }
+            // Make the keys lowercase
+            $array = array_change_key_case($array, CASE_LOWER);
+        }
+        else
+        {
+            // TODO if client provides keys
+        }
+
+        return $array;
     }
 
     /**
@@ -397,8 +418,10 @@ class Packer
         if (!isset($array) || !is_array($array))
             throw new ApiException("Wrong parameters in addArray!");
 
+        $array = $this->changeArrayKeys($array);
+
         if ($key == null)
-            $this->packedObject = (object) $array;
+            $this->packedObject = (object)$array;
         else
             $this->packedObject->$key = $array;
 

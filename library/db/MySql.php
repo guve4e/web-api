@@ -56,9 +56,6 @@ class MySql
         // pass the query to MySQL for processing
         $result = $this->connection->query($sql);
 
-        if (is_null($result))
-            throw new DatabaseException("Bad Query!");
-
         $endTime = microtime(true);
         $this->chrono = $endTime - $startTime;
 
