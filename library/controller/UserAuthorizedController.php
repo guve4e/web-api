@@ -1,5 +1,5 @@
 <?php
-include(AUTHORIZATION_PATH . "/AuthorizedController.php");
+require_once (AUTHORIZATION_PATH . "/AuthorizedController.php");
 
 /**
  * UserAuthentication

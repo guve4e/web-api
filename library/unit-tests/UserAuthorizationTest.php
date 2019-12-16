@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../relative-paths.php");
+require_once dirname(__FILE__) . "/../../relative-paths.php";
 require_once(AUTHORIZATION_PATH . "/UserAuthorizedController.php");
 require_once ("UtilityTest.php");
 use PHPUnit\Framework\TestCase;

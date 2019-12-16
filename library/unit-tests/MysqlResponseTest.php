@@ -1,10 +1,10 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once("../../relative-paths.php");
+require_once dirname(__FILE__) . "/../../relative-paths.php";
 require_once ("UtilityTest.php");
 require_once (LIBRARY_PATH . "/Logger.php");
-require_once(LIBRARY_PATH . "/database/MysqlResponse.php");
+require_once (LIBRARY_PATH . "/db/MysqlResponse.php");
 
 class MysqlResponseTest extends TestCase
 {
@@ -15,7 +15,7 @@ class MysqlResponseTest extends TestCase
     /**
      * Create test subject before test
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         // Arrange
         $this->response = new MysqlResponse();

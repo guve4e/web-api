@@ -9,7 +9,7 @@ class Splicer
     private $parameters = [];
 
     /**
-     * Takes parameterString member and splits
+     * Takes parameterString member and splitsF
      * it to construct parameters array.
      */
     private function makeParametersRawArray(string $parameterString)

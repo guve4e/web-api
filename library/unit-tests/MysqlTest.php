@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-require_once("../../relative-paths.php");
+require_once dirname(__FILE__) . "/../../relative-paths.php";
 require_once ("UtilityTest.php");
 require_once (LIBRARY_PATH . "/Logger.php");
 require_once (LIBRARY_PATH . "/db/MysqlResponse.php");
@@ -20,7 +20,7 @@ class MysqlTest extends TestCase
     /**
      * Create test subject before test
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->mockConnection = $this->getMockBuilder(MysqlConnection::class)
             ->setMethods([
@@ -63,7 +63,7 @@ class MysqlTest extends TestCase
         $this->assertEquals(true, $result->success);
         $this->assertEquals('none',  $result->stats);
         $this->assertEquals(1, $result->rows_affected);
-        $this->assertInternalType("double", $result->database_access_time);
+        $this->assertIsNumeric( $result->database_access_time);
         $this->assertEquals(array(), $result->data);
     }
 
@@ -144,7 +144,7 @@ class MysqlTest extends TestCase
         // Assert
         $this->assertEquals($expected->success, $result->success);
         $this->assertEquals($expected->stats, $result->stats);
-        $this->assertInternalType("double", $result->database_access_time);
+        $this->assertIsNumeric($result->database_access_time);
         $this->assertEquals($expected->data, $result->data);
         $this->assertEquals($expected->rows_affected, $result->rows_affected);
     }
@@ -244,12 +244,9 @@ class MysqlTest extends TestCase
         $this->assertEquals(123, $result);
     }
 
-
-    /**
-     * @expectedException DatabaseException
-     */
     public function testQuerySingleValueWhenDataSetHasManyKeyValuePair()
     {
+        $this->expectException(Exception::class);
         // Arrange
         $mysql = new MySql($this->mockConnection);
 

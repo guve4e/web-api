@@ -1,7 +1,7 @@
 <?php
 
-require_once("../../relative-paths.php");
-require_once(LIBRARY_PATH . "/Controller.php");
+require_once dirname(__FILE__) . "/../../relative-paths.php";
+require_once (LIBRARY_PATH . "/controller/Controller.php");
 require_once ("UtilityTest.php");
 
 use PHPUnit\Framework\TestCase;
@@ -12,7 +12,7 @@ class ControllerTest extends TestCase
 
     protected $mockFile;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->mockFile = $this->getMockBuilder(FileManager::class)
             ->setMethods(array('jsonDecode', 'loadFileContent'))

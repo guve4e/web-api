@@ -7,11 +7,9 @@
  */
 
 use PHPUnit\Framework\TestCase;
-require_once("../../relative-paths.php");
-require_once ("UtilityTest.php");
-require_once(LIBRARY_PATH . "/Splicer.php");
+require_once dirname(__FILE__) . "/../../relative-paths.php";
 
-class RouterTest extends TestCase
+class SplicerTest extends TestCase
 {
     /**
      * @throws Exception

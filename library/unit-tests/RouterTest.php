@@ -7,10 +7,10 @@
  */
 
 use PHPUnit\Framework\TestCase;
-require_once("../../relative-paths.php");
+require_once dirname(__FILE__) . "/../../relative-paths.php";
 require_once ("UtilityTest.php");
 require_once (LIBRARY_PATH . "/Logger.php");
-require_once(LIBRARY_PATH . "/Router.php");
+require_once (LIBRARY_PATH . "/Router.php");
 
 class RouterTest extends TestCase
 {
@@ -21,7 +21,7 @@ class RouterTest extends TestCase
     /**
      * Create test subject before test
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         // Arrange
         $_SERVER['PATH_INFO'] = "/mockcontroller/123";
@@ -29,20 +29,15 @@ class RouterTest extends TestCase
         $_SERVER['HTTP_APITOKEN'] = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd";
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testRouterWithNullPathInfoExpectedException()
     {
+        $this->expectException(Exception::class);
         new Router(null);
     }
 
-    /**
-     * @expectedException NoSuchControllerException
-     * @throws Exception
-     */
     public function testRouterWithControllerThatDoesNotExistExpectedException()
     {
+        $this->expectException(Exception::class);
         new Router("/somefakecontroller/123");
     }
 
