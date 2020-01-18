@@ -8,6 +8,7 @@
 
 use PHPUnit\Framework\TestCase;
 require_once dirname(__FILE__) . "/../../relative-paths.php";
+require_once (LIBRARY_PATH . "/Splicer.php");
 
 class SplicerTest extends TestCase
 {
