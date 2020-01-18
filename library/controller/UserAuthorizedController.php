@@ -22,12 +22,13 @@ class UserAuthorizedController extends AuthorizedController
      * - contains the right JWT
      *
      * @access public
+     * @param FileManager $fileManager
+     * @param RestCall $restCall
      * @param mixed $controller instance
      * @return bool
-     * @throws Exception
      * @throws NotAuthorizedException
      */
-    public function authorize(FileManager $fileManager, $controller): bool
+    public function authorize(FileManager $fileManager, RestCall $restCall, $controller): bool
     {
         $hasRightApiToken = $hasRightJWTToken = false;
 
@@ -41,7 +42,7 @@ class UserAuthorizedController extends AuthorizedController
         if ($token === $this->apiToken)
             $hasRightApiToken = true;
 
-        $hasRightJWTToken = $this->checkJWT($fileManager);
+        $hasRightJWTToken = $this->checkJWT($fileManager, $restCall);
 
         return (is_object($controller) &&
             $controller instanceof Controller &&
@@ -54,9 +55,9 @@ class UserAuthorizedController extends AuthorizedController
      * @return bool
      * @throws Exception
      */
-    private function checkJWT(FileManager $fileManager): bool
+    private function checkJWT(FileManager $fileManager, RestCall $restCall): bool
     {
-        $headers = getallheaders();
+        $headers = $fileManager->getHeaders();
 
         if (isset($headers['Authorization']))
             $bearer = $headers['Authorization'];
@@ -76,7 +77,7 @@ class UserAuthorizedController extends AuthorizedController
             "password" => "some-pass"
         ];
 
-        $jwt = new JWT(new RestCall("Curl", $fileManager), $info);
+        $jwt = new JWT($restCall, $info);
         return $jwt->checkAuthorizationToken($token);
     }
 }

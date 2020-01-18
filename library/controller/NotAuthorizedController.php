@@ -6,10 +6,11 @@ class NotAuthorizedController extends AuthorizedController
 {
     /**
      * @param FileManager $fileManager
+     * @param RestCall $restCall
      * @param $var
      * @return bool|mixed
      */
-    function authorize(FileManager $fileManager, $var)
+    function authorize(FileManager $fileManager, RestCall $restCall, $var)
     {
         return true;
     }

@@ -6,6 +6,7 @@
 require_once (EXCEPTION_PATH . "/NoSuchControllerException.php");
 require_once (EXCEPTION_PATH . "/NoSuchMethodException.php");
 require_once (LIBRARY_PATH . "/Splicer.php");
+require_once (HTTP_PATH . "/RestCall.php");
 
 class Router
 {
@@ -138,6 +139,7 @@ class Router
      * string substitution.
      *
      * @throws ApiException, NoSuchControllerException
+     * @throws Exception
      */
     private function route()
     {
@@ -148,15 +150,18 @@ class Router
         $this->constructControllerPath();
 
         // if file exists include it
-        require_once($this->controllerPath);
+        require_once ($this->controllerPath);
 
         // text substitution
         // @example:
         // $test = new Test();
         $this->instance = new $this->controllerName();
 
+        // prepare rest call for auth-server verification
+        $restCall = new RestCall("Curl", $this->fileManager);
+
         // authorize the controller
-        if (!$this->instance->authorize($this->fileManager ,$this->instance))
+        if (!$this->instance->authorize($this->fileManager, $restCall, $this->instance))
             throw new NotAuthorizedException();
 
         // get the request method

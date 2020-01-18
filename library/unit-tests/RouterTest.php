@@ -54,6 +54,6 @@ class RouterTest extends TestCase
     {
         new Router($this->mockFileManager, $_SERVER['PATH_INFO']);
 
-        $this->assertTrue(class_exists("Mockcontroller22", false));
+        $this->assertTrue(class_exists("Mockcontroller", false));
     }
 }

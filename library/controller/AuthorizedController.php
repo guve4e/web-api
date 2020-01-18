@@ -15,11 +15,11 @@ abstract class AuthorizedController extends Controller
 
     /**
      * @param FileManager $fileManager
+     * @param RestCall $restCall
      * @param $var
      * @return mixed
      */
-    public abstract function authorize(FileManager $fileManager, $var);
-
+    public abstract function authorize(FileManager $fileManager, RestCall $restCall, $var);
 }
 
 

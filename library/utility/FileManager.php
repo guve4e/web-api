@@ -216,4 +216,13 @@ class FileManager {
     {
         fclose($fileDescriptor);
     }
+
+    /**
+     * Retrieves the headers
+     * form the request
+     */
+    public function getHeaders()
+    {
+        return getallheaders();
+    }
 }
