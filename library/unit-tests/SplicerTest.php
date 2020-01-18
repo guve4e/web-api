@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: home
- * Date: 6/23/17
- * Time: 8:16 PM
- */
 
 use PHPUnit\Framework\TestCase;
 require_once dirname(__FILE__) . "/../../relative-paths.php";
