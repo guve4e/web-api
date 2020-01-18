@@ -31,6 +31,9 @@
     defined("EXCEPTION_PATH")
     or define("EXCEPTION_PATH", realpath(dirname(__FILE__) . "/library/exception" ));
 
+    defined("HTTP_PATH")
+        or define("HTTP_PATH", realpath(dirname(__FILE__) . '/library/phphttp'));
+
     defined("VIEW_PATH")
     or define("VIEW_PATH", dirname(__FILE__) . "/views" );
 
