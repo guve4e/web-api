@@ -29,6 +29,8 @@ class MethodNotImplementedException extends ApiException
         $this->data = [
             "message" => "This method (" . $method . ") is not implemented!"
         ];
+
+        http_response_code(500);
     }
 
     /**

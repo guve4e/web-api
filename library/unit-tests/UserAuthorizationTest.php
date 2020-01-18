@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . "/../../relative-paths.php";
-require_once (AUTHORIZATION_PATH . "/UserAuthorizedController.php");
+require_once(AUTHORIZATION_PATH . "/AuthorizedController.php");
 require_once ("UtilityTest.php");
 use PHPUnit\Framework\TestCase;
 
@@ -43,7 +43,7 @@ class UserAuthorizationTest extends TestCase
     {
         $_SERVER['HTTP_APITOKEN'] = "WRCdma(&#_)*@$$@@$@#Sch38E2*$%G";
 
-        $auth = new UserAuthorizedController();
+        $auth = new AuthorizedController();
         $result = $auth->authorize($this->mockFileManager, $this->restCall, $auth);
 
         $this->assertEquals(true, $result);
@@ -57,7 +57,7 @@ class UserAuthorizationTest extends TestCase
     {
         $_SERVER['HTTP_APITOKEN'] = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd ";
 
-        $auth = new UserAuthorizedController();
+        $auth = new AuthorizedController();
         $result = $auth->authorize($this->mockFileManager, $this->restCall, $auth);
 
         $this->assertEquals(false, $result);
@@ -86,7 +86,7 @@ class UserAuthorizationTest extends TestCase
         $restCall->method('getResponseWithInfo')
             ->willReturn($restResponse);
 
-        $auth = new UserAuthorizedController();
+        $auth = new AuthorizedController();
         $result = $auth->authorize($this->mockFileManager, $restCall, $auth);
 
         $this->assertEquals(false, $result);

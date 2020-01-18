@@ -17,5 +17,7 @@ class DatabaseException extends ApiException
         $this->data = [
             "message" => "Unsuccessful connection to database, " . $msg,
         ];
+
+        http_response_code(500);
     }
 }

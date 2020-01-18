@@ -26,7 +26,7 @@
     or define("BASE_CLASS_PATH", realpath(dirname(__FILE__) . "/library/base" ));
 
     defined("DATABASE_PATH")
-    or define("DATABASE_PATH", realpath(dirname(__FILE__) . "/library/database" ));
+    or define("DATABASE_PATH", realpath(dirname(__FILE__) . "/library/db" ));
 
     defined("EXCEPTION_PATH")
     or define("EXCEPTION_PATH", realpath(dirname(__FILE__) . "/library/exception" ));

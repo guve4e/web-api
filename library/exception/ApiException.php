@@ -26,6 +26,8 @@ class ApiException extends Exception
             "message" => $message,
             "time" => $dateTime->getTimestamp()
         ];
+
+        http_response_code(500);
     }
 
     /**

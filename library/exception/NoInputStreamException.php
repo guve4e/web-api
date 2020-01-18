@@ -20,5 +20,7 @@ class NoInputStreamException extends ApiException
             "message" => "Sorry, This API works only with Input Stream"
         ];
         $this->output();
+
+        http_response_code(500);
     }
 }

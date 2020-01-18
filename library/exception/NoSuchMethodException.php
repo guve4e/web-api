@@ -18,5 +18,7 @@ class NoSuchMethodException extends ApiException
         $this->data = [
             "message" => "Web API does not support " . $method . " method."
         ];
+
+        http_response_code(404);
     }
 }

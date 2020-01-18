@@ -16,12 +16,12 @@ class NotAuthorizedException extends ApiException
      * @param string controller's name
      */
     public function __construct() {
-
-        // make sure everything is assigned properly
         parent::__construct($this);
         $this->data = [
             "message" => "You Are Not Authorized"
         ];
+
+        http_response_code(401);
     }
 
     /**

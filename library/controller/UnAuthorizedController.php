@@ -1,8 +1,8 @@
 <?php
 
-require_once (AUTHORIZATION_PATH . "/AuthorizedController.php");
+require_once(AUTHORIZATION_PATH . "/AbstractAuthorizedController.php");
 
-class NotAuthorizedController extends AuthorizedController
+class UnAuthorizedController extends AbstractAuthorizedController
 {
     /**
      * @param FileManager $fileManager

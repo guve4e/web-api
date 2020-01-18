@@ -17,11 +17,13 @@ class NoSuchControllerException extends ApiException
         $this->controller = $controller_name;
         $this->file = $file;
         $this->line = $line;
-        // make sure everything is assigned properly
+
         parent::__construct($this);
         $this->data = [
             "message" => "There is no such service : " . $controller_name
         ];
+
+        http_response_code(404);
     }
 
     /**
