@@ -1,15 +1,10 @@
 <?php
-/**
- * Logger
- *
- * @license http://www.opensource.org/licenses/gpl-license.php
- *
- */
+
 class Logger{
 
     /**
      * How to end the row,
-     * Linux or Windows versions
+     * Linux or Windows style
      *
      * @var string
      */
@@ -108,6 +103,5 @@ class Logger{
         // call to private _log
         self::_log($fname, $msg);
     }
-
-}// end Logger class
+}
 

@@ -3,11 +3,6 @@
 /**
  * NoInputStreamException
  * Extends the ApiException Class.
- *
- *
- *
- * @package library/exeption
- * @filesource
  */
 require_once ("ApiException.php");
 

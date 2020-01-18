@@ -17,11 +17,8 @@ class UserAuthorizationTest extends TestCase
     {
         $_SERVER['HTTP_APITOKEN'] = "WRCdma(&#_)*@$$@@$@#Sch38E2*$%G";
 
-        try {
-            $this->auth = new UserAuthorizedController();
-            $result = $this->auth->authorize($this->auth);
-        } catch (Exception $e) {
-        }
+        $this->auth = new UserAuthorizedController();
+        $result = $this->auth->authorize($this->auth);
 
         $this->assertEquals(true, $result);
     }
@@ -34,12 +31,8 @@ class UserAuthorizationTest extends TestCase
     {
         $_SERVER['HTTP_APITOKEN'] = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd ";
 
-        try {
-            $this->auth = new UserAuthorizedController();
-            $result = $this->auth->authorize($this->auth);
-        } catch (NotAuthorizedException $e) {
-        } catch (Exception $e) {
-        }
+        $this->auth = new UserAuthorizedController();
+        $result = $this->auth->authorize($this->auth);
 
         $this->assertEquals(false, $result);
     }

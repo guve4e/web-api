@@ -45,16 +45,27 @@ class Router
     private $controllerPath;
 
     /**
-     * __construct
+     * @var FileManager obj
+     */
+    private $fileManager;
+
+    /**
+     * Router Constructor
      *
      * @access public
-     * @param $pathInfo  $_SERVER['PATH_INFO']
+     * @param FileManager $fileManager
+     * @param string $pathInfo $_SERVER['PATH_INFO']
      * @throws Exception
+     * @throws ApiException
+     * @throws NoSuchControllerException
+     * @throws NoSuchMethodException
      */
-    public function __construct($pathInfo)
+    public function __construct(FileManager $fileManager, string $pathInfo)
     {
-        if (!isset($pathInfo) || is_null($pathInfo))
-            throw new Exception("Bad parameter passed in Router constructor!");
+        if (!isset($pathInfo) || empty($pathInfo))
+            throw new NoSuchControllerException("Null Controller Name", "Router", 66);
+
+        $this->fileManager = $fileManager;
 
         // retrieve the controller name
         $splicer = new Splicer($pathInfo);
@@ -90,7 +101,6 @@ class Router
         else if ($requestMethod == "PATCH") return "patch";
         else throw new NoSuchMethodException($requestMethod);
     }
-
 
     /**
      * Takes te first char from the
@@ -146,7 +156,7 @@ class Router
         $this->instance = new $this->controllerName();
 
         // authorize the controller
-        if (!$this->instance->authorize($this->instance))
+        if (!$this->instance->authorize($this->fileManager ,$this->instance))
             throw new NotAuthorizedException();
 
         // get the request method

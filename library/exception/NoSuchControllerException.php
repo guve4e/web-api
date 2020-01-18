@@ -1,15 +1,5 @@
 <?php
 
-/**
- * NoSuchControllerException
- * Extends the ApiException Class.
- *
- *
- *
- * @license http://www.opensource.org/licenses/gpl-license.php
- * @package library/exeption
- * @filesource
- */
 require_once ("ApiException.php");
 
 class NoSuchControllerException extends ApiException
@@ -19,7 +9,9 @@ class NoSuchControllerException extends ApiException
     /**
      * NoSuchControllerException constructor.
      *
-     * @param string controller's name
+     * @param $controller_name
+     * @param $file
+     * @param $line
      */
     public function __construct($controller_name, $file, $line) {
         $this->controller = $controller_name;

@@ -5,11 +5,6 @@
  * Extends the ApiException Class.
  * Handles Users that are not
  * Authorized
- *
- *
- * @license http://www.opensource.org/licenses/gpl-license.php
- * @package library/exeption
- * @filesource
  */
 require_once ("ApiException.php");
 

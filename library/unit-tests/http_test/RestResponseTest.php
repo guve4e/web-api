@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 require_once dirname(__FILE__) . "/../../../relative-paths.php";
 require_once (HTTP_PATH . "/RestCall.php");
-require_once(UTILITY_PATH . "/FileManager.php");
+require_once (UTILITY_PATH . "/FileManager.php");
 
 class RestResponseTest extends TestCase
 {

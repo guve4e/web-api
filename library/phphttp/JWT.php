@@ -76,14 +76,11 @@ class JWT
         $this->restCall->send();
 
         $response = $this->restCall->getResponseWithInfo();
-        $responseInfo = $response->getInfo();
 
-        if ($responseInfo['code'] == 200)
-        {
-            return $this->restCall->getResponseAsJson();
-        }
+        if ($response->getHttpCode() == 200)
+            return true;
 
-        throw new Exception("Bad Call to Authorization server! Code: {$responseInfo['code'] }");
+        throw new Exception("Bad Call to Authorization server! Code: {$response->getHttpCode()}");
     }
 
     /**

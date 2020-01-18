@@ -81,7 +81,6 @@ class Splicer
         $this->pathInfo = implode("/", $split);
     }
 
-
     /**
      * Splicer constructor.
      * @param string $pathInfo
@@ -90,7 +89,7 @@ class Splicer
     public function __construct(string $pathInfo)
     {
         if (!isset($pathInfo))
-            throw new Exception("Bad parameter in Splicer constructor!");
+            throw new ApiException("Bad parameter in Splicer constructor!");
 
         $this->retrieveControllerName($pathInfo);
         $this->retrieveParameter();

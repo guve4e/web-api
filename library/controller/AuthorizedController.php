@@ -1,20 +1,12 @@
 <?php
 
 require_once (LIBRARY_PATH . "/controller/Controller.php");
-/**
- * Every class extending this one
- * must implement the authorize method.
- * Concrete classes have to del with
- * implementing the method.
- */
+
 abstract class AuthorizedController extends Controller
 {
-
     /**
-     * __construct
-     *
-     * @access public
-     * @throws Exception
+     * AuthorizedController constructor.
+     * @throws ApiException
      */
     public function __construct()
     {
@@ -22,12 +14,11 @@ abstract class AuthorizedController extends Controller
     }
 
     /**
-     *
-     * @abstract
+     * @param FileManager $fileManager
      * @param $var
      * @return mixed
      */
-    public abstract function authorize($var);
+    public abstract function authorize(FileManager $fileManager, $var);
 
 }
 
