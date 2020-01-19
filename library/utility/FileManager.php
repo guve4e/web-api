@@ -225,4 +225,9 @@ class FileManager {
     {
         return getallheaders();
     }
+
+    public function getParentName(string $className)
+    {
+        return get_parent_class($className);
+    }
 }

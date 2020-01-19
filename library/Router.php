@@ -5,6 +5,7 @@
  */
 require_once (EXCEPTION_PATH . "/NoSuchControllerException.php");
 require_once (EXCEPTION_PATH . "/NoSuchMethodException.php");
+require_once (AUTHORIZATION_FILTER_PATH . "/AuthorizationFilter.php");
 require_once (LIBRARY_PATH . "/Splicer.php");
 require_once (HTTP_PATH . "/RestCall.php");
 
@@ -51,22 +52,29 @@ class Router
     private $fileManager;
 
     /**
+     * @var IAuthorizationFilter
+     */
+    private $authorizationFilter;
+
+    /**
      * Router Constructor
      *
      * @access public
      * @param FileManager $fileManager
+     * @param IAuthorizationFilter $authorizationFilter
      * @param string $pathInfo $_SERVER['PATH_INFO']
-     * @throws Exception
      * @throws ApiException
      * @throws NoSuchControllerException
      * @throws NoSuchMethodException
+     * @throws Exception
      */
-    public function __construct(FileManager $fileManager, string $pathInfo)
+    public function __construct(FileManager $fileManager, IAuthorizationFilter $authorizationFilter, string $pathInfo)
     {
         if (!isset($pathInfo) || empty($pathInfo))
             throw new NoSuchControllerException("Null Controller Name", "Router", 66);
 
         $this->fileManager = $fileManager;
+        $this->authorizationFilter = $authorizationFilter;
 
         // retrieve the controller name
         $splicer = new Splicer($pathInfo);
@@ -146,23 +154,16 @@ class Router
         // sanitize controller name first
         $this->sanitizeControllerName();
 
-        //then validate if it exist
+        // then validate if it exist
         $this->constructControllerPath();
 
         // if file exists include it
         require_once ($this->controllerPath);
 
-        // text substitution
-        // @example:
-        // $test = new Test();
+        if ($this->needAuthorization())
+            $this->authorizationFilter->authorize();
+
         $this->instance = new $this->controllerName();
-
-        // prepare rest call for auth-server verification
-        $restCall = new RestCall("Curl", $this->fileManager);
-
-        // authorize the controller
-        if (!$this->instance->authorize($this->fileManager, $restCall, $this->instance))
-            throw new NotAuthorizedException();
 
         // get the request method
         $method = $this->methodType;
@@ -172,5 +173,21 @@ class Router
             $this->instance->$method($this->parameters);
         else
             call_user_func_array([$this->instance, $this->methodType], $this->parameters);
+    }
+
+    /**
+     * @return bool
+     * @throws ApiException
+     */
+    private function needAuthorization(): bool
+    {
+        $parent = $this->fileManager->getParentName($this->controllerName);
+
+        if ($parent === "AuthorizedController")
+            return true;
+        else if ($parent === "UnAuthorizedController")
+            return false;
+        else
+            throw new ApiException("Server Exception", 102);
     }
 }

@@ -22,6 +22,9 @@
     defined("AUTHORIZATION_PATH")
     or define("AUTHORIZATION_PATH", realpath(dirname(__FILE__) . "/library/controller" ));
 
+    defined("AUTHORIZATION_FILTER_PATH")
+    or define("AUTHORIZATION_FILTER_PATH", realpath(dirname(__FILE__) . "/library/authorization" ));
+
     defined("BASE_CLASS_PATH")
     or define("BASE_CLASS_PATH", realpath(dirname(__FILE__) . "/library/base" ));
 
@@ -32,7 +35,7 @@
     or define("EXCEPTION_PATH", realpath(dirname(__FILE__) . "/library/exception" ));
 
     defined("HTTP_PATH")
-        or define("HTTP_PATH", realpath(dirname(__FILE__) . '/library/phphttp'));
+    or define("HTTP_PATH", realpath(dirname(__FILE__) . '/library/phphttp'));
 
     defined("VIEW_PATH")
     or define("VIEW_PATH", dirname(__FILE__) . "/views" );
@@ -44,15 +47,15 @@
     or define("SRC_PATH", dirname(__FILE__) . "/src" );
 
     define('DB',array(  "host" => "localhost",
-                  "username" => "root",
+                  "username" => "username",
                   "password" => "password",
-                  "schema" => "SomeDatabase"
+                  "schema" => "SOME DATABASE"
                 ));
 
     define('DSN','mysql://root@localhost/framework');
 
-    define('API_TOKEN','WRCdma(&#_)*@$$@@$@#Sch38E2*$%G');
+    define('API_TOKEN','76E48EA91C151BFD63F51851D8C40');
 
-    define('AUTH_SERVER_URL',"http://localhost:8100/oauth/check_token");
+    define('AUTH_SERVER_URL',"https://auth-server.ddns.net/oauth/check_token");
 
     ?>

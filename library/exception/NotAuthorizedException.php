@@ -33,16 +33,4 @@ class NotAuthorizedException extends ApiException
         parent::output();
         die();
     }
-
-    /**
-     * toString magical method
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        $toString = "Not Authorized Access !\n" .
-            "IP : " . $_SERVER['SERVER_ADDR'] . "\n";
-        return $toString;
-    }
 }

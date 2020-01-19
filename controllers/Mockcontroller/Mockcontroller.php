@@ -1,9 +1,9 @@
 <?php
-require_once (AUTHORIZATION_PATH . "/NotAuthorizedController.php");
+require_once(AUTHORIZATION_PATH . "/UnAuthorizedController.php");
 require_once (PACK_PATH . "/Response.php");
-//require_once ("MockControllerDatabase.php");
+//require_once ("MaketokenControllerDatabase.php");
 
-final class Mockcontroller extends NotAuthorizedController
+final class Mockcontroller extends UnAuthorizedController
 {
     /**
      * Database Connector

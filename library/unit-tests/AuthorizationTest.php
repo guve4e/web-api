@@ -1,11 +1,11 @@
 <?php
 
 require_once dirname(__FILE__) . "/../../relative-paths.php";
-require_once(AUTHORIZATION_PATH . "/AuthorizedController.php");
+require_once(AUTHORIZATION_FILTER_PATH . "/AuthorizationFilter.php");
 require_once ("UtilityTest.php");
 use PHPUnit\Framework\TestCase;
 
-class UserAuthorizationTest extends TestCase
+class AuthorizationTest extends TestCase
 {
     private $mockFileManager;
     private $restCall;
@@ -38,29 +38,31 @@ class UserAuthorizationTest extends TestCase
     /**
      * Test for proper Authorization
      * with the right api token
+     * @throws NotAuthorizedException
      */
     public function testProperAuthorization()
     {
-        $_SERVER['HTTP_APITOKEN'] = "WRCdma(&#_)*@$$@@$@#Sch38E2*$%G";
+        $_SERVER['HTTP_APITOKEN'] = "76E48EA91C151BFD63F51851D8C40";
 
-        $auth = new AuthorizedController();
-        $result = $auth->authorize($this->mockFileManager, $this->restCall, $auth);
+        $this->expectNotToPerformAssertions();
 
-        $this->assertEquals(true, $result);
+        $auth = new AuthorizationFilter($this->mockFileManager, $this->restCall);
+        $auth->authorize();
     }
 
     /**
      * Test for proper Authorization
      * with wrong api token
+     * @throws NotAuthorizedException
      */
     public function testProperAuthorizationWrongToken()
     {
         $_SERVER['HTTP_APITOKEN'] = "WRCdmach38E2*$%Ghdo@nf#cOBD4fd ";
 
-        $auth = new AuthorizedController();
-        $result = $auth->authorize($this->mockFileManager, $this->restCall, $auth);
+        $this->expectException(NotAuthorizedException::class);
 
-        $this->assertEquals(false, $result);
+        $auth = new AuthorizationFilter($this->mockFileManager, $this->restCall);
+        $auth->authorize();
     }
 
     /**
@@ -86,9 +88,9 @@ class UserAuthorizationTest extends TestCase
         $restCall->method('getResponseWithInfo')
             ->willReturn($restResponse);
 
-        $auth = new AuthorizedController();
-        $result = $auth->authorize($this->mockFileManager, $restCall, $auth);
+        $this->expectException(NotAuthorizedException::class);
 
-        $this->assertEquals(false, $result);
+        $auth = new AuthorizationFilter($this->mockFileManager, $restCall);
+        $auth->authorize();
     }
 }

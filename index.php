@@ -11,7 +11,10 @@ try
     Logger::logServer();
     Logger::logHeaders();
 
-    new Router(new FileManager(), $_SERVER['PATH_INFO']);
+    new Router(
+        new FileManager(),
+        new AuthorizationFilter(new FileManager(), new RestCall("Curl", new FileManager())),
+        $_SERVER['PATH_INFO']);
 }
 catch (ApiException $e)
 {

@@ -192,7 +192,7 @@ class JWTTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testFoo()
+    public function testCheckAuthorizationToken()
     {
         $expectedResponse = [
             "scope" => [
@@ -238,7 +238,7 @@ class JWTTest extends TestCase
         $jwt2 = new JWT($mockRestCall, $info2);
         $actual = $jwt2->checkAuthorizationToken($jwt1->getToken());
 
-        $this->assertEquals($expectedResponse, (array)$actual);
+        $this->assertEquals(true, $actual);
     }
 }
 
