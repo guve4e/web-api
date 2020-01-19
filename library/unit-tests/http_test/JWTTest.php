@@ -22,10 +22,10 @@ class JWTTest extends TestCase
             ->getMock();
 
         $this->jsonString = "{" .
-            "\"access_token\": \"06615fca-b806-4cd8-92f5-4de9e451769f\"," .
-            "\"expires_in\": 3536," .
-            "\"scope\": \"READ_ALL_GUESTS WRITE_GUEST UPDATE_GUEST\"," .
-            "\"token_type\": \"bearer\"" .
+                "\"access_token\": \"06615fca-b806-4cd8-92f5-4de9e451769f\"," .
+                "\"expires_in\": 3536," .
+                "\"scope\": \"READ_ALL_GUESTS WRITE_GUEST UPDATE_GUEST\"," .
+                "\"token_type\": \"bearer\"" .
             "}";
 
         $restResponse = new RestResponse();
@@ -192,7 +192,7 @@ class JWTTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testCheckAuthorizationToken()
+    public function testFoo()
     {
         $expectedResponse = [
             "scope" => [
@@ -202,7 +202,7 @@ class JWTTest extends TestCase
             ],
             "exp" => 1576750460,
             "authorities" => [
-                "ROLE_GUESTS_AUTHORIZED_CLIENT"
+                 "ROLE_GUESTS_AUTHORIZED_CLIENT"
             ],
             "client_id" => "guest_app"
         ];
@@ -238,7 +238,7 @@ class JWTTest extends TestCase
         $jwt2 = new JWT($mockRestCall, $info2);
         $actual = $jwt2->checkAuthorizationToken($jwt1->getToken());
 
-        $this->assertEquals(true, $actual);
+        $this->assertEquals($expectedResponse, (array)$actual);
     }
 }
 

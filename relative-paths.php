@@ -53,4 +53,6 @@
 
     define('API_TOKEN','WRCdma(&#_)*@$$@@$@#Sch38E2*$%G');
 
+    define('AUTH_SERVER_URL',"http://localhost:8100/oauth/check_token");
+
     ?>

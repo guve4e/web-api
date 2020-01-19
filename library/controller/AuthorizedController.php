@@ -72,9 +72,7 @@ class AuthorizedController extends AbstractAuthorizedController
         $token = $bearerParts[1];
 
         $info = [
-            "url" => "http://localhost:8100/oauth/check_token",
-            "username" => "user",
-            "password" => "some-pass"
+            "url" => AUTH_SERVER_URL
         ];
 
         $jwt = new JWT($restCall, $info);
