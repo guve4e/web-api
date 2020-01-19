@@ -168,6 +168,9 @@ class Router
         // get the request method
         $method = $this->methodType;
 
+        if (!$this->fileManager->methodExist($this->instance, $method))
+            throw new NoSuchMethodException($method);
+
         // invoke method with the right parameter, if provided
         if (!is_array($this->parameters))
             $this->instance->$method($this->parameters);

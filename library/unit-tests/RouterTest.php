@@ -132,4 +132,25 @@ class RouterTest extends TestCase
 
         new Router($this->mockFileManager, $this->mockAuthorizationFilter, $_SERVER['PATH_INFO']);
     }
+
+    /**
+     * Test Build
+     * @throws Exception
+     */
+    public function testConstructionWithMethodThatTheControllerDoesntHave()
+    {
+        $_SERVER['PATH_INFO'] = "/mockcontroller/123";
+        $_SERVER['REQUEST_METHOD'] = "GET";
+
+        $mockFileManager = $this->getMockBuilder(FileManager::class)
+            ->setMethods(['methodExist'])
+            ->getMock();
+
+        $mockFileManager->method('methodExist')
+            ->willReturn(false);
+
+        $this->expectException(NoSuchMethodException::class);
+
+        new Router($mockFileManager, $this->mockAuthorizationFilter, $_SERVER['PATH_INFO']);
+    }
 }

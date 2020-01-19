@@ -226,8 +226,23 @@ class FileManager {
         return getallheaders();
     }
 
+    /**
+     * Retrieves class parent name
+     * @param string $className
+     * @return string
+     */
     public function getParentName(string $className)
     {
         return get_parent_class($className);
+    }
+
+    /**
+     * @param $object
+     * @param $methodName
+     * @return bool
+     */
+    public function methodExist($object, $methodName)
+    {
+        return method_exists($object,$methodName);
     }
 }
