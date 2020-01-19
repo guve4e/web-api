@@ -16,7 +16,7 @@ class ApiException extends Exception
     protected $option_bits =  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 
     // Redefine the exception so message isn't optional
-    public function __construct($message, $code = 0, Exception $previous = null) {
+    public function __construct($message, $code = 500, Exception $previous = null) {
         parent::__construct($message, $code, $previous);
 
         // get time and date
@@ -27,7 +27,7 @@ class ApiException extends Exception
             "time" => $dateTime->getTimestamp()
         ];
 
-        http_response_code(500);
+        http_response_code($code);
     }
 
     /**

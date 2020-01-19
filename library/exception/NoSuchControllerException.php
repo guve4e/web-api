@@ -13,7 +13,7 @@ class NoSuchControllerException extends ApiException
      * @param $file
      * @param $line
      */
-    public function __construct($controller_name, $file, $line) {
+    public function __construct($controller_name, $file = "", $line = 0) {
         $this->controller = $controller_name;
         $this->file = $file;
         $this->line = $line;
