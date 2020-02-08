@@ -56,6 +56,6 @@
 
     define('API_TOKEN','76E48EA91C151BFD63F51851D8C40');
 
-    define('AUTH_SERVER_URL',"https://auth-server.ddns.net/oauth/check_token");
+    define('AUTH_SERVER_URL',"https://some-auth-server.net/oauth/check_token");
 
     ?>
