@@ -2,7 +2,7 @@
 
 require_once ("HttpCurlCall.php");
 require_once ("HttpSocketCall.php");
-require_once (UTILITY_PATH . "/FileManager.php");
+
 
 class RestCall
 {
@@ -30,6 +30,16 @@ class RestCall
             default:
                 throw new Exception("Unrecognized rest-call type!");
         }
+    }
+
+    /**
+     * @param string $url
+     * @return $this
+     * @throws Exception
+     */
+    public function setTimeOut(int $timeInSeconds) {
+        $this->strategy->setTimeOut($timeInSeconds);
+        return $this;
     }
 
     /**
@@ -96,8 +106,18 @@ class RestCall
      * @return $this
      * @throws Exception
      */
-    public function addBody(array $data) {
-        $this->strategy->addBody($data);
+    public function addBodyForm(array $data) {
+        $this->strategy->addBodyForm($data);
+        return $this;
+    }
+
+    /**
+     * @param array $data
+     * @return $this
+     * @throws Exception
+     */
+    public function addBodyArray(array $data) {
+        $this->strategy->addBodyArray($data);
         return $this;
     }
 
@@ -106,7 +126,15 @@ class RestCall
      * @throws Exception
      */
     public function send() {
-       $this->strategy->send();
+        set_error_handler(function ($severity, $message, $file, $line) {
+            throw new ErrorException($message, $severity, $severity, $file, $line);
+        });
+
+        try {
+            $this->strategy->send();
+        } finally {
+            restore_error_handler();
+        }
     }
 
     /**

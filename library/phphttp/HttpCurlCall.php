@@ -9,11 +9,18 @@ require_once ("RestResponse.php");
  */
 class HttpCurlCall extends AHttpRequest
 {
+
+    private function addContentType()
+    {
+        $contentTypeHeader = "Content-Type: " . $this->contentType;
+        array_push($this->headers, $contentTypeHeader);
+    }
+
     /**
      * RestCall constructor.
      * @throws Exception
      */
-    function __construct() {
+    public function __construct() {
         // check if php_curl is installed
         if (!function_exists('curl_version'))
             throw new Exception("PHP Curl not installed");
@@ -22,15 +29,15 @@ class HttpCurlCall extends AHttpRequest
     /**
      * Makes HTTP Call to specified URL
      *
-     * @return string json string / Curl Response
      * @throws Exception
      */
     public function send()
     {
         // preconditions
         if ($this->method == null) throw new Exception("Null Method");
-        if ($this->contentType == null) throw new Exception("Null Content Type");
         if ($this->url == null) throw new Exception("Null Url");
+
+        $this->addContentType();
 
         // initialize
         $curl = curl_init($this->url);
@@ -49,10 +56,14 @@ class HttpCurlCall extends AHttpRequest
         // set headers
         curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
 
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($curl, CURLOPT_TIMEOUT, $this->timeOut); //timeout in seconds
+
         if ($this->body)
             curl_setopt($curl, CURLOPT_POSTFIELDS, $this->body);
 
         try {
+
             $this->startTime = $this->takeTime();
             $response = curl_exec($curl);
             $this->endTime = $this->takeTime();
@@ -66,7 +77,7 @@ class HttpCurlCall extends AHttpRequest
             $this->retrieveRestResponseInfo($response, $info);
 
         } catch (Exception $e) {
-            $e->getTrace();
+            Logger::logException($e->getMessage());
         } finally {
             curl_close($curl);
         }

@@ -21,7 +21,7 @@ abstract class AHttpRequest implements IHttpRequest
      * MIME type
      * Header field content-type
      */
-    protected $contentType = "application/x-www-form-urlencoded";
+    protected $contentType = "application/json";
 
     /**
      * @var
@@ -77,6 +77,11 @@ abstract class AHttpRequest implements IHttpRequest
     protected $restResponse = null;
 
     /**
+     * @var int TimeOut in seconds
+     */
+    protected $timeOut = 30;
+
+    /**
      * Take time in microsecond
      * @return float
      */
@@ -107,11 +112,7 @@ abstract class AHttpRequest implements IHttpRequest
      */
     public function setContentType(string $contentType)
     {
-        if ($contentType == null)
-            throw new Exception("Null ContentType");
-
         $this->contentType = $contentType;
-        $this->headers [] = 'Content-Type: ' . $contentType;
     }
 
     /**
@@ -146,6 +147,15 @@ abstract class AHttpRequest implements IHttpRequest
     }
 
     /**
+     * Sets TimeOut.
+     * @param mixed $timeOut
+     */
+    public function setTimeOut(string $timeOut)
+    {
+        $this->timeOut = $timeOut;
+    }
+
+    /**
      * Encodes data in json format.
      * @param mixed $jsonData
      * @throws Exception
@@ -162,11 +172,20 @@ abstract class AHttpRequest implements IHttpRequest
      * Encodes data in form format.
      * @param array $data
      */
-    public function addBody(array $data)
+    public function addBodyForm(array $data)
     {
         if (!empty($data))
             $data = http_build_query($data);
 
+        $this->body = $data;
+    }
+
+    /**
+     * Encodes data in form format.
+     * @param array $data
+     */
+    public function addBodyArray(array $data)
+    {
         $this->body = $data;
     }
 

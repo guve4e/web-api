@@ -55,6 +55,9 @@ class CurlCall extends AHttpRequest
         if ($this->body)
             curl_setopt($curl, CURLOPT_POSTFIELDS, $this->body);
 
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($curl, CURLOPT_TIMEOUT, $this->timeOut); //timeout in seconds
+
         try {
             $this->startTime = $this->takeTime();
             $response = curl_exec($curl);
@@ -65,7 +68,7 @@ class CurlCall extends AHttpRequest
             $this->retrieveRestResponseInfo($response, $info);
 
         } catch (Exception $e) {
-            $e->getTrace();
+            Logger::logException($e->getMessage());
         } finally {
             curl_close($curl);
         }

@@ -96,6 +96,7 @@ class HttpSocketCall extends AHttpRequest
         $headerFields .= "Host: ". $this->host . "\r\n";
         $headerFields .= "Content-Type: {$this->contentType}\r\n";
         $headerFields .= "Content-Length: " . strlen($this->body)."\r\n";
+        $headerFields .= $this->makeAdditionalHeaderFields();
         $headerFields .= "Connection: Close\r\n\r\n";
         $headerFields .= $this->body;
 
@@ -179,7 +180,7 @@ class HttpSocketCall extends AHttpRequest
         $socket = new SocketCall($this->file);
         $socket = $socket->setHost($this->sslHost)
             ->setPort($this->port)
-            ->setTimeout(30)
+            ->setTimeout($this->timeOut)
             ->isWaitingForResponse($this->isWaitingForResponse)
             ->setData($this->makeInitialHeaderFields());
 
@@ -246,5 +247,20 @@ class HttpSocketCall extends AHttpRequest
     public function getResponseAsString()
     {
         return $this->responseBody;
+    }
+
+    private function makeAdditionalHeaderFields()
+    {
+        $data = "";
+
+        if (!is_null($this->headers) && count($this->headers) > 0)
+        {
+            foreach ($this->headers as $header)
+            {
+                $data .= $header . "\r\n";
+            }
+        }
+
+        return $data;
     }
 }
