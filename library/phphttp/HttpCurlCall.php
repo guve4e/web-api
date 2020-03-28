@@ -13,6 +13,10 @@ class HttpCurlCall extends AHttpRequest
     private function addContentType()
     {
         $contentTypeHeader = "Content-Type: " . $this->contentType;
+
+        if (is_null($this->headers))
+            $this->headers = [];
+
         array_push($this->headers, $contentTypeHeader);
     }
 

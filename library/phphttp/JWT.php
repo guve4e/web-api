@@ -70,7 +70,7 @@ class JWT
 
         $this->restCall->setUrl($this->url)
             ->setContentType("application/x-www-form-urlencoded")
-            ->addBody(['token' => $token])
+            ->addBodyForm(['token' => $token])
             ->setMethod("POST");
 
         $this->restCall->send();

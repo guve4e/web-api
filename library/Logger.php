@@ -1,10 +1,10 @@
 <?php
 
-class Logger{
-
+class Logger
+{
     /**
      * How to end the row,
-     * Linux or Windows style
+     * Linux or Windows versions
      *
      * @var string
      */
@@ -18,19 +18,16 @@ class Logger{
     /**
      * Log function. Wrapper to file_put_contents()
      *
-     *
      * @param $file_name
      * @param $msg
      */
-    private static function _log($file_name, $msg) {
-        // path to Logs
-        $fname = LOG_PATH  . '/' . $file_name . ".txt";
-        // record time and the message with new line at the end
-        $log_msg =  "==================== " . date('Y-m-d H:i:s') . "===================="
-            . self::$endRowDouble . $msg . self::$endRow
-            . "============================================================" . self::$endRow;
-        // log to file
-        file_put_contents($fname, $log_msg, FILE_APPEND | LOCK_EX);
+    private static function _log($file_name, $msg)
+    {
+        $fileName = LOG_PATH  . '/' . $file_name . ".log";
+
+        $log_msg = "<" . date('Y-m-d H:i:s') . "> " . $msg . self::$endRow;
+
+        file_put_contents($fileName, $log_msg, FILE_APPEND | LOCK_EX);
     }
 
     /**
@@ -41,7 +38,7 @@ class Logger{
         // printable array
         $server = print_r($_SERVER,true);
         // call to private _log
-        self::_log("SERVER", $server);
+        self::_log("server", $server);
     }
 
     /**
@@ -54,7 +51,7 @@ class Logger{
         // printable array
         $h = print_r($headers,true);
         // call to private _log
-        self::_log("HEADERS", $h);
+        self::_log("headers", $h);
     }
 
     /**
@@ -64,7 +61,18 @@ class Logger{
      */
     public static function logException($msg) {
         // name file
-        $file = "EXCEPTIONS";
+        $file = "exception";
+        self::_log($file,$msg);
+    }
+
+    /**
+     * Log Exceptions
+     *
+     * @param $msg
+     */
+    public static function logThrowable($msg) {
+        // name file
+        $file = "throwable";
         self::_log($file,$msg);
     }
 
@@ -75,7 +83,7 @@ class Logger{
      */
     public static function logMySqlResponse($msg) {
         // name file
-        $file = "DATABASE_RESPONSE";
+        $file = "mysql-response";
         self::_log($file,$msg);
     }
 
@@ -87,21 +95,35 @@ class Logger{
      */
     public static function logOutput($msg) {
         // name file
-        $file = "OUTPUT";
+        $file = "output";
         self::_log($file,$msg);
     }
 
     /**
      * Generic Method to log messages
      *
-     * @param $fname string filename
+     * @param $fileName string filename
      * @param $msg string message
      */
-    public static function logMsg($fname, $msg) {
+    public static function logMsg($fileName, $msg) {
         // printable array
         $msg = print_r($msg,true);
         // call to private _log
-        self::_log($fname, $msg);
+        self::_log($fileName, $msg);
+    }
+
+    public static function logMsgArray($fileName, array $data) {
+        // printable array
+        $json_string = json_encode($data, JSON_PRETTY_PRINT);
+        // call to private _log
+        self::_log($fileName, $json_string);
+    }
+
+    public static function logMsgObject($fileName, object $data) {
+        // printable array
+        $json_string = json_decode(json_encode($data, JSON_PRETTY_PRINT), true);
+        // call to private _log
+        self::logMsgArray($fileName, $json_string);
     }
 }
 

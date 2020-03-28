@@ -67,6 +67,7 @@ class Splicer
      * leaving path info with parameter/parameters only.
      * @param $pathInfo : string,
      * @throws ApiException
+     * @throws Exception
      */
     private function retrieveControllerName(string $pathInfo)
     {
@@ -75,10 +76,38 @@ class Splicer
         if ($split == null || count($split) == 0)
             throw new ApiException("PATH_INFO");
 
-        $this->controllerName = $split[0];
+        $this->convertControllerNameToClassName($split[0]);
+
         array_shift($split);
 
         $this->pathInfo = implode("/", $split);
+    }
+
+    /**
+     * Converts controller name to class name (Hungarian notation)
+     * Ex: mock-controller will become MockController
+     * @param string $controllerName
+     * @throws Exception
+     */
+    private function convertControllerNameToClassName(string $controllerName)
+    {
+        $parts = preg_split( "/(-|_)/", $controllerName );
+
+        if (!is_array($parts))
+            throw new Exception("Malformed controller Name");
+
+        if (count($parts) < 1)
+            throw new Exception("Malformed controller Name");
+
+        if (count($parts) > 1)
+        {
+            foreach ($parts as &$part)
+                $part = ucfirst($part);
+
+            $this->controllerName = implode("", $parts);
+        }
+        else
+            $this->controllerName = ucfirst($controllerName);
     }
 
     /**

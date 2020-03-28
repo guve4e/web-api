@@ -42,7 +42,7 @@ class AuthorizationTest extends TestCase
      */
     public function testProperAuthorization()
     {
-        $_SERVER['HTTP_APITOKEN'] = "76E48EA91C151BFD63F51851D8C40";
+        $_SERVER['HTTP_APITOKEN'] =  API_TOKEN;
 
         $this->expectNotToPerformAssertions();
 
@@ -71,7 +71,7 @@ class AuthorizationTest extends TestCase
      */
     public function testProperAuthorizationWrongJWT()
     {
-        $_SERVER['HTTP_APITOKEN'] = "WRCdma(&#_)*@$$@@$@#Sch38E2*$%G";
+        $_SERVER['HTTP_APITOKEN'] =  API_TOKEN;
 
         $restCall = $this->getMockBuilder(RestCall::class)
             ->setConstructorArgs(["Curl", new FileManager])

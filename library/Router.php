@@ -112,17 +112,6 @@ class Router
     }
 
     /**
-     * Takes te first char from the
-     * controller name and makes it
-     * capital, if already not.
-     */
-    private function sanitizeControllerName()
-    {
-        // make the first letter of the controller uppercase
-        $this->controllerName = ucfirst($this->controllerName);
-    }
-
-    /**
      * Constructs the controller path form
      * the parameter given and hard wired path to
      * directory. Then it checks if the file exists.
@@ -151,9 +140,6 @@ class Router
      */
     private function route()
     {
-        // sanitize controller name first
-        $this->sanitizeControllerName();
-
         // then validate if it exist
         $this->constructControllerPath();
 

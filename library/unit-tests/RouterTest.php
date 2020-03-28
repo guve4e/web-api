@@ -24,7 +24,7 @@ class RouterTest extends TestCase
 
     protected function setUp(): void
     {
-        $_SERVER['PATH_INFO'] = "/mockcontroller/123";
+        $_SERVER['PATH_INFO'] = "/mock-controller/123";
         $_SERVER['REQUEST_METHOD'] = "GET";
 
         $this->mockFileManager = $this->getMockBuilder(FileManager::class)
@@ -73,7 +73,7 @@ class RouterTest extends TestCase
 
         new Router($mockFileManager, $this->mockAuthorizationFilter, $_SERVER['PATH_INFO']);
 
-        $this->assertTrue(class_exists("Mockcontroller", false));
+        $this->assertTrue(class_exists("MockController", false));
     }
 
     /**
@@ -84,7 +84,7 @@ class RouterTest extends TestCase
     {
         new Router($this->mockFileManager, $this->mockAuthorizationFilter, $_SERVER['PATH_INFO']);
 
-        $this->assertTrue(class_exists("Mockcontroller", false));
+        $this->assertTrue(class_exists("MockController", false));
     }
 
     /**
@@ -93,12 +93,12 @@ class RouterTest extends TestCase
      */
     public function testConstructionWithAuthorizedControllerWithQueryStringParameters()
     {
-        $_SERVER['PATH_INFO'] = "/mockcontroller/123?param1=value1&param2=value2";
+        $_SERVER['PATH_INFO'] = "/mock-controller/123?param1=value1&param2=value2";
         $_SERVER['REQUEST_METHOD'] = "POST";
 
         new Router($this->mockFileManager, $this->mockAuthorizationFilter, $_SERVER['PATH_INFO']);
 
-        $this->assertTrue(class_exists("Mockcontroller", false));
+        $this->assertTrue(class_exists("MockController", false));
     }
 
     /**
@@ -139,7 +139,7 @@ class RouterTest extends TestCase
      */
     public function testConstructionWithMethodThatTheControllerDoesntHave()
     {
-        $_SERVER['PATH_INFO'] = "/mockcontroller/123";
+        $_SERVER['PATH_INFO'] = "/mock-controller/123";
         $_SERVER['REQUEST_METHOD'] = "GET";
 
         $mockFileManager = $this->getMockBuilder(FileManager::class)

@@ -83,6 +83,8 @@ class Controller {
         // log
         Logger::logOutput($jsonString);
 
+        header('Content-Type: application/json');
+
         // print on screen
         echo($jsonString);
     }

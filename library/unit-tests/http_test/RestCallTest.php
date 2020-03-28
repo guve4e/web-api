@@ -91,7 +91,7 @@ class RestCallTest extends TestCase
         $restCall->setUrl("http://webapi.ddns.net/index.php/mockcontroller/1001");
         $restCall->setContentType("application/x-www-form-urlencoded");
         $restCall->setMethod("POST");
-        $restCall->addBody(["a" => 'b', 'c' => 'd', 'e' => 'f']);
+        $restCall->addBodyForm(["a" => 'b', 'c' => 'd', 'e' => 'f']);
         $restCall->send();
         $restResponse = $restCall->getResponseWithInfo();
 

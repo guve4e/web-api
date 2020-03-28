@@ -16,7 +16,33 @@ class SplicerTest extends TestCase
         $splice = new Splicer($_SERVER['PATH_INFO']);
         $controller = $splice->getControllerName();
 
-        $this->assertEquals("mockcontroller", $controller);
+        $this->assertEquals("Mockcontroller", $controller);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testGetControllerWithNameSeparatedByUnderscore()
+    {
+        $_SERVER['PATH_INFO'] = "/mock_controller";
+
+        $splice = new Splicer($_SERVER['PATH_INFO']);
+        $controller = $splice->getControllerName();
+
+        $this->assertEquals("MockController", $controller);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testGetControllerWithNameSeparatedByDash()
+    {
+        $_SERVER['PATH_INFO'] = "/mock-controller";
+
+        $splice = new Splicer($_SERVER['PATH_INFO']);
+        $controller = $splice->getControllerName();
+
+        $this->assertEquals("MockController", $controller);
     }
 
     /**
